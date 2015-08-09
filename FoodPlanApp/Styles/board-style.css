@@ -1,0 +1,37 @@
+﻿.days-board {
+	border: 1px dotted gray;
+}
+
+.days-board::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.day-card {
+	background: gray;
+	margin-bottom: 10px;
+	margin-right: 10px;
+	
+	width: 200px;
+	
+	display: block;
+	float: left;
+}
+
+.day-card__header {
+	background: red;
+}
+
+.day-card__event {
+	margin: 5px;
+	background: seashell;
+}
+
+.day-card__food-item {
+	padding-left: 5px;
+}
+
+.day-card__food-item::before {
+	content: "> ";
+}
