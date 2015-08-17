@@ -2,5 +2,6 @@
 {
     public class ItemModel
     {
+        public string Title { get; set; }
     }
 }
