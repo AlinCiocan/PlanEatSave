@@ -8,32 +8,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/Styles/board-style.css">
     <script src="/Scripts/jquery-2.1.4.js"></script>
-    <script src="/Scripts/board-script.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="/Scripts/board-script-for-styling.js"></script>
+    <script src="/Scripts/foodplan-board-app.js"></script>
 </head>
-<body>
+<body ng-app="foodplanBoardApp">
 <h2>FoodPlan App</h2>
-<div class="days-board">
-    <div class="day-card">
-        <div class="day-card__header">Sunday</div>
+<div class="days-board" ng-controller="BoardController">
+    <div class="day-card" ng-repeat="day in board.days">
+        <div class="day-card__header"> {{day.date | date: "EEEE"}} </div>
         <div class="day-card__body">
-            <div class="day-card__event">
-                <div class="day-card__event-name">Breakfast</div>
-                <div class="day-card__food-item">Fruits and cereals</div>
-            </div>
-            <div class="day-card__event">
-                <div class="day-card__event-name">Lunch</div>
-                <div class="day-card__food-item">Cheese and tomatoes</div>
-            </div>
-            <div class="day-card__event">
-                <div class="day-card__event-name">Dinner</div>
-                <div class="day-card__food-item">Avocado</div>
-            </div>
-            <div class="day-card__event">
-                <div class="day-card__event-name">Cook</div>
-                <div class="day-card__food-item">Soup</div>
-                <div class="day-card__food-item">Hummus</div>
+            <div class="day-card__category" ng-repeat="category in day.categories">
+                <div class="day-card__category-name"> {{category.title}} </div>
+                <div class="day-card__item" ng-repeat="item in category.items"> {{item.title}} </div>
             </div>
         </div>
+
     </div>
 </div>
 </body>

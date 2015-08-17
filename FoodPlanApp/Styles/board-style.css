@@ -23,15 +23,15 @@
 	background: red;
 }
 
-.day-card__event {
+.day-card__category {
 	margin: 5px;
 	background: seashell;
 }
 
-.day-card__food-item {
+.day-card__item {
 	padding-left: 5px;
 }
 
-.day-card__food-item::before {
+.day-card__item::before {
 	content: "> ";
 }

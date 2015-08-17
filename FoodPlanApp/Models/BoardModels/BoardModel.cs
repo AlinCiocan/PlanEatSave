@@ -4,6 +4,6 @@ namespace FoodPlanApp.Models.BoardModels
 {
     public class BoardModel
     {
-        public IList<BoardDayModel> BoardDays { get; set; }
+        public IList<DayModel> Days { get; set; }
     }
 }

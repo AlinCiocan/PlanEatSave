@@ -4,7 +4,7 @@ namespace FoodPlanApp.Models.BoardModels
 {
     public class CategoryModel
     {
-        public string CategoryName { get; set; }
+        public string Title { get; set; }
         public IList<ItemModel> Items { get; set; }
     }
 }

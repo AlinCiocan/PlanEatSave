@@ -8,35 +8,35 @@ using FoodPlanApp.Models.BoardModels;
 
 namespace FoodPlanApp.ApiControllers
 {
-    public class BoardApiController : ApiController
+    public class BoardController : ApiController
     {
-        // GET api/boardapi
+        // GET api/board
         public IEnumerable<string> Get()
         {
             return new string[] {"value1", "value2"};
         }
 
-        // GET api/boardapi/5
+        // GET api/board/5
         public BoardModel Get(int id)
         {
 
-            var board = new BoardModel {BoardDays = GenereateBoardDaysForMockup()};
+            var board = new BoardModel {Days = GenereateBoardDaysForMockup()};
 
             return board;
         }
 
-        // POST api/boardapi
+        // POST api/board
         public void Post([FromBody] BoardModel board)
         {
             //store the board
         }
 
-        // PUT api/boardapi/5
+        // PUT api/board/5
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/boardapi/5
+        // DELETE api/board/5
         public void Delete(int id)
         {
         }
@@ -44,18 +44,18 @@ namespace FoodPlanApp.ApiControllers
 
 
         // method for mock up
-        private static IList<BoardDayModel> GenereateBoardDaysForMockup()
+        private static IList<DayModel> GenereateBoardDaysForMockup()
         {
-            var days = new List<BoardDayModel>
+            var days = new List<DayModel>
             {
-                new BoardDayModel
+                new DayModel
                 {
                     Date = DateTime.Now,
-                    DaysCategories = new List<CategoryModel>
+                    Categories = new List<CategoryModel>
                     {
                         new CategoryModel
                         {
-                            CategoryName = "Breakfast",
+                            Title = "Breakfast",
                             Items = new List<ItemModel>
                             {
                                 new ItemModel {Title = "breakfast food 1"},
@@ -64,7 +64,7 @@ namespace FoodPlanApp.ApiControllers
                         },
                         new CategoryModel
                         {
-                            CategoryName = "Dinner",
+                            Title = "Dinner",
                             Items = new List<ItemModel>
                             {
                                 new ItemModel {Title = "dinner 1 food"},
