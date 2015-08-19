@@ -20,7 +20,7 @@ namespace FoodPlanApp.ApiControllers
         public BoardModel Get(int id)
         {
 
-            var board = new BoardModel {Days = GenereateBoardDaysForMockup()};
+            var board = new BoardModel {Days = GenereateBoardDaysForMockup(), Id = 1234};
 
             return board;
         }
@@ -32,8 +32,9 @@ namespace FoodPlanApp.ApiControllers
         }
 
         // PUT api/board/5
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] BoardModel board)
         {
+            Console.WriteLine("Entered here");
         }
 
         // DELETE api/board/5
