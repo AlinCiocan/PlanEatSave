@@ -4,12 +4,21 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using FoodPlanApp.Models.BoardModels;
+using BusinessLogic;
+using DataAccessLayer;
+using ViewModels.BoardModels;
 
 namespace FoodPlanApp.ApiControllers
 {
     public class BoardController : ApiController
     {
+        public BoardService BoardService { get; set; }
+
+        public BoardController()
+        {
+            BoardService = new BoardService(new BoardDao());
+        }
+
         // GET api/board
         public IEnumerable<string> Get()
         {
@@ -17,24 +26,22 @@ namespace FoodPlanApp.ApiControllers
         }
 
         // GET api/board/5
-        public BoardModel Get(int id)
+        public BoardViewModel Get(long id)
         {
-
-            var board = new BoardModel {Days = GenereateBoardDaysForMockup(), Id = 1234};
-
-            return board;
+            return BoardService.GetBoardById(id);
         }
 
         // POST api/board
-        public void Post([FromBody] BoardModel board)
+        public void Post([FromBody] BoardViewModel boardView)
         {
             //store the board
         }
 
         // PUT api/board/5
-        public void Put(int id, [FromBody] BoardModel board)
+        public void Put(int id, [FromBody] BoardViewModel boardView)
         {
-            Console.WriteLine("Entered here");
+            Console.WriteLine("Board Put here");
+            BoardService.UpdateBoard(boardView);
         }
 
         // DELETE api/board/5
@@ -42,42 +49,5 @@ namespace FoodPlanApp.ApiControllers
         {
         }
 
-
-
-        // method for mock up
-        private static IList<DayModel> GenereateBoardDaysForMockup()
-        {
-            var days = new List<DayModel>
-            {
-                new DayModel
-                {
-                    Date = DateTime.Now,
-                    Categories = new List<CategoryModel>
-                    {
-                        new CategoryModel
-                        {
-                            Title = "Breakfast",
-                            Items = new List<ItemModel>
-                            {
-                                new ItemModel {Title = "breakfast food 1"},
-                                new ItemModel {Title = "breakfast 2"}
-                            }
-                        },
-                        new CategoryModel
-                        {
-                            Title = "Dinner",
-                            Items = new List<ItemModel>
-                            {
-                                new ItemModel {Title = "dinner 1 food"},
-                                new ItemModel {Title = "dinner 2 food"}
-                            }
-                        }
-                    }
-                }
-            };
-
-
-            return days;
-        }
     }
 }

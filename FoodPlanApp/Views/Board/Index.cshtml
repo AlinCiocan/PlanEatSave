@@ -9,13 +9,12 @@
     <link rel="stylesheet" href="/Styles/board-style.css">
     <script src="/Scripts/jquery-2.1.4.js"></script>
     <script src="~/Scripts/angular.js"></script>
-    <script src="/Scripts/board-script-for-styling.js"></script>
     <script src="/Scripts/foodplan-board-app.js"></script>
 </head>
 <body ng-app="foodplanBoardApp">
 <h2>FoodPlan App</h2>
 <div class="days-board" ng-controller="BoardController" ng-style="styleForBoard">
-    
+    <h3> Board: {{board.title}} </h3>
     <p>My paragraph here: {{styleForBoard.width}} </p>
     <button ng-click="changeBoard()"> Change category title </button>
 

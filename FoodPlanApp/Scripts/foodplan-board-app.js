@@ -4,6 +4,7 @@
 (function (angular) {
     "use strict";
 
+    var BOARD_ID = 1;
 
     var getBoardApiUrl = function(boardId) {
         var BOARD_API_URL = "/api/board/";
@@ -14,7 +15,7 @@
     var foodplanBoardApp = angular.module("foodplanBoardApp", []);
 
     foodplanBoardApp.controller("BoardController", ["$scope", "$http", function ($scope, $http) {
-        $http.get(getBoardApiUrl(5))
+        $http.get(getBoardApiUrl(BOARD_ID))
         .then(function(response) {
             console.log("success", response);
             $scope.board = response.data;
@@ -36,6 +37,8 @@
 
 
             $scope.changeBoard = function () {
+                $scope.board.title = "my great board 2";
+
                 $scope.board.days[0].categories[0].title = "some great category here";
             };
 

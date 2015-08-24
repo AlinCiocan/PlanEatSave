@@ -115,15 +115,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiControllers\BoardController.cs" />
+    <Compile Include="ApiControllers\BoardGenerator.cs" />
     <Compile Include="Controllers\BoardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BoardModels\BoardModel.cs" />
-    <Compile Include="Models\BoardModels\DayModel.cs" />
-    <Compile Include="Models\BoardModels\CategoryModel.cs" />
-    <Compile Include="Models\BoardModels\ItemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -162,6 +160,10 @@
     <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
       <Project>{24d28334-4299-418a-b337-f61a9c21aed0}</Project>
       <Name>BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
+      <Project>{C373249F-F807-4CD0-9AA4-000A9FA16522}</Project>
+      <Name>DataAccessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{d309c98b-87df-4f30-b36f-1ade4d57c072}</Project>
