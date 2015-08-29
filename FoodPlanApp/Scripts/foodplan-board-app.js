@@ -42,6 +42,20 @@
                 $scope.board.days[0].categories[0].title = "some great category here";
             };
 
+
+            $scope.addCategory = function () {
+                var newCategory = prompt("New category name", "");
+                if (!newCategory) {
+                    alert("Unfortunatelly, you cannot add an empty category");
+                }
+
+                $scope.board.days[0].categories.push({
+                    dayId: 1,
+                    title: newCategory
+                });
+            };
+
+
         }, function(error) {
             console.log("error", error);
         });

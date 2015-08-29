@@ -70,8 +70,16 @@ namespace DataAccessLayer
 
                 foreach (var category in day.Categories)
                 {
-                    repository.CategoryEntities.Attach(category);
-                    repository.Entry(category).State = EntityState.Modified;
+                    
+                    if(category.Id == 0)
+                    {
+                        repository.CategoryEntities.Add(category);
+                    }
+                    else
+                    {
+                        repository.CategoryEntities.Attach(category);
+                        repository.Entry(category).State = EntityState.Modified;
+                    }
 
                     foreach (var item in category.Items)
                     {
