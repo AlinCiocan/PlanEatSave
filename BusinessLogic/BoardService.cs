@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using DataAccessLayer;
 using Entities.BoardEntities;
 using ViewModels.BoardModels;
@@ -25,10 +20,10 @@ namespace BusinessLogic
             return Mapper.Map<BoardViewModel>(boardEntity);
         }
 
-        public void UpdateBoard(BoardViewModel boardView)
+        public BoardViewModel UpdateBoard(BoardViewModel boardView)
         {
             var boardEntity = Mapper.Map<BoardEntity>(boardView);
-            _boardDao.UpdateBoard(boardEntity);
+            return Mapper.Map<BoardViewModel>(_boardDao.UpdateBoard(boardEntity));
         }
     }
 }

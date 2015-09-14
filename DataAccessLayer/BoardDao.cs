@@ -1,14 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data.Entity;
+using System.Linq;
 using Entities.BoardEntities;
 using Repository;
-using System.Data.Entity;
-using System.Linq;
 
 namespace DataAccessLayer
 {
     public class BoardDao : IBoardDao
     {
+        public BoardEntity GetBoardById(long boardId)
+        {
+            using (var repository = new FoodPlanAppContext())
+            {
+                var boardEntity = IncludeAllBoardProperties(repository.BoardEntities).
+                    FirstOrDefault(board => board.Id == boardId);
+
+                return boardEntity;
+            }
+        }
+
+        public BoardEntity UpdateBoard(BoardEntity updatedBoard)
+        {
+            using (var repository = new FoodPlanAppContext())
+            {
+                UpdateAllBoardProperties(updatedBoard, repository);
+                repository.SaveChanges();
+            }
+
+            return updatedBoard;
+        }
 
         private IQueryable<BoardEntity> IncludeDays(IQueryable<BoardEntity> query)
         {
@@ -33,35 +52,12 @@ namespace DataAccessLayer
         }
 
 
-        public BoardEntity GetBoardById(long boardId)
-        {
-            using (var repository = new FoodPlanAppContext())
-            {
-                var boardEntity = IncludeAllBoardProperties(repository.BoardEntities).
-                                FirstOrDefault(board => board.Id == boardId);
-
-                return boardEntity;
-
-            }
-        }
-
-        public void UpdateBoard(BoardEntity updatedBoard)
-        {
-            using (var repository = new FoodPlanAppContext())
-            {
-                UpdateAllBoardProperties(updatedBoard, repository);
-
-                repository.SaveChanges();
-            }
-        }
-
         private static void UpdateAllBoardProperties(BoardEntity updatedBoard, FoodPlanAppContext repository)
         {
             //TODO: Refactor this method in a nicer way
 
             repository.BoardEntities.Attach(updatedBoard);
             repository.Entry(updatedBoard).State = EntityState.Modified;
-
 
             foreach (var day in updatedBoard.Days)
             {
@@ -70,8 +66,7 @@ namespace DataAccessLayer
 
                 foreach (var category in day.Categories)
                 {
-                    
-                    if(category.Id == 0)
+                    if (category.Id == 0)
                     {
                         repository.CategoryEntities.Add(category);
                     }

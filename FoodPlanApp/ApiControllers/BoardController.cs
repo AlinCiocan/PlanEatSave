@@ -38,10 +38,10 @@ namespace FoodPlanApp.ApiControllers
         }
 
         // PUT api/board/5
-        public void Put(int id, [FromBody] BoardViewModel boardView)
+        public BoardViewModel Put(int id, [FromBody] BoardViewModel boardView)
         {
             Console.WriteLine("Board Put here");
-            BoardService.UpdateBoard(boardView);
+            return BoardService.UpdateBoard(boardView);
         }
 
         // DELETE api/board/5

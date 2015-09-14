@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/Styles/board-style.css">
     <script src="/Scripts/jquery-2.1.4.js"></script>
     <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/underscore.js"></script>
     <script src="/Scripts/foodplan-board-app.js"></script>
 </head>
 <body ng-app="foodplanBoardApp">
@@ -25,7 +26,7 @@
                 <div class="day-card__category-name"> {{category.title}} </div>
                 <div class="day-card__item" ng-repeat="item in category.items"> {{item.title}} </div>
             </div>
-            <div class="day-card__add-category" ng-click="addCategory()">
+            <div class="day-card__add-category" ng-click="addCategory(day.id)">
                 Add category...
             </div>
         </div>
