@@ -56,9 +56,10 @@
 
 
                     $scope.addCategory = function(dayId) {
-                        var newCategory = prompt("New category name", "");
-                        if (!newCategory) {
+                        var newCategoryTitle = prompt("New category name", "");
+                        if (!newCategoryTitle) {
                             alert("Unfortunatelly, you cannot add an empty category");
+                            return;
                         }
 
 
@@ -66,8 +67,23 @@
 
                         day.categories.push({
                             dayId: dayId,
-                            title: newCategory
+                            title: newCategoryTitle
                         });
+                    };
+
+                    $scope.addItem = function(category) {
+                        var newItemTitle = prompt("New item name", "");
+                        if (!newItemTitle) {
+                            alert("Unfortunatelly, you cannot add an empty item");
+                            return;
+                        }
+
+
+                        category.items.push({
+                            categoryId: category.id,
+                            title : newItemTitle
+                        });
+
                     };
 
                     function getDayById(dayId) {

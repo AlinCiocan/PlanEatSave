@@ -25,6 +25,10 @@
             <div class="day-card__category" ng-repeat="category in day.categories">
                 <div class="day-card__category-name"> {{category.title}} </div>
                 <div class="day-card__item" ng-repeat="item in category.items"> {{item.title}} </div>
+                
+                <div class="day-card__add-item" ng-click="addItem(category)">
+                    Add item...
+                </div>
             </div>
             <div class="day-card__add-category" ng-click="addCategory(day.id)">
                 Add category...

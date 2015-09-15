@@ -70,6 +70,7 @@ namespace DataAccessLayer
                     {
                         repository.CategoryEntities.Add(category);
                     }
+
                     else
                     {
                         repository.CategoryEntities.Attach(category);
@@ -78,8 +79,15 @@ namespace DataAccessLayer
 
                     foreach (var item in category.Items)
                     {
-                        repository.ItemEntities.Attach(item);
-                        repository.Entry(item).State = EntityState.Modified;
+                        if (item.Id == 0)
+                        {
+                            repository.ItemEntities.Add(item);
+                        }
+                        else
+                        {
+                            repository.ItemEntities.Attach(item);
+                            repository.Entry(item).State = EntityState.Modified;
+                        }
                     }
                 }
             }
