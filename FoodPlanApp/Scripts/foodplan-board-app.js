@@ -14,7 +14,7 @@
 
     // TODO: make sure to refactor this controller, it starts to become too big
     foodplanBoardApp.controller("BoardController", [
-        "$scope", "$http", function($scope, $http) {
+        "$scope", "$http", "$window", function($scope, $http, $window) {
             $http.get(getBoardApiUrl(BOARD_ID))
                 .then(function(response) {
                     console.log("success", response);
@@ -27,9 +27,9 @@
 
                     watchBoard();
 
-
+                    var unwatchBoard;
                     function watchBoard() {
-                        var unwatchBoard = $scope.$watch("board", function(newBoard, oldBoard) {
+                        unwatchBoard = $scope.$watch("board", function (newBoard, oldBoard) {
                             /*This is a special case for the first time when receiving the board
                 from the server and from $watch will detect this a change, but both the
                 new and old board are identical*/
@@ -48,11 +48,20 @@
                         }, true);
                     }
 
-                    $scope.changeBoard = function() {
-                        $scope.board.title = "my great board 2";
 
-                        $scope.board.days[0].categories[0].title = "some great category here";
+                    $scope.clearBoard = function () {
+
+                        $http.delete(getBoardApiUrl($scope.board.id))
+                             .success(function () {
+                                 $window.location.reload();
+                            })
+                             .error(function (err) {
+                                 alert("An error ocurred with the clear of the board");
+                                 console.log(err);
+                             });
+
                     };
+                    
 
 
                     $scope.addCategory = function(dayId) {

@@ -27,8 +27,10 @@ namespace Repository
 
             modelBuilder.Entity<BoardEntity>().HasMany(board => board.Days).WithRequired(day => day.Board);
             modelBuilder.Entity<DayEntity>().HasMany(day => day.Categories).WithRequired(category => category.Day);
-            modelBuilder.Entity<CategoryEntity>().HasMany(category => category.Items).WithRequired(item => item.Category);
-
+            modelBuilder.Entity<CategoryEntity>()
+                        .HasMany(category => category.Items)
+                        .WithRequired(item => item.Category)
+                        .WillCascadeOnDelete(true);
 
         }
     }

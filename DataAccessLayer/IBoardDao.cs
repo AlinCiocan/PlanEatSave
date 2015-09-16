@@ -6,5 +6,6 @@ namespace DataAccessLayer
     {
         BoardEntity GetBoardById(long boardId);
         BoardEntity UpdateBoard(BoardEntity updatedBoard);
+        void ClearBoard(long boardId);
     }
 }

@@ -29,6 +29,26 @@ namespace DataAccessLayer
             return updatedBoard;
         }
 
+        public void ClearBoard(long boardId)
+        {
+            using (var repository = new FoodPlanAppContext())
+            {
+                var currentBoard = IncludeAllBoardProperties(repository.BoardEntities).FirstOrDefault(board => board.Id == boardId);
+                if (currentBoard != null)
+                {
+
+                    foreach (var day in currentBoard.Days.ToList())
+                    {
+                        foreach (var category in day.Categories.ToList())
+                        {
+                            repository.CategoryEntities.Remove(category);
+                        }
+                    }
+                }
+                repository.SaveChanges();
+            }
+        }
+
         private IQueryable<BoardEntity> IncludeDays(IQueryable<BoardEntity> query)
         {
             return query.Include(board => board.Days);
@@ -47,7 +67,7 @@ namespace DataAccessLayer
 
         private IQueryable<BoardEntity> IncludeAllBoardProperties(IQueryable<BoardEntity> query)
         {
-            // TODO: refactor this with extensiosn methods
+            // TODO: refactor this with extension methods
             return IncludeItems(IncludeCategories(IncludeDays(query)));
         }
 

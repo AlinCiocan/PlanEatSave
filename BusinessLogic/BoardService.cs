@@ -25,5 +25,10 @@ namespace BusinessLogic
             var boardEntity = Mapper.Map<BoardEntity>(boardView);
             return Mapper.Map<BoardViewModel>(_boardDao.UpdateBoard(boardEntity));
         }
+
+        public void ClearBoard(long boardId)
+        {
+            _boardDao.ClearBoard(boardId);
+        }
     }
 }

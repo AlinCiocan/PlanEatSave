@@ -45,8 +45,10 @@ namespace FoodPlanApp.ApiControllers
         }
 
         // DELETE api/board/5
-        public void Delete(int id)
+        [HttpDelete]
+        public void Delete(long id)
         {
+            BoardService.ClearBoard(id);
         }
 
     }
