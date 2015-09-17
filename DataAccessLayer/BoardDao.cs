@@ -81,9 +81,16 @@ namespace DataAccessLayer
 
             foreach (var day in updatedBoard.Days)
             {
-                repository.DayEntities.Attach(day);
-                repository.Entry(day).State = EntityState.Modified;
 
+                if (day.Id == 0)
+                {
+                    repository.DayEntities.Add(day);
+                }
+                else
+                {
+                    repository.DayEntities.Attach(day);
+                    repository.Entry(day).State = EntityState.Modified;
+                }
                 foreach (var category in day.Categories)
                 {
                     if (category.Id == 0)

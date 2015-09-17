@@ -21,7 +21,7 @@
                     $scope.board = response.data;
 
                     $scope.styleForBoard = {
-                        width: $scope.board.days.length * 220 + "px"
+                        width: ($scope.board.days.length + 1) * 220 + "px"
                     };
 
 
@@ -33,7 +33,6 @@
                             /*This is a special case for the first time when receiving the board
                 from the server and from $watch will detect this a change, but both the
                 new and old board are identical*/
-                            debugger;
                             if (newBoard === oldBoard) {
                                 return;
                             }
@@ -93,6 +92,13 @@
                             title : newItemTitle
                         });
 
+                    };
+
+                    $scope.addDay = function() {
+                        $scope.board.days.push({
+                            boardId: $scope.board.id,
+                            date: new Date()
+                        });
                     };
 
                     function getDayById(dayId) {

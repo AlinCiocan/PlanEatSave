@@ -18,14 +18,14 @@
     <h3> Board: {{board.title}} </h3>
     
     <button ng-click="clearBoard()"> Clear board </button>
-    
+
     <div class="day-card" ng-repeat="day in board.days">
         <div class="day-card__header"> {{day.date | date: "EEEE"}} </div>
         <div class="day-card__body">
             <div class="day-card__category" ng-repeat="category in day.categories">
                 <div class="day-card__category-name"> {{category.title}} </div>
                 <div class="day-card__item" ng-repeat="item in category.items"> {{item.title}} </div>
-                
+
                 <div class="day-card__add-item" ng-click="addItem(category)">
                     Add item...
                 </div>
@@ -35,6 +35,9 @@
             </div>
         </div>
 
+    </div>
+    <div class="add-day" ng-click="addDay()">
+        New day
     </div>
 </div>
 </body>
