@@ -39,10 +39,7 @@ namespace DataAccessLayer
 
                     foreach (var day in currentBoard.Days.ToList())
                     {
-                        foreach (var category in day.Categories.ToList())
-                        {
-                            repository.CategoryEntities.Remove(category);
-                        }
+                        repository.DayEntities.Remove(day);
                     }
                 }
                 repository.SaveChanges();

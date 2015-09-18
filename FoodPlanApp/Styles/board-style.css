@@ -60,3 +60,8 @@
     float: left;
     display: block;
 }
+
+.clear-board {
+    display: block;
+    margin-bottom: 10px;
+}
