@@ -94,11 +94,37 @@
 
                     };
 
-                    $scope.addDay = function() {
+                    $scope.addDay = function () {
+                        var newDay = thereAreAnyOtherDays() ? addOneDay(mostRecentDay()) : today();
+
                         $scope.board.days.push({
                             boardId: $scope.board.id,
-                            date: new Date()
+                            date: newDay
                         });
+
+
+                        function thereAreAnyOtherDays() {
+                            return $scope.board.days.length !== 0;
+                        }
+
+                        function addOneDay(date) {
+                            var copyOfDate = new Date(date);
+
+                            copyOfDate.setDate(copyOfDate.getDate() + 1);
+
+                            return copyOfDate;
+                        }
+
+
+
+                        function today() {
+                            return new Date();
+                        }
+
+                        function mostRecentDay() {
+                            var day = $scope.board.days[$scope.board.days.length - 1];
+                            return day.date;
+                        }
                     };
 
                     function getDayById(dayId) {
