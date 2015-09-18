@@ -20,12 +20,16 @@
                     console.log("success", response);
                     $scope.board = response.data;
 
-                    $scope.styleForBoard = {
-                        width: ($scope.board.days.length + 1) * 220 + "px"
+
+                    $scope.updateStyleForBoard = function() {
+                        $scope.styleForBoard = {
+                            width: ($scope.board.days.length + 1) * 220 + "px"
+                        };
                     };
 
-
+                    $scope.updateStyleForBoard();
                     watchBoard();
+
 
                     var unwatchBoard;
                     function watchBoard() {
@@ -41,6 +45,8 @@
                                 .then(function(rsp) {
                                     console.log("response from put request", rsp);
                                     $scope.board = rsp.data;
+
+                                    $scope.updateStyleForBoard();
                                     unwatchBoard();
                                     watchBoard();
                                 });

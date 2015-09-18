@@ -29,12 +29,17 @@
 	background: seashell;
 }
 
+.day-card__add-category {
+    cursor: pointer;   
+}
+
 .day-card__item {
 	padding-left: 5px;
 }
 
 .day-card__add-item {
 	background: silver;
+    cursor: pointer;
 }
 
 .day-card__item::before {
@@ -46,6 +51,7 @@
     content: "+";
     color: green;
     font-size: 60px;
+    font-weight: bold;
     display: block;
 }
 
@@ -57,8 +63,10 @@
     text-align: center;
     color: green;
     border: 3px dotted green;
+    background-color: #DDF7DD;
     float: left;
     display: block;
+    cursor: pointer;
 }
 
 .clear-board {
