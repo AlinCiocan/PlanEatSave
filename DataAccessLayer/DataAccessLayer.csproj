@@ -48,7 +48,9 @@
   <ItemGroup>
     <Compile Include="BoardDao.cs" />
     <Compile Include="IBoardDao.cs" />
+    <Compile Include="IUserDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserDao.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

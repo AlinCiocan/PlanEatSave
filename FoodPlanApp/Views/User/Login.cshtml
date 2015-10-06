@@ -1,0 +1,24 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>User Login</title>
+    <script type="text/javascript" src="~/Scripts/angular.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/login-controller.js"></script>
+</head>
+<body>
+<div ng-controller="LoginController">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" ng-model="username"/>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" ng-model="password"/>
+
+    <button ng-click="login()">Login</button>
+</div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using Entities.BoardEntities;
+using Entities.UserEntities;
 
 namespace Repository
 {
@@ -15,9 +16,13 @@ namespace Repository
         public DbSet<CategoryEntity> CategoryEntities { get; set; }
         public DbSet<ItemEntity> ItemEntities { get; set; }
 
+        public DbSet<UserEntity> UserEntities { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<UserEntity>().ToTable("users");
+
             modelBuilder.Entity<BoardEntity>().ToTable("boards");
             modelBuilder.Entity<DayEntity>().ToTable("days");
             modelBuilder.Entity<CategoryEntity>().ToTable("categories");

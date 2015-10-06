@@ -51,6 +51,7 @@
     <Compile Include="BoardEntities\DayEntity.cs" />
     <Compile Include="BoardEntities\ItemEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserEntities\UserEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

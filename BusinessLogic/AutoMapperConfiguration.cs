@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Entities.BoardEntities;
+using Entities.UserEntities;
 using ViewModels.BoardModels;
+using ViewModels.UserModels;
 
 namespace BusinessLogic
 {
@@ -23,6 +25,8 @@ namespace BusinessLogic
             Mapper.CreateMap<DayEntity, DayViewModel>().ReverseMap();
             Mapper.CreateMap<CategoryEntity, CategoryViewModel>().ReverseMap();
             Mapper.CreateMap<ItemEntity, ItemViewModel>().ReverseMap();
+
+            Mapper.CreateMap<UserEntity, UserViewModel>().ReverseMap();
         }
     }
 }
