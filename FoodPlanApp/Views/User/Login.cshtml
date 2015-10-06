@@ -10,7 +10,9 @@
     <script type="text/javascript" src="~/Scripts/angular.min.js"></script>
     <script type="text/javascript" src="~/Scripts/login-controller.js"></script>
 </head>
-<body>
+<body ng-app="foodplanBoardApp">
+    <h3>Food Plan App Login</h3>
+
 <div ng-controller="LoginController">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" ng-model="username"/>
