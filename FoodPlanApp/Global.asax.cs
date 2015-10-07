@@ -20,5 +20,11 @@ namespace FoodPlanApp
 
             AutoMapperConfiguration.Initialize();
         }
+
+        /* TODO: this method is to enable session in WebApi, but MUST BE REMOVED when you have time, in order for WebApi to be stateless */
+        protected void Application_PostAuthorizeRequest()
+        {
+            System.Web.HttpContext.Current.SetSessionStateBehavior(System.Web.SessionState.SessionStateBehavior.Required);
+        }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DataAccessLayer;
+using ViewModels.UserModels;
 
 namespace FoodPlanApp.Controllers
 {
@@ -14,6 +15,12 @@ namespace FoodPlanApp.Controllers
 
         public ActionResult Index()
         {
+            var user = Session["user"] as UserViewModel;
+            if (user == null)
+            {
+                return RedirectToAction("Login", "User");
+            }
+
             return View();
         }
 

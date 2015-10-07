@@ -13,7 +13,7 @@ namespace FoodPlanApp.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Board");
         }
 
     }
