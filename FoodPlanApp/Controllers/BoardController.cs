@@ -1,27 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using DataAccessLayer;
-using ViewModels.UserModels;
+﻿using System.Web.Mvc;
+using FoodPlanApp.Authentication;
+using FoodPlanApp.Authentication.UserSessionStore;
 
 namespace FoodPlanApp.Controllers
 {
     public class BoardController : Controller
     {
+
+        public IUserAuthentication UserAuthentication { get; set; }
+
+        public BoardController()
+        {
+            UserAuthentication = new UserAuthentication(new UserSessionStore(System.Web.HttpContext.Current.Session));
+        }
+
         //
         // GET: /Board/
 
         public ActionResult Index()
         {
-            var user = Session["user"] as UserViewModel;
-            if (user == null)
+            if (UserAuthentication.IsUserLoggedIn())
             {
-                return RedirectToAction("Login", "User");
+                return View();
             }
 
-            return View();
+            return RedirectToAction("Login", "User");
         }
 
     }

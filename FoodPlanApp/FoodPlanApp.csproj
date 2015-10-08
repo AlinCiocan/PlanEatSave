@@ -123,6 +123,11 @@
   <ItemGroup>
     <Compile Include="ApiControllers\BoardController.cs" />
     <Compile Include="ApiControllers\UserController.cs" />
+    <Compile Include="Authentication\UserSessionStore\IUserSessionStore.cs" />
+    <Compile Include="Authentication\IUserAuthentication.cs" />
+    <Compile Include="Authentication\UserAuthentication.cs" />
+    <Compile Include="Authentication\UserAuthenticationConstants.cs" />
+    <Compile Include="Authentication\UserSessionStore\UserSessionStore.cs" />
     <Compile Include="Controllers\BoardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />

@@ -9,6 +9,8 @@ using System.Web.ModelBinding;
 using System.Web.SessionState;
 using BusinessLogic;
 using DataAccessLayer;
+using FoodPlanApp.Authentication;
+using FoodPlanApp.Authentication.UserSessionStore;
 using ViewModels.UserModels;
 
 namespace FoodPlanApp.ApiControllers
@@ -17,24 +19,25 @@ namespace FoodPlanApp.ApiControllers
     {
 
         public UserService UserService { get; set; }
-        private HttpSessionState Session { get; set; }
+        public IUserAuthentication UserAuthentication { get; set; }
+
 
         public UserController()
         {
             UserService = new UserService(new UserDao());
-            Session = HttpContext.Current.Session;
+            UserAuthentication = new UserAuthentication(new UserSessionStore(HttpContext.Current.Session));
         }
 
-        public UserLoginResponse Login(UserLoginViewModel user)
+        public UserViewModel Login(UserLoginViewModel user)
         {
+            // TODO: refactor this, because the wrapper for userLoginResponse is not need it anymore, since if password is incorect then will return an Forbidden response
             var userLoginResponse = UserService.Login(user);
-
             if (userLoginResponse.IsLoggedIn)
             {
-                Session["user"] = userLoginResponse.User;
+                return userLoginResponse.User;
             }
 
-            return userLoginResponse;
+            throw new HttpResponseException(HttpStatusCode.Forbidden);
         }
 
     }

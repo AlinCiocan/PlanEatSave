@@ -49,6 +49,8 @@
                                     $scope.updateStyleForBoard();
                                     unwatchBoard();
                                     watchBoard();
+                                }, function(error) {
+                                    redirectToLoginIfTheErrorIsForbidden(error);
                                 });
                         }, true);
                     }
@@ -144,7 +146,18 @@
 
                 }, function(error) {
                     console.log("error", error);
+                    redirectToLoginIfTheErrorIsForbidden(error);
                 });
+
+            function redirectToLoginPage() {
+                $window.location.href = "/user/login";
+            }
+
+            function redirectToLoginIfTheErrorIsForbidden(error) {
+                if (error.statusCode == "403") {
+                    redirectToLoginPage();
+                }
+            }
 
         }
     ]);

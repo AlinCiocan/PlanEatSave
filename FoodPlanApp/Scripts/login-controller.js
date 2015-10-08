@@ -6,17 +6,17 @@
     var foodplanBoardApp = angular.module("foodplanBoardApp", []);
 
     foodplanBoardApp.controller("LoginController",
-        ["$scope", "$http", function($scope, $http) {
+        ["$scope", "$http", "$window", function ($scope, $http, $window) {
 
 
             function loginRequestCallback(response) {
                 console.log(response.data);
-
-                
+                $window.location.href = "/board";
             }
 
             function loginRequestFailedCallback(error) {
                 console.log("An error ocurred while trying to do login", error);
+                alert("Username or password is incorrect, please try again.");
             }
 
 
