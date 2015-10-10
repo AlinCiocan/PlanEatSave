@@ -28,13 +28,15 @@ namespace FoodPlanApp.ApiControllers
             UserAuthentication = new UserAuthentication(new UserSessionStore(HttpContext.Current.Session));
         }
 
-        public UserViewModel Login(UserLoginViewModel user)
+        public UserViewModel Login(UserLoginViewModel userLogin)
         {
             // TODO: refactor this, because the wrapper for userLoginResponse is not need it anymore, since if password is incorect then will return an Forbidden response
-            var userLoginResponse = UserService.Login(user);
+            var userLoginResponse = UserService.Login(userLogin);
             if (userLoginResponse.IsLoggedIn)
             {
-                return userLoginResponse.User;
+                var user = userLoginResponse.User;
+                UserAuthentication.LoginUser(user);
+                return user;
             }
 
             throw new HttpResponseException(HttpStatusCode.Forbidden);
