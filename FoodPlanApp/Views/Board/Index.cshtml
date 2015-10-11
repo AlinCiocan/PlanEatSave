@@ -23,8 +23,17 @@
         <div class="day-card__header"> {{day.date | date: "EEEE"}} </div>
         <div class="day-card__body">
             <div class="day-card__category" ng-repeat="category in day.categories">
+                <img src="~/Images/delete-icon.png" class="day-card__delete-category" ng-click="deleteCategory(category)"/>
+                <div class="day-card__edit-category" ng-click="editCategory(category)"></div>
+
                 <div class="day-card__category-name"> {{category.title}} </div>
-                <div class="day-card__item" ng-repeat="item in category.items"> {{item.title}} </div>
+                <div class="day-card__item" ng-repeat="item in category.items">
+                    {{item.title}}
+                    <img src="~/Images/delete-icon.png" class="day-card__delete-item" ng-click="deleteItem(item)"/>
+                    <div class="day-card__edit-item" ng-click="editItem(item)"></div>
+                </div>
+
+
 
                 <div class="day-card__add-item" ng-click="addItem(category)">
                     Add item...

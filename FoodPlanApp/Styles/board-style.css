@@ -3,7 +3,7 @@
     padding-bottom: 10px;
 }
 
-.days-board::after {
+.days-board:after {
 	content: "";
 	display: block;
 	clear: both;
@@ -27,6 +27,8 @@
 .day-card__category {
 	margin: 5px;
 	background: seashell;
+
+    position: relative;
 }
 
 .day-card__add-category {
@@ -35,6 +37,10 @@
 
 .day-card__item {
 	padding-left: 5px;
+    position: relative;
+
+    padding-right: 40px;
+    margin-right: 10px;
 }
 
 .day-card__add-item {
@@ -42,12 +48,12 @@
     cursor: pointer;
 }
 
-.day-card__item::before {
+.day-card__item:before {
 	content: "> ";
 }
 
 
-.add-day::after {
+.add-day:after {
     content: "+";
     color: green;
     font-size: 60px;
@@ -56,7 +62,6 @@
 }
 
 .add-day {
-    margin-top: 10px;
     width: 200px;
     height: 130px;
     padding-top: 70px;
@@ -72,4 +77,38 @@
 .clear-board {
     display: block;
     margin-bottom: 10px;
+}
+
+.day-card__category-name {
+    border-bottom: 1px solid gray;
+    padding-right: 40px;
+}
+
+.day-card__delete-category,
+.day-card__delete-item  {
+    width: 12px;
+    height: 12px;
+
+    display: block;
+
+    position: absolute;
+    top: 2px;
+    right: 2px;
+
+
+    cursor: pointer;
+}
+
+.day-card__edit-category:before,
+.day-card__edit-item:before {
+    content: "E";
+
+    width: 12px;
+    height: 12px;
+
+    position: absolute;
+    top: 0;
+    right: 20px;
+
+    cursor: pointer;
 }

@@ -1,7 +1,9 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.Core.Objects.DataClasses;
 using System.Linq;
 using Entities.BoardEntities;
 using Repository;
+using Utils;
 
 namespace DataAccessLayer
 {
@@ -88,22 +90,38 @@ namespace DataAccessLayer
                     repository.DayEntities.Attach(day);
                     repository.Entry(day).State = EntityState.Modified;
                 }
+
+                day.Categories.Where(category=> category.State == ObjectState.Deleted).ToList().ForEach(category =>
+                {
+                    repository.Entry(category).State = EntityState.Deleted;
+                    category.Items.ToList().ForEach(item => repository.Entry(item).State = EntityState.Deleted);
+                });
+                    
+
                 foreach (var category in day.Categories)
                 {
+
                     if (category.Id == 0)
                     {
                         repository.CategoryEntities.Add(category);
                     }
-
                     else
                     {
-                        repository.CategoryEntities.Attach(category);
                         repository.Entry(category).State = EntityState.Modified;
                     }
 
+                   
+                    category.Items.Where(item => item.State == ObjectState.Deleted)
+                                  .ToList()
+                                  .ForEach(item => repository.Entry(item).State = EntityState.Deleted);
+
+
                     foreach (var item in category.Items)
                     {
-                        if (item.Id == 0)
+
+
+
+                    if (item.Id == 0)
                         {
                             repository.ItemEntities.Add(item);
                         }

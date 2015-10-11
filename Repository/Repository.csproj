@@ -67,6 +67,10 @@
       <Project>{d309c98b-87df-4f30-b36f-1ade4d57c072}</Project>
       <Name>Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{9a98d757-0f88-4651-baf0-5afcaffd69d1}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201508241812416_Initial.resx">

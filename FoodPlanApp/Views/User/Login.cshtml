@@ -7,20 +7,39 @@
 <html>
 <head>
     <title>User Login</title>
+    <meta name="viewport" content="width=device-width"/>
     <script type="text/javascript" src="~/Scripts/angular.min.js"></script>
     <script type="text/javascript" src="~/Scripts/login-controller.js"></script>
 </head>
 <body ng-app="foodplanBoardApp">
-    <h3>Food Plan App Login</h3>
+<h3>Food Plan App Login page</h3>
 
-<div ng-controller="LoginController">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" ng-model="username"/>
+<div ng-controller="LoginController" class="login-form">
+    <div class="login-form__username">
+        <label for="username" class="login-form__username-label">Username:</label>
+        <input type="text" id="username" name="username" ng-model="username" ng-keypress="loginOnEnter($event)" class="login-form__username-input"/>
+    </div>
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" ng-model="password"/>
+    <div class="login-form__password">
+        <label for="password" class="login-form__password-label">Password:</label>
+        <input type="password" id="password" name="password" ng-model="password" ng-keypress="loginOnEnter($event)" class="login-form__password-input"/>
+    </div>
 
-    <button ng-click="login()">Login</button>
+    <div class="login-form__login-button">
+        <button ng-click="login()">Login</button>
+    </div>
 </div>
+
+<style type="text/css">
+    .login-form__username,
+    .login-form__password {
+        margin-bottom: 20px;
+    }
+
+    .login-form__username-label,
+    .login-form__password-label {
+        display: block;
+    }
+</style>
 </body>
 </html>

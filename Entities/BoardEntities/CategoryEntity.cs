@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Utils;
 
 namespace Entities.BoardEntities
 {
@@ -9,5 +10,7 @@ namespace Entities.BoardEntities
         public IList<ItemEntity> Items { get; set; }
         public long DayId { get; set; }
         public DayEntity Day { get; set; }
+
+        public ObjectState State { get; set; }
     }
 }

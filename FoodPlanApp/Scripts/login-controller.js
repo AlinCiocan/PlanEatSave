@@ -30,6 +30,15 @@
             };
 
 
+            $scope.loginOnEnter = function(keyEvent) {
+                var ENTER_KEY = 13;
+
+                if (keyEvent.which == ENTER_KEY) {
+                    $scope.login();
+                }
+            };
+
+
         }]);
 
 })(window.angular);

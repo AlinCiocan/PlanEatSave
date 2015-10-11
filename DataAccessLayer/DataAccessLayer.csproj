@@ -64,6 +64,10 @@
       <Project>{27f0ec2d-2759-40ed-9a30-ec3fd2fdd121}</Project>
       <Name>Repository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{9a98d757-0f88-4651-baf0-5afcaffd69d1}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ViewModels\ViewModels.csproj">
       <Project>{0CA9A49D-05DE-45FA-A679-D26CC62E8293}</Project>
       <Name>ViewModels</Name>

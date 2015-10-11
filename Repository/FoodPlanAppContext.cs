@@ -41,9 +41,13 @@ namespace Repository
                         .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<CategoryEntity>()
+                        .Ignore(category => category.State)
                         .HasMany(category => category.Items)
                         .WithRequired(item => item.Category)
                         .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<ItemEntity>()
+                       .Ignore(item => item.State);
 
         }
     }

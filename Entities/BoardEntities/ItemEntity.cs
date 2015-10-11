@@ -1,4 +1,6 @@
-﻿namespace Entities.BoardEntities
+﻿using Utils;
+
+namespace Entities.BoardEntities
 {
     public class ItemEntity
     {
@@ -6,5 +8,6 @@
         public string Title { get; set; }
         public long CategoryId { get; set; }
         public CategoryEntity Category { get; set; }
+        public ObjectState State { get; set; }
     }
 }
