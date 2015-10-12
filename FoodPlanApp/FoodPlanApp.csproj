@@ -146,6 +146,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Global.asax" />
     <Content Include="Images\delete-icon.png" />
+    <Content Include="Images\edit-icon.png" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
