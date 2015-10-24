@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Diagnostics;
 using Entities.BoardEntities;
 using Entities.UserEntities;
 
@@ -7,7 +8,8 @@ namespace Repository
     public class FoodPlanAppContext : DbContext
     {
         public FoodPlanAppContext() : base("FoodPlanAppContext")
-        {       
+        {
+            Database.Log = s => Debug.WriteLine(s);
         }
 
 

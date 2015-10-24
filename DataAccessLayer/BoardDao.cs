@@ -75,7 +75,7 @@ namespace DataAccessLayer
         {
             //TODO: Refactor this method in a nicer way
 
-            repository.BoardEntities.Attach(updatedBoard);
+            repository.BoardEntities.Add(updatedBoard);
             repository.Entry(updatedBoard).State = EntityState.Modified;
 
             foreach (var day in updatedBoard.Days)
@@ -91,12 +91,25 @@ namespace DataAccessLayer
                     repository.Entry(day).State = EntityState.Modified;
                 }
 
-                day.Categories.Where(category=> category.State == ObjectState.Deleted).ToList().ForEach(category =>
+                var deletedCategories = day.Categories.Where(category=> category.State == ObjectState.Deleted).ToList();
+
+                foreach (var deletedCategory in deletedCategories)
                 {
-                    repository.Entry(category).State = EntityState.Deleted;
-                    category.Items.ToList().ForEach(item => repository.Entry(item).State = EntityState.Deleted);
-                });
-                    
+                    //deletedCategory.Items.ToList().ForEach(item => repository.Entry(item).State = EntityState.Deleted);
+
+
+                    var deletedItems = deletedCategory.Items.ToList();
+
+                    foreach (var deletedItem in deletedItems)
+                    {
+                        repository.Entry(deletedItem).State = EntityState.Deleted;
+                    }
+
+
+                    repository.Entry(deletedCategory).State = EntityState.Deleted;
+                }
+
+
 
                 foreach (var category in day.Categories)
                 {
