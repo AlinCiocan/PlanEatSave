@@ -76,6 +76,14 @@
             }
 
             $scope.clearBoard = function () {
+                debugger;
+                if (!confirm("Are you sure you want to clear the board?")) {
+                    return;
+                }
+
+                if (!confirm("Are you double sure you want to clear the whole board?")) {
+                    return;
+                }
 
                 $http.delete(getBoardApiUrl($scope.board.id))
                      .success(function () {
