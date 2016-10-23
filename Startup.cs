@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MySQL.Data.Entity.Extensions;
 using FoodPlan.DataAceessLayer;
+using FoodPlan.Utils;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace FoodPlan
 {
@@ -31,6 +33,25 @@ namespace FoodPlan
         {
             // Add framework services.
             services.AddMvc();
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+            // Add application services
+            services.AddScoped<IFoodPlanLogger, FoodPlanLogger>();
+
+            services.Configure<IdentityOptions>(options =>
+           {
+               // Password settings
+               options.Password.RequireDigit = false;
+               options.Password.RequiredLength = 6;
+               options.Password.RequireNonAlphanumeric = false;
+               options.Password.RequireUppercase = false;
+               options.Password.RequireLowercase = false;
+
+               // User settings
+               options.User.RequireUniqueEmail = true;
+           });
 
             var sqlConnectionString = Configuration["ConnectionString:DataAccessMySqlProvider"];
             var sql = @"server=localhost;userid=root;password=1234;database=foodplan;";
@@ -65,7 +86,7 @@ namespace FoodPlan
 
             app.UseStaticFiles();
 
-            app.UseMvc(routes => 
+            app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "Default",
