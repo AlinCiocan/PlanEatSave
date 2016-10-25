@@ -18,6 +18,8 @@
     "Microsoft.AspNetCore.StaticFiles": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Identity": "1.0.0",
+    "Microsoft.AspNetCore.Authentication.JwtBearer": "1.0.0",
+    "Microsoft.IdentityModel.Tokens": "5.0.0",
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
     "SapientGuardian.EntityFrameworkCore.MySql": "7.1.9",
     "Microsoft.EntityFrameworkCore.Design": {
