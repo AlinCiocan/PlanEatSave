@@ -50,8 +50,8 @@ namespace FoodPlan
 
             // Configure JwtIssuerOptions
             //TODO: Make sure to put this variable in a config & keep it safe
-             const string SecretKey = "foodplan-secret";
-             SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
+             const string SecretKey = "foodplan-secret-7b3a1bfc-5d22-4fc0-a9b6-399b4f31e65f";
+             var _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
 
             services.Configure<JwtIssuerOptions>(options =>
             {
