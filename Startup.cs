@@ -21,6 +21,7 @@ namespace FoodPlan
 {
     public class Startup
     {
+        private SymmetricSecurityKey _signingKey;
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -51,7 +52,7 @@ namespace FoodPlan
             // Configure JwtIssuerOptions
             //TODO: Make sure to put this variable in a config & keep it safe
              const string SecretKey = "foodplan-secret-7b3a1bfc-5d22-4fc0-a9b6-399b4f31e65f";
-             var _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
+             _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
 
             services.Configure<JwtIssuerOptions>(options =>
             {
@@ -59,7 +60,6 @@ namespace FoodPlan
                 options.Audience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)];
                 options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
             });
-
 
             // Add application services
             services.AddScoped<IFoodPlanLogger, FoodPlanLogger>();
@@ -97,8 +97,6 @@ namespace FoodPlan
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseIdentityServer();
-
             app.UseCors((configurationPolicy) =>
             {
                 configurationPolicy
@@ -107,8 +105,16 @@ namespace FoodPlan
                     .AllowCredentials();
             });
 
-
             app.UseStaticFiles();
+
+            var tokenValidationParameters = CreateTokenValidationParameters();
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                TokenValidationParameters = tokenValidationParameters
+            });
+
 
             app.UseMvc(routes =>
             {
@@ -117,6 +123,28 @@ namespace FoodPlan
                     template: "api/{controller}/{action}/{id?}"
                 );
             });
+        }
+
+        private TokenValidationParameters CreateTokenValidationParameters()
+        {
+            var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidIssuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)],
+
+                ValidateAudience = true,
+                ValidAudience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)],
+
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = _signingKey,
+
+                RequireExpirationTime = true,
+                ValidateLifetime = true,
+
+                ClockSkew = TimeSpan.Zero
+            };
+            return tokenValidationParameters;
         }
     }
 }
