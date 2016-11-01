@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { hashHistory, Router, Route, Link } from 'react-router'
+import { hashHistory, Router, Route } from 'react-router'
 import App from './components/App/App';
 import RegisterPage from './components/Register/RegisterPage';
 import LoginPage from './components/Login/LoginPage';

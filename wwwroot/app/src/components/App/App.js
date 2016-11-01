@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Link } from 'react-router';
 import './App.css';
 
 // import '../../lib/routie/routie';
@@ -10,7 +10,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1> This is my awesome food plan app</h1>
+        <h1> Food Plan app homepage </h1>
+        <Link to={`/register`}>Create new account</Link>
+        <br/>
+        <Link to={`/login`}>Login</Link>
       </div>  
     );
   }

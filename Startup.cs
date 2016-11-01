@@ -16,6 +16,8 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using FoodPlan.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace FoodPlan
 {
@@ -38,21 +40,24 @@ namespace FoodPlan
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddCors();
             services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()
                      .RequireAuthenticatedUser()
                      .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
+                config.Filters.Add(new CorsAuthorizationFilterFactory("AllowAllOrigins"));
             });
+
             services.AddIdentity<ApplicationUser, IdentityRole>()
                     .AddEntityFrameworkStores<ApplicationDbContext>();
             var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
 
             // Configure JwtIssuerOptions
             //TODO: Make sure to put this variable in a config & keep it safe
-             const string SecretKey = "foodplan-secret-7b3a1bfc-5d22-4fc0-a9b6-399b4f31e65f";
-             _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
+            const string SecretKey = "foodplan-secret-7b3a1bfc-5d22-4fc0-a9b6-399b4f31e65f";
+            _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
 
             services.Configure<JwtIssuerOptions>(options =>
             {

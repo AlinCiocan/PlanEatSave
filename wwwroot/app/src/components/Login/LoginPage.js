@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 
 import './login.css'
 
-class LoginPage extends Component {
+export default class LoginPage extends Component {
     render() {
-        return (<h1> My awesome login page! </h1>);
+        return (
+            <div> 
+                <h1> Login </h1>
+                <input type="text" />
+            </div>    
+        );
     }
 }
-
-
-export default LoginPage;
