@@ -10,8 +10,7 @@ export function apiUrl(path) {
 
 function postRequest(url) {
     return request
-        .post(apiUrl(url))
-        .set("Access-Control-Allow-Origin", "*");
+        .post(apiUrl(url));
 }
 
 export class ApiRequest {

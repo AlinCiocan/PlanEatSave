@@ -40,14 +40,22 @@ namespace FoodPlan
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
             services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()
                      .RequireAuthenticatedUser()
                      .Build();
+                //config.Filters.Add(new CorsAuthorizationFilterFactory("AllowAllOrigins"));
                 config.Filters.Add(new AuthorizeFilter(policy));
-                config.Filters.Add(new CorsAuthorizationFilterFactory("AllowAllOrigins"));
             });
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -102,13 +110,7 @@ namespace FoodPlan
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors((configurationPolicy) =>
-            {
-                configurationPolicy
-                    .AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowCredentials();
-            });
+            app.UseCors("CorsPolicy");
 
             app.UseStaticFiles();
 

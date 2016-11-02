@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Principal;
+using Microsoft.AspNetCore.Cors;
 
 namespace FoodPlan.Controllers
 {
