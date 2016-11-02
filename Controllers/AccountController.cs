@@ -45,7 +45,7 @@ namespace FoodPlan.Controllers
             var identity = await GetClaimsIdentity(user);
             if (identity == null)
             {
-                return BadRequest("Invalid credentials");
+                return BadRequest($"Invalid credentials");
             }
 
             var claims = new[]
@@ -128,7 +128,7 @@ namespace FoodPlan.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest("Invalid request");
+                return BadRequest("Invalid request: {this.GetModelStateAllErrors()}");
             }
 
             try
@@ -139,10 +139,17 @@ namespace FoodPlan.Controllers
                     UserName = user.Email
                 };
 
+                var userFromDatabase = await _userManager.FindByEmailAsync(applicationUser.Email);
+                if(userFromDatabase != null) 
+                {
+                    return BadRequest("Email address already registered");
+                }
+
                 var result = await _userManager.CreateAsync(applicationUser, user.Password);
                 if (!result.Succeeded)
                 {
-                    return BadRequest();
+                    _logger.LogError($"Failed registration for user with email '{user.Email}' and password '{user.Password}'. Error messages: {string.Join(",", result.Errors)}");
+                    return BadRequest("Your registration could not be complete. Please refer to an admin of the site to help you");
                 }
 
                 var registeredUser = new UserRegisteredModel

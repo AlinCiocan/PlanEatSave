@@ -10,7 +10,8 @@ export function apiUrl(path) {
 
 function postRequest(url) {
     return request
-        .post(apiUrl(url));
+        .post(apiUrl(url))
+        .set('Accept', 'application/json');
 }
 
 export class ApiRequest {

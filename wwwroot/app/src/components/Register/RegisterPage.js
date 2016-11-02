@@ -19,8 +19,8 @@ export default class RegisterPage extends Component {
         var password = this.refs.password.value;
 
         var user = {
-            email,
-            password
+            Email: email,
+            Password: password
         };        
 
         ApiRequest

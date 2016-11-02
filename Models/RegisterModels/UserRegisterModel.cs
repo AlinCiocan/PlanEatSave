@@ -8,6 +8,7 @@ namespace FoodPlan.Models
         public string Email { get; set; }
 
         [Required]
+        [MinLengthAttribute(6)]
         public string Password { get; set; }
     }
 }
