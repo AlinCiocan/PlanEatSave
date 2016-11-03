@@ -1,0 +1,5 @@
+.registration__error-msg {
+  color: red; }
+
+.registration__error-msg--hidden {
+  display: none; }

@@ -1,0 +1,9 @@
+.registration {
+    &__error-msg {
+        color: red;
+    }
+
+    &__error-msg--hidden {
+        display: none;
+    }
+}

@@ -7,11 +7,10 @@ export function apiUrl(path) {
     return API_BASE_ADDRESS + path;
 }
 
-
 function postRequest(url) {
     return request
         .post(apiUrl(url))
-        .set('Accept', 'application/json');
+        .set("Content-Type", "application/json");
 }
 
 export class ApiRequest {

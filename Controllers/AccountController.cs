@@ -124,11 +124,11 @@ namespace FoodPlan.Controllers
         // TODO: make sure to take care of special cases, like when the email address already exists in database
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Register(UserRegisterModel user)
+        public async Task<IActionResult> Register([FromBody] UserRegisterModel user)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest("Invalid request: {this.GetModelStateAllErrors()}");
+                return BadRequest($"Invalid request: {this.GetModelStateAllErrors()}");
             }
 
             try
@@ -149,7 +149,7 @@ namespace FoodPlan.Controllers
                 if (!result.Succeeded)
                 {
                     _logger.LogError($"Failed registration for user with email '{user.Email}' and password '{user.Password}'. Error messages: {string.Join(",", result.Errors)}");
-                    return BadRequest("Your registration could not be complete. Please refer to an admin of the site to help you");
+                    return BadRequest("Your registration could not be completed. Please refer to an admin of the site to help you");
                 }
 
                 var registeredUser = new UserRegisteredModel
