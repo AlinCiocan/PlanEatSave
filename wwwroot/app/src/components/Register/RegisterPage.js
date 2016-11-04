@@ -13,7 +13,7 @@ export default class RegisterPage extends Component {
     }
 
     showErrorMsg(msg) {
-        this.setState({ shouldShowErrorMsg: true, errorMsg: msg });
+        this.setState({ shouldShowErrorMsg: true, errorMsg: msg.response.text });
     }
 
     hideErrorMsg() {
@@ -21,14 +21,13 @@ export default class RegisterPage extends Component {
     }    
     
     createNewAccountFailed(err) {
-        console.log("Registration failed due to the following error ", err);
+        console.log("Registration failed due to the following error ", err.response);
         this.showErrorMsg(err);
     }
 
     accountWasCreatedSuccessfully(value) {
-        console.log("account created successfully", value);
-        alert("account created successfully", value);
-        this.props.history.push("/login");
+        alert("Your account was created successfully. Now you'll be redirected to login page!");
+        this.props.router.push("/login");
     }
 
 
@@ -56,6 +55,7 @@ export default class RegisterPage extends Component {
                 <br />
                 <br />
                 <button onClick={(event) => this.register()}> Create account </button>
+                <br />
                 <br />
                 <div className="registration__error-msg { this.state.shouldShowErrorMsg? 'registration__error-msg--hidden' : ''}">
                     {this.state.errorMsg}
