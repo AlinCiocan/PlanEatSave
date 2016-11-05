@@ -12,7 +12,7 @@ namespace PlanEatSave.Utils.Extensions
 
         public static string GetModelStateAllErrors(this Controller controller)
         {
-            return string.Join(",",
+            return string.Join("  ",
                     controller.ModelState.Values
                     .Where(e => e.Errors.Count > 0)
                     .SelectMany(e => e.Errors)

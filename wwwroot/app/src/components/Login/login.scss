@@ -1,0 +1,10 @@
+.login {
+    &__error-msg {
+        padding-top: 10px;
+        color: red;
+    }
+
+    &__error-msg--hidden {
+        display: none;
+    }
+}

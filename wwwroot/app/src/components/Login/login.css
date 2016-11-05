@@ -1,0 +1,6 @@
+.login__error-msg {
+  padding-top: 10px;
+  color: red; }
+
+.login__error-msg--hidden {
+  display: none; }

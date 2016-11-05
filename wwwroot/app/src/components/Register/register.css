@@ -1,4 +1,5 @@
 .registration__error-msg {
+  padding-top: 5px;
   color: red; }
 
 .registration__error-msg--hidden {

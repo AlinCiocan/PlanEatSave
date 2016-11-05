@@ -5,7 +5,6 @@ using PlanEatSave.Models;
 using System;
 using PlanEatSave.Utils;
 using Microsoft.AspNetCore.Identity;
-using System.Net;
 using PlanEatSave.Utils.Extensions;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -13,8 +12,6 @@ using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Authorization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Principal;
-using Microsoft.AspNetCore.Cors;
 
 namespace PlanEatSave.Controllers
 {
@@ -40,12 +37,24 @@ namespace PlanEatSave.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(UserLoginModel user)
+        public async Task<IActionResult> Login([FromBody] UserLoginModel user)
         {
-            var identity = await GetClaimsIdentity(user);
-            if (identity == null)
+            if (!ModelState.IsValid)
             {
-                return BadRequest($"Invalid credentials");
+                return BadRequest($"{this.GetModelStateAllErrors()}");
+            }
+
+            try
+            {
+                if (await AreCredentialsValid(user) == false)
+                {
+                    return BadRequest("Invalid email address and/or password");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogException(ex, $"Login exception for user with email - '{user.Email}'");
+                return this.InternalServerError();
             }
 
             var claims = new[]
@@ -56,8 +65,7 @@ namespace PlanEatSave.Controllers
                             JwtRegisteredClaimNames.Iat,
                             ToUnixEpochDate(_jwtOptions.IssuedAt).ToString(),
                             ClaimValueTypes.Integer64
-                        ),
-                identity.FindFirst("DisneyCharacter")
+                        )
             };
 
             // Create the JWT security token and encode it.
@@ -92,32 +100,20 @@ namespace PlanEatSave.Controllers
 
         /// <returns>Date converted to seconds since Unix epoch (Jan 1, 1970, midnight UTC).</returns>
         private static long ToUnixEpochDate(DateTime date)
-      => (long)Math.Round((date.ToUniversalTime() -
+        {
+            return (long)Math.Round((date.ToUniversalTime() -
                            new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero))
                           .TotalSeconds);
+        }
 
-        /// <summary>
-        /// IMAGINE BIG RED WARNING SIGNS HERE!
-        /// You'd want to retrieve claims through your claims provider
-        /// in whatever way suits you, the below is purely for demo purposes!
-        /// </summary>
-
-        // TODO: this method should chekc the credentials if they are valid
-        private static Task<ClaimsIdentity> GetClaimsIdentity(UserLoginModel user)
+        private async Task<bool> AreCredentialsValid(UserLoginModel user)
         {
-            if (user?.Email == "MickeyMouse" &&
-                user?.Password == "1234")
+            var userFromDb = await _userManager.FindByEmailAsync(user.Email);
+            if (userFromDb == null)
             {
-                return Task.FromResult(new ClaimsIdentity(
-                  new GenericIdentity(user.Email, "Token"),
-                  new[]
-                  {
-            new Claim("DisneyCharacter", "IAmMickey")
-                  }));
+                return false;
             }
-
-            // Credentials are invalid, or account doesn't exist
-            return Task.FromResult<ClaimsIdentity>(null);
+            return await _userManager.CheckPasswordAsync(userFromDb, user.Password);
         }
 
 
@@ -128,7 +124,7 @@ namespace PlanEatSave.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest($"Invalid request: {this.GetModelStateAllErrors()}");
+                return BadRequest($"{this.GetModelStateAllErrors()}");
             }
 
             try
@@ -140,7 +136,7 @@ namespace PlanEatSave.Controllers
                 };
 
                 var userFromDatabase = await _userManager.FindByEmailAsync(applicationUser.Email);
-                if(userFromDatabase != null) 
+                if (userFromDatabase != null)
                 {
                     return BadRequest("Email address already registered");
                 }

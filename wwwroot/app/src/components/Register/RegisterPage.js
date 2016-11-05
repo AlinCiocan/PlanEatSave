@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { ApiRequest } from '../../services/apiRequest';
+import { ApiRequest } from '../../services/ApiRequest';
+import  ApiRequestsErrorHandler  from '../../services/ApiRequestsErrorHandler';
+
 import './register.css'
 
 export default class RegisterPage extends Component {
@@ -8,12 +10,12 @@ export default class RegisterPage extends Component {
         super(props);
         this.state = {
             shouldShowErrorMsg: false,
-            errorMsg: ""
+            errorMsg: ''
         };
     }
 
     showErrorMsg(msg) {
-        this.setState({ shouldShowErrorMsg: true, errorMsg: msg.response.text });
+        this.setState({ shouldShowErrorMsg: true, errorMsg: msg });
     }
 
     hideErrorMsg() {
@@ -21,13 +23,12 @@ export default class RegisterPage extends Component {
     }    
     
     createNewAccountFailed(err) {
-        console.log("Registration failed due to the following error ", err.response);
-        this.showErrorMsg(err);
+        this.showErrorMsg(ApiRequestsErrorHandler.getErrorMessage(err));
     }
 
     accountWasCreatedSuccessfully(value) {
-        alert("Your account was created successfully. Now you'll be redirected to login page!");
-        this.props.router.push("/login");
+        alert('Your account was created successfully. Now you\'ll be redirected to login page!');
+        this.props.router.push('/login');
     }
 
 
@@ -45,16 +46,17 @@ export default class RegisterPage extends Component {
     }
 
     render() {
+        var _this = this;
         return (
             <div>
-                <h1> Create new account </h1>
+                <h3> Create new account </h3>
                 <input type="email" ref="email" placeholder="Email address" />
                 <br />
                 <br />
                 <input type="password" ref="password" placeholder="Password" />
                 <br />
                 <br />
-                <button onClick={(event) => this.register()}> Create account </button>
+                <button onClick={(event) => _this.register()}> Create account </button>
                 <br />
                 <br />
                 <div className="registration__error-msg { this.state.shouldShowErrorMsg? 'registration__error-msg--hidden' : ''}">
