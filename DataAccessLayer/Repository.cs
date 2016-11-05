@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace FoodPlan.DataAceessLayer
+namespace PlanEatSave.DataAceessLayer
 {
     public class ApplicationUser : IdentityUser
     {

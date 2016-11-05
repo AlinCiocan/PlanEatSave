@@ -1,7 +1,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FoodPlan.Utils.Extensions
+namespace PlanEatSave.Utils.Extensions
 {
     public static class ControllerExtensions
     {

@@ -1,4 +1,4 @@
-namespace FoodPlan.Models
+namespace PlanEatSave.Models
 {
     public class UserRegisteredModel
     {

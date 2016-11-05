@@ -1,8 +1,8 @@
 using System;
 
-namespace FoodPlan.Utils
+namespace PlanEatSave.Utils
 {
-    public interface IFoodPlanLogger
+    public interface IPlanEatSaveLogger
     {
         void LogException(Exception ex, string message = "");
         void LogError(string message);

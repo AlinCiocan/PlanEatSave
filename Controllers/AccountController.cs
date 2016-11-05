@@ -1,12 +1,12 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using FoodPlan.DataAceessLayer;
-using FoodPlan.Models;
+using PlanEatSave.DataAceessLayer;
+using PlanEatSave.Models;
 using System;
-using FoodPlan.Utils;
+using PlanEatSave.Utils;
 using Microsoft.AspNetCore.Identity;
 using System.Net;
-using FoodPlan.Utils.Extensions;
+using PlanEatSave.Utils.Extensions;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -16,15 +16,15 @@ using System.Security.Claims;
 using System.Security.Principal;
 using Microsoft.AspNetCore.Cors;
 
-namespace FoodPlan.Controllers
+namespace PlanEatSave.Controllers
 {
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IFoodPlanLogger _logger;
+        private readonly IPlanEatSaveLogger _logger;
         private readonly JsonSerializerSettings _serializerSettings;
         private readonly JwtIssuerOptions _jwtOptions;
-        public AccountController(UserManager<ApplicationUser> userManager, IOptions<JwtIssuerOptions> jwtOptions, IFoodPlanLogger logger)
+        public AccountController(UserManager<ApplicationUser> userManager, IOptions<JwtIssuerOptions> jwtOptions, IPlanEatSaveLogger logger)
         {
             _userManager = userManager;
             _logger = logger;

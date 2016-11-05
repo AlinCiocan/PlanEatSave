@@ -10,10 +10,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1> Food Plan app homepage </h1>
-        <Link to={`/register`}>Create new account</Link>
-        <br/>
-        <Link to={`/login`}>Login</Link>
+        
       </div>  
     );
   }

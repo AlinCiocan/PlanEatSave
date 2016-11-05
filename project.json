@@ -65,6 +65,6 @@
     ]
   },
   "tooling": {
-    "defaultNamespace": "FoodPlan"
+    "defaultNamespace": "PlanEatSave"
   }
 }

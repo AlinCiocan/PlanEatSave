@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace FoodPlan.Models 
+namespace PlanEatSave.Models 
 {
     public class UserRegisterModel
     {

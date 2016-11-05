@@ -6,7 +6,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}\\bin\\Debug\\netcoreapp1.0\\FoodPlanApp.dll",
+            "program": "${workspaceRoot}\\bin\\Debug\\netcoreapp1.0\\PlanEatSave.dll",
             "args": [],
             "cwd": "${workspaceRoot}",
             "stopAtEntry": false,

@@ -8,18 +8,18 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MySQL.Data.Entity.Extensions;
-using FoodPlan.DataAceessLayer;
-using FoodPlan.Utils;
+using PlanEatSave.DataAceessLayer;
+using PlanEatSave.Utils;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using FoodPlan.Models;
+using PlanEatSave.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
-namespace FoodPlan
+namespace PlanEatSave
 {
     public class Startup
     {
@@ -64,7 +64,7 @@ namespace FoodPlan
 
             // Configure JwtIssuerOptions
             //TODO: Make sure to put this variable in a config & keep it safe
-            const string SecretKey = "foodplan-secret-7b3a1bfc-5d22-4fc0-a9b6-399b4f31e65f";
+            const string SecretKey = "PlanEatSave-secret-7b3a1bfc-5d22-4fc0-a9b6-399b4f31e65f";
             _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
 
             services.Configure<JwtIssuerOptions>(options =>
@@ -75,7 +75,7 @@ namespace FoodPlan
             });
 
             // Add application services
-            services.AddScoped<IFoodPlanLogger, FoodPlanLogger>();
+            services.AddScoped<IPlanEatSaveLogger, PlanEatSaveLogger>();
 
             services.Configure<IdentityOptions>(options =>
            {
@@ -91,7 +91,7 @@ namespace FoodPlan
            });
 
             var sqlConnectionString = Configuration["ConnectionString:DataAccessMySqlProvider"];
-            var sql = @"server=localhost;userid=root;password=1234;database=foodplan;";
+            var sql = @"server=localhost;userid=root;password=1234;database=planeatsave;";
 
             Console.WriteLine("Mysql sql conn: " + sql);
             services.AddDbContext<ApplicationDbContext>(options =>

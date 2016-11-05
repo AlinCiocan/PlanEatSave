@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using FoodPlan.DataAceessLayer;
+using PlanEatSave.DataAceessLayer;
 
-namespace FoodPlan.Migrations
+namespace PlanEatSave.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20161021044144_Initial")]
@@ -123,7 +123,7 @@ namespace FoodPlan.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("FoodPlan.DataAceessLayer.ApplicationUser", b =>
+            modelBuilder.Entity("PlanEatSave.DataAceessLayer.ApplicationUser", b =>
                 {
                     b.Property<string>("Id");
 
@@ -186,7 +186,7 @@ namespace FoodPlan.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("FoodPlan.DataAceessLayer.ApplicationUser")
+                    b.HasOne("PlanEatSave.DataAceessLayer.ApplicationUser")
                         .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -194,7 +194,7 @@ namespace FoodPlan.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("FoodPlan.DataAceessLayer.ApplicationUser")
+                    b.HasOne("PlanEatSave.DataAceessLayer.ApplicationUser")
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -207,7 +207,7 @@ namespace FoodPlan.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("FoodPlan.DataAceessLayer.ApplicationUser")
+                    b.HasOne("PlanEatSave.DataAceessLayer.ApplicationUser")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

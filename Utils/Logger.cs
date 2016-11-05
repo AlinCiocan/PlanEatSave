@@ -1,12 +1,12 @@
 using System;
 using System.IO;
 
-namespace FoodPlan.Utils
+namespace PlanEatSave.Utils
 {
-    public class FoodPlanLogger : IFoodPlanLogger
+    public class PlanEatSaveLogger : IPlanEatSaveLogger
     {
         public static readonly string LogFilePath;
-        static  FoodPlanLogger() 
+        static  PlanEatSaveLogger() 
         {
             LogFilePath = Path.Combine("Log", "log.txt");
         }

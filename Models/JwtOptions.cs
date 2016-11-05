@@ -2,7 +2,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Threading.Tasks;
 
-namespace FoodPlan.Models
+namespace PlanEatSave.Models
 {
   public class JwtIssuerOptions
   {

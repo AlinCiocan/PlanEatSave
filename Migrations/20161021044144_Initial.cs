@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace FoodPlan.Migrations
+namespace PlanEatSave.Migrations
 {
     public partial class Initial : Migration
     {
