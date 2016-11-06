@@ -1,2 +1,29 @@
-.pantry__list {
-  font-weight: 900; }
+.pantry__lists {
+  margin-left: 16px; }
+.pantry__list-title {
+  font-weight: 900;
+  font-size: 16px;
+  letter-spacing: 2.24px;
+  margin-bottom: 10px; }
+.pantry__item {
+  position: relative;
+  margin-bottom: 20px;
+  margin-left: 2px; }
+.pantry__item-img {
+  width: 125px;
+  height: 80px;
+  background-color: #c7d3d0;
+  display: inline-block; }
+.pantry__item-details {
+  position: absolute;
+  top: 12px;
+  left: 140px; }
+.pantry__item-name {
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 1.96px;
+  margin-bottom: 6px; }
+.pantry__item-expiration {
+  letter-spacing: 1.96px; }
+
+/*# sourceMappingURL=pantry.css.map */

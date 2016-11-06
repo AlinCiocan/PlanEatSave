@@ -33,14 +33,32 @@ export default class PantryPage extends Component {
 
     }
 
+    renderPantryItem(item) {
+        return (
+            <div className="pantry__item">
+                <div className="pantry__item-img">
+                </div>
+                <div className="pantry__item-details">
+                    <div className="pantry__item-name">
+                        {item.name}
+                    </div>    
+                     <div className="pantry__item-expiration">
+                        {item.expiration}
+                    </div>    
+                </div>
+            </div>
+        );
+    }
+
     renderPantryList(list) {
+        var _this = this;
         return (
             <div key={list.id} className="pantry__list">
                 <div className="pantry__list-title">
                     {list.title}
                 </div>
                 <div className="pantry__items">
-                    {list.items.map((x) => (<p> {x.name + ' ' + x.expiration} </p>))}
+                    {list.items.map(item => _this.renderPantryItem(item))}
                 </div>
             </div>
         );
@@ -51,11 +69,8 @@ export default class PantryPage extends Component {
         var _this = this;
         return (
             <div>
-                <div className="top-bar">
-
-                </div>
                 <div className="pantry__lists">
-                    {this.state.pantry.lists.map((pantryList) => _this.renderPantryList(pantryList))}
+                    {this.state.pantry.lists.map(pantryList => _this.renderPantryList(pantryList))}
                 </div>
             </div>
         );

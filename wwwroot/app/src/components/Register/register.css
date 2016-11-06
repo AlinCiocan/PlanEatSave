@@ -1,6 +1,7 @@
 .registration__error-msg {
-  padding-top: 5px;
+  padding-top: 10px;
   color: red; }
-
 .registration__error-msg--hidden {
   display: none; }
+
+/*# sourceMappingURL=register.css.map */

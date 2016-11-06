@@ -1,11 +1,46 @@
 @import '../../layout/fonts';
 
+
 .pantry {
-    &__list-title {
-        @include font-bold();
+    &__lists {
+        margin-left: 16px;
     }
 
-    &__item-title {
+    &__list-title {
         @include font-bold();
+        font-size: 16px;
+        letter-spacing: 2.24px;
+        margin-bottom: 10px;
     }
+
+    &__item {
+        position: relative;
+        margin-bottom: 20px;
+        margin-left: 2px;
+    }
+
+    &__item-img {
+        width: 125px;
+        height: 80px;
+        background-color: #c7d3d0;
+        display: inline-block;
+    }
+
+    &__item-details {
+        position: absolute;
+        top: 12px;
+        left: 140px;
+    }
+
+    &__item-name {
+        @include font-bold();
+        font-size: 14px;
+        letter-spacing: 1.96px;
+        margin-bottom: 6px;
+    }
+
+    &__item-expiration {
+        letter-spacing: 1.96px;
+    }
+
 }

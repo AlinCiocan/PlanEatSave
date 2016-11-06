@@ -14,7 +14,7 @@
     "superagent": "^2.3.0"
   },
   "scripts": {
-    "sass": "node-sass src -w -o src",
+    "sass": "node-sass \"G:\\projects\\planeatsave\\wwwroot\\app\\src\" -o \"G:\\projects\\planeatsave\\wwwroot\\app\\src\" --watch",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
