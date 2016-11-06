@@ -1,0 +1,7 @@
+@mixin font-bold() {
+    font-weight: 900;
+}
+
+@mixin font-style() {
+    font-style: italic;
+}

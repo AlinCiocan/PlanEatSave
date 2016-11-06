@@ -1,0 +1,11 @@
+@import '../../layout/fonts';
+
+.pantry {
+    &__list-title {
+        @include font-bold();
+    }
+
+    &__item-title {
+        @include font-bold();
+    }
+}
