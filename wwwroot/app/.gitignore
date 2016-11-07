@@ -13,3 +13,10 @@ build
 .DS_Store
 .env
 npm-debug.log
+
+
+# Ignore Sass' cache
+/.sass-cache
+
+# Ignore CSS Map File
+*.map
