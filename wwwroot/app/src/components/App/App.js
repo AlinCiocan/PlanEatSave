@@ -12,7 +12,7 @@ class App extends Component {
 
         <div className="top-bar">
           <Link to="/" className="top-bar__logo">
-            <img src={logo} alt="Logo"/>
+            <img src={logo} />
           </Link>
         </div>
 
