@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { ApiRequest } from '../../services/ApiRequest';
 import  ApiRequestsErrorHandler  from '../../services/ApiRequestsErrorHandler';
+import  TokenStore  from '../../services/TokenStore';
+
 
 import './login.css'
 
@@ -22,7 +24,8 @@ export default class LoginPage extends Component {
         this.setState({ shouldShowErrorMsg: true, errorMsg: msg });
     }
 
-    loginSuccessfully() {
+    loginSuccessfully(rsp) {
+        TokenStore.storeTokenFromApi(rsp.text);
         this.props.router.push('/pantry');
     }
 
