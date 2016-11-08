@@ -10,19 +10,3 @@ body {
 }
 
 
-.top-bar {
-    width: 100%;
-    height: 60px;
-    position: relative;
-    margin-bottom: 20px;
-    background-color: #737b79;
-
-    &__logo {
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
-        width: 45px;
-
-        padding-top: 7px;
-    }
-}

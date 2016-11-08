@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 // import { ApiRequest } from '../../services/ApiRequest';
 // import ApiRequestsErrorHandler from '../../services/ApiRequestsErrorHandler';
 import './pantry.css';
+import TopBar from '../TopBar/TopBar';
+
 
 export default class PantryPage extends Component {
     constructor(props) {
@@ -69,6 +71,7 @@ export default class PantryPage extends Component {
         var _this = this;
         return (
             <div>
+                <TopBar />
                 <div className="pantry__lists">
                     {this.state.pantry.lists.map(pantryList => _this.renderPantryList(pantryList))}
                 </div>

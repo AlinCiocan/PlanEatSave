@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ApiRequest } from '../../services/ApiRequest';
 import  ApiRequestsErrorHandler  from '../../services/ApiRequestsErrorHandler';
+import TopBar from '../TopBar/TopBar';
 
 import './register.css'
 
@@ -49,6 +50,7 @@ export default class RegisterPage extends Component {
         var _this = this;
         return (
             <div>
+                <TopBar />
                 <h3> Create new account </h3>
                 <input type="email" ref="email" placeholder="Email address" />
                 <br />

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ApiRequest } from '../../services/ApiRequest';
 import  ApiRequestsErrorHandler  from '../../services/ApiRequestsErrorHandler';
 import  TokenStore  from '../../services/TokenStore';
-
+import TopBar from '../TopBar/TopBar';
 
 import './login.css'
 
@@ -26,7 +26,13 @@ export default class LoginPage extends Component {
 
     loginSuccessfully(rsp) {
         TokenStore.storeTokenFromApi(rsp.text);
-        this.props.router.push('/pantry');
+
+        var nextPath = '/pantry'; 
+        if (this.props.location.state && this.props.location.state.nextPathname) {
+            nextPath = this.props.location.state.nextPathname;
+        }
+
+        this.props.router.push(nextPath);
     }
 
     failedLogin(err) {
@@ -50,6 +56,7 @@ export default class LoginPage extends Component {
     render() {
         return (
             <div>
+                <TopBar />
                 <h3> Login </h3>
                 <input type="email" ref="email" placeholder="john@doe.com" />
                 <br />
