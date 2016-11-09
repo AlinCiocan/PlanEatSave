@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ApiRequest } from '../../services/ApiRequest';
-import  ApiRequestsErrorHandler  from '../../services/ApiRequestsErrorHandler';
-import  TokenStore  from '../../services/TokenStore';
+import ApiRequestsErrorHandler from '../../services/ApiRequestsErrorHandler';
+import TokenStore from '../../services/TokenStore';
 import TopBar from '../TopBar/TopBar';
 
 import './login.css'
@@ -24,21 +24,23 @@ export default class LoginPage extends Component {
         this.setState({ shouldShowErrorMsg: true, errorMsg: msg });
     }
 
-    loginSuccessfully(rsp) {
-        TokenStore.storeTokenFromApi(rsp.text);
-
-        var nextPath = '/pantry'; 
+    getNextPath() {
         if (this.props.location.state && this.props.location.state.nextPathname) {
-            nextPath = this.props.location.state.nextPathname;
+            return this.props.location.state.nextPathname;
         }
 
-        this.props.router.push(nextPath);
+        return '/pantry';
+    }
+
+    loginSuccessfully(rsp) {
+        TokenStore.storeTokenFromApi(rsp.text);
+        this.props.router.push(this.getNextPath());
     }
 
     failedLogin(err) {
         this.showErrorMsg(ApiRequestsErrorHandler.getErrorMessage(err));
     }
-    
+
     login() {
         this.hideErrorMsg();
 

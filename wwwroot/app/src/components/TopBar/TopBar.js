@@ -4,10 +4,6 @@ import logo from '../../images/logo.svg';
 import './topbar.css';
 
 export default class TopBar extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className="top-bar">

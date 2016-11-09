@@ -5,7 +5,7 @@ import App from './components/App/App';
 import RegisterPage from './components/Register/RegisterPage';
 import LoginPage from './components/Login/LoginPage';
 import LandingPage from './components/LandingPage/LandingPage';
-import PantryPage from './components/PantryPage/PantryPage';
+import PantryPageContainer from './components/PantryPage/PantryPageContainer';
 import TokenStore from './services/TokenStore';
 
 import './index.css';
@@ -27,7 +27,7 @@ ReactDOM.render(
       <IndexRoute component={LandingPage} />
       <Route path="/login" component={LoginPage} />
       <Route path="/register" component={RegisterPage} />
-      <Route path="/pantry" component={PantryPage} onEnter={requiresAuthentication} />
+      <Route path="/pantry" component={PantryPageContainer} onEnter={requiresAuthentication} />
     </Route>
   </Router>,
   document.getElementById('root')
