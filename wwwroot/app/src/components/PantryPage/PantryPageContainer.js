@@ -13,16 +13,20 @@ export default class PantryPageContainer extends Component {
     }
 
     componentDidMount() {
-        let pantryResponse = ApiRequest.getPantry();
-        this.setState({pantry: pantryResponse.pantry});
-    }    
-    
+        ApiRequest.getPantry().then(response => {
+            console.log('response pantry', response);
+            this.setState({ pantry: response.text });
+        }, err => {
+            console.log(err);
+        });
+    }
+
     renderPantry() {
         if (this.state.pantry == null) {
             return (<h3> Loading... </h3>);
         }
 
-        return (<PantryPage pantry={this.state.pantry}/>)
+        return (<PantryPage pantry={this.state.pantry} />)
     }
 
     render() {

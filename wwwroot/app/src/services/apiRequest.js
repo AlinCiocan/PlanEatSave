@@ -1,5 +1,5 @@
 import request from 'superagent';
-
+import TokenStore from './TokenStore';
 // TODO: make sure to put this url in a config file
 export const API_BASE_ADDRESS = 'http://localhost:5000/api/';
 
@@ -12,10 +12,20 @@ function postRequest(url) {
         .post(apiUrl(url))
         .set('Content-Type', 'application/json');
 }
+
+function authGetRequest(url) {
+    var token = TokenStore.getAuthToken();
+
+    return request
+        .get(apiUrl(url))
+        .set('Content-Type', 'application/json')
+        .set('Authorization', `Bearer ${token}`);
+}
+
 var i = 0;
 function newItem(name, exp) {
     i++;
-    return { name, expiration: 'Exp: ' + exp , id: i};
+    return { name, expiration: 'Exp: ' + exp, id: i };
 }
 
 export class ApiRequest {
@@ -30,24 +40,6 @@ export class ApiRequest {
     }
 
     static getPantry() {
-        return {
-            pantry: {
-                lists: [{
-                    id: 'pantry-list-1',
-                    title: 'All products (59)',
-                    items: [
-                        newItem('Quinoa', '09.09.2016'),
-                        newItem('Organic Coconut Milk', '29.10.2016'),
-                        newItem('Vanilla Beans', '09.12.2016'),
-                        newItem('Cardamom', '08.01.2017'),
-
-                        newItem('Quinoa 2', '09.09.2018'),
-                        newItem('Organic Coconut Milk 2', '29.10.2018'),
-                        newItem('Vanilla Beans 2', '09.12.2018'),
-                        newItem('Cardamom 2', '08.01.2018')
-                    ]
-                }]
-            }
-        }
+        return authGetRequest('pantry/getpantry');
     }
 }

@@ -1,6 +1,7 @@
-using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PlanEatSave.DataAceessLayer;
+using PlanEatSave.Utils.Extensions;
 
 namespace PlanEatSave.Controllers
 {
@@ -12,9 +13,11 @@ namespace PlanEatSave.Controllers
             _pantryService = pantryService;
         }
         [HttpGet]
-        public IActionResult GetPantry(int userId)
+        public async Task<IActionResult> GetPantry()
         {
-            return Ok("item1, item2, item3");
+            string userId = this.GetUserId();
+            var pantry = await _pantryService.GetPantryByUserIdAsync(userId);
+            return Ok(pantry);
         }
     }
 }

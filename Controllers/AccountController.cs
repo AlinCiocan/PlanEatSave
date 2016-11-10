@@ -44,9 +44,12 @@ namespace PlanEatSave.Controllers
                 return BadRequest($"{this.GetModelStateAllErrors()}");
             }
 
+            string userId;
             try
             {
-                if (await AreCredentialsValid(user) == false)
+                userId = await GetUserIdByEmailAndPassword(user);
+
+                if (userId == null)
                 {
                     return BadRequest("Invalid email address and/or password");
                 }
@@ -59,7 +62,8 @@ namespace PlanEatSave.Controllers
 
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                new Claim(JwtRegisteredClaimNames.Sub, userId),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, await _jwtOptions.JtiGenerator()),
                 new Claim(
                             JwtRegisteredClaimNames.Iat,
@@ -106,14 +110,19 @@ namespace PlanEatSave.Controllers
                           .TotalSeconds);
         }
 
-        private async Task<bool> AreCredentialsValid(UserLoginModel user)
+        private async Task<string> GetUserIdByEmailAndPassword(UserLoginModel user)
         {
             var userFromDb = await _userManager.FindByEmailAsync(user.Email);
             if (userFromDb == null)
             {
-                return false;
+                return null;
             }
-            return await _userManager.CheckPasswordAsync(userFromDb, user.Password);
+            if(await _userManager.CheckPasswordAsync(userFromDb, user.Password) == false)
+            {
+                return null;
+            }
+
+            return userFromDb.Id;
         }
 
 

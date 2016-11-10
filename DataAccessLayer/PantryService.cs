@@ -1,4 +1,6 @@
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace PlanEatSave.DataAceessLayer
 {
@@ -11,9 +13,11 @@ namespace PlanEatSave.DataAceessLayer
         }
 
 
-        public Pantry GetPantryByUserId(string userId)
+        public async Task<Pantry> GetPantryByUserIdAsync(string userId)
         {
-            return _context.Pantries.Where(pantry => pantry.UserId == userId).First();
+            return await _context.Pantries
+                                .Where(pantry => pantry.UserId == userId)
+                                .Include(pantry => pantry.PantryItems).FirstOrDefaultAsync();
         }
     }
 }
