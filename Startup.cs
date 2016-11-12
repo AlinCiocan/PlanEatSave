@@ -18,6 +18,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
+using AutoMapper;
 
 namespace PlanEatSave
 {
@@ -49,6 +50,13 @@ namespace PlanEatSave
                         .AllowAnyHeader()
                         .AllowCredentials());
             });
+
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Pantry, PantryViewModel>();
+                cfg.CreateMap<PantryItem, PantryItemViewModel>();
+            });
+
             services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()

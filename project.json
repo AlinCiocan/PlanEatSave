@@ -22,6 +22,7 @@
     "Microsoft.IdentityModel.Tokens": "5.0.0",
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
     "SapientGuardian.EntityFrameworkCore.MySql": "7.1.9",
+    "AutoMapper.Extensions.Microsoft.DependencyInjection": "1.1.2",
     "Microsoft.EntityFrameworkCore.Design": {
       "version": "1.0.0-preview2-final",
       "type": "build"

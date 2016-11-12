@@ -92,8 +92,8 @@ namespace PlanEatSave.Controllers
                     expires_in = (int)_jwtOptions.ValidFor.TotalSeconds
                 };
 
-                var json = JsonConvert.SerializeObject(response, _serializerSettings);
-                return new OkObjectResult(json);
+                //var json = JsonConvert.SerializeObject(response, _serializerSettings);
+                return Ok(response);
             }
             catch (Exception ex)
             {

@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PlanEatSave.Utils.Extensions
@@ -23,8 +24,8 @@ namespace PlanEatSave.Utils.Extensions
 
         public static string GetUserId(this Controller controller)
         {
-            var jwtCubClaim = controller.ControllerContext.HttpContext.User.FindFirst(claim => claim.Type == JwtRegisteredClaimNames.Sub);
-            return jwtCubClaim.Value;
+            var jwtUserIdClaim = controller.ControllerContext.HttpContext.User.Claims.First(claim => claim.Type == ClaimTypes.NameIdentifier);
+            return jwtUserIdClaim.Value;
         }
     }
 
