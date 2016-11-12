@@ -10,6 +10,17 @@ export default class PantryPage extends Component {
         };
     }
 
+    twoDigits(value) {
+        return ('0' + value).slice(0, 2);
+    }
+
+    formatDate(dateString) {
+        var date = new Date(dateString);
+        var twoDigits = this.twoDigits;
+        
+        return `Exp: ${twoDigits(date.getDate())}.${twoDigits(date.getMonth() + 1)}.${date.getFullYear()}`;
+    }
+
     renderPantryItem(item) {
         return (
             <div className="pantry__item" key={item.id}>
@@ -20,7 +31,7 @@ export default class PantryPage extends Component {
                         {item.name}
                     </div>
                     <div className="pantry__item-expiration">
-                        {item.expiration}
+                        {this.formatDate(item.expiration)}
                     </div>
                 </div>
             </div>
