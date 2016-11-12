@@ -10,6 +10,8 @@ export default class TopBar extends Component {
                 <Link to="/" className="top-bar__logo">
                     <img src={logo} alt="logo"/>
                 </Link>
+
+                {this.props.rightSide}
             </div>
         );
     }

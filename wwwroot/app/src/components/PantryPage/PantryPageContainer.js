@@ -16,7 +16,7 @@ export default class PantryPageContainer extends Component {
         ApiRequest.getPantry().then(response => {
             console.log('response pantry', response);
             let pantryDb = response.body;
-            
+
 
             let pantry = {
                 lists: [{
@@ -41,10 +41,16 @@ export default class PantryPageContainer extends Component {
         return (<PantryPage pantry={this.state.pantry} />)
     }
 
+    getAddPantryItemButton() {
+        return (
+            <button onClick={() => this.props.router.push('/pantry/add-item')} className="add-pantry-item">+</button>
+        );
+    }
+
     render() {
         return (
             <div>
-                <TopBar />
+                <TopBar rightSide={this.getAddPantryItemButton()} />
                 {this.renderPantry()}
             </div>
         );

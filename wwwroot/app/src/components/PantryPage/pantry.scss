@@ -43,5 +43,21 @@
         font-size: 14px;
         letter-spacing: 1.96px;
     }
+}
 
+.add-pantry-item {
+    width: 70px;
+    height: 35px;
+    background-color: #8e9e99;
+    color: white;
+    border: 0;
+    top: 10px;
+    right: 15px;
+    position: absolute;
+    border-radius: 4px;
+    font-size: 32px;
+    cursor: pointer;
+
+    // TODO: check with the designer about the outline
+    // outline: 0;
 }
