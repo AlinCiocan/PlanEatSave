@@ -4,8 +4,6 @@ import ApiRequestsErrorHandler from '../../services/ApiRequestsErrorHandler';
 import TokenStore from '../../services/TokenStore';
 import TopBar from '../TopBar/TopBar';
 
-import './login.css'
-
 export default class LoginPage extends Component {
     constructor(props) {
         super(props);

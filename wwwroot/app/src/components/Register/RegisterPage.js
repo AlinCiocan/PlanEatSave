@@ -3,8 +3,6 @@ import { ApiRequest } from '../../services/ApiRequest';
 import  ApiRequestsErrorHandler  from '../../services/ApiRequestsErrorHandler';
 import TopBar from '../TopBar/TopBar';
 
-import './register.css'
-
 export default class RegisterPage extends Component {
 
     constructor(props) {

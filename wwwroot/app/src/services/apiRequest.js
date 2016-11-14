@@ -13,19 +13,24 @@ function postRequest(url) {
         .set('Content-Type', 'application/json');
 }
 
-function authGetRequest(url) {
-    var token = TokenStore.getAuthToken();
-
+function getRequest(url) {
     return request
         .get(apiUrl(url))
         .set('Content-Type', 'application/json')
+}
+
+function authGetRequest(url) {
+    var token = TokenStore.getAuthToken();
+
+    return getRequest(url)
         .set('Authorization', `Bearer ${token}`);
 }
 
-var i = 0;
-function newItem(name, exp) {
-    i++;
-    return { name, expiration: 'Exp: ' + exp, id: i };
+function authPostRequest(url) {
+    var token = TokenStore.getAuthToken();
+
+    return postRequest(url)
+        .set('Authorization', `Bearer ${token}`);
 }
 
 export class ApiRequest {
@@ -41,5 +46,10 @@ export class ApiRequest {
 
     static getPantry() {
         return authGetRequest('pantry/getpantry');
+    }
+
+    static addPantryItem(item) {
+        return authPostRequest('pantry/addItem')
+            .send(item);
     }
 }

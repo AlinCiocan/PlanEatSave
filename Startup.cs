@@ -53,8 +53,8 @@ namespace PlanEatSave
 
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Pantry, PantryViewModel>();
-                cfg.CreateMap<PantryItem, PantryItemViewModel>();
+                cfg.CreateMap<Pantry, PantryViewModel>().ReverseMap();
+                cfg.CreateMap<PantryItem, PantryItemViewModel>().ReverseMap();
             });
 
             services.AddMvc(config =>

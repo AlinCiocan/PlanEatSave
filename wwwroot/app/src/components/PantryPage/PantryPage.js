@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './pantry.css';
 
 export default class PantryPage extends Component {
     constructor(props) {
@@ -11,7 +10,7 @@ export default class PantryPage extends Component {
     }
 
     twoDigits(value) {
-        return ('0' + value).slice(0, 2);
+        return ('0' + value).slice(-2);
     }
 
     formatDate(dateString) {

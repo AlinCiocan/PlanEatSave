@@ -26,9 +26,9 @@ namespace PlanEatSave.DataAceessLayer
                                 .Include(pantry => pantry.PantryItems).FirstOrDefaultAsync();
         }
 
-        public async Task<bool> AddItem(string userId, long pantryId, PantryItem item)
+        public async Task<bool> AddItem(string userId, PantryItem item)
         {
-            var pantryDb = await _context.Pantries.Where(pantry => pantry.Id == pantryId).FirstOrDefaultAsync();
+            var pantryDb = await _context.Pantries.Where(pantry => pantry.Id == item.PantryId).FirstOrDefaultAsync();
             if (pantryDb == null || pantryDb.UserId != userId)
             {
                 return false;

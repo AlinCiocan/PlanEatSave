@@ -126,7 +126,6 @@ namespace PlanEatSave.Controllers
         }
 
 
-        // TODO: make sure to take care of special cases, like when the email address already exists in database
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] UserRegisterModel user)

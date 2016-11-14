@@ -48,16 +48,28 @@
 .add-pantry-item {
     width: 70px;
     height: 35px;
+    margin-top: -18px;
     background-color: #8e9e99;
-    color: white;
-    border: 0;
-    top: 10px;
-    right: 15px;
-    position: absolute;
     border-radius: 4px;
     font-size: 32px;
-    cursor: pointer;
 
     // TODO: check with the designer about the outline
     // outline: 0;
+}
+
+.pantry-add-item {
+    &__form-group {
+        margin-bottom: 10px;
+        margin-left: 24px; 
+        margin-right: 24px;       
+    }
+
+    &__form-label {
+        margin-bottom: 10px;
+    }
+
+    &__form-input {
+        width: 100%;
+        box-sizing: border-box;
+    }
 }

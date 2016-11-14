@@ -37,13 +37,12 @@ namespace PlanEatSave.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddItem(long pantryId, PantryItemViewModel item)
+        public async Task<IActionResult> AddItem([FromBody] PantryItemViewModel item)
         {
-
             try
             {
                 var newItem = Mapper.Map<PantryItem>(item);
-                if (await _pantryService.AddItem(UserId, pantryId, newItem))
+                if (await _pantryService.AddItem(UserId, newItem))
                 {
                     return Ok(Mapper.Map<PantryItemViewModel>(newItem));
                 }
@@ -51,7 +50,7 @@ namespace PlanEatSave.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogException(ex, $"Add item failed; user id - {UserId}; pantry id - {pantryId}; item - {JsonConvert.SerializeObject(item)}");
+                _logger.LogException(ex, $"Add item failed; user id - {UserId}; item - {JsonConvert.SerializeObject(item)}");
                 return this.InternalServerError();
             }
 

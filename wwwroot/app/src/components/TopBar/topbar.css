@@ -12,5 +12,20 @@
     display: block;
     width: 45px;
     padding-top: 7px; }
+  /* line 17, topbar.scss */
+  .top-bar__side {
+    position: absolute;
+    cursor: pointer;
+    color: white;
+    border: 0;
+    top: 50%;
+    margin-top: -10px;
+    font-size: 16px; }
+  /* line 27, topbar.scss */
+  .top-bar__side--left {
+    left: 15px; }
+  /* line 31, topbar.scss */
+  .top-bar__side--right {
+    right: 15px; }
 
 /*# sourceMappingURL=topbar.css.map */

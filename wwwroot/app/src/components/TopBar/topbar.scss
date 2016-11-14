@@ -13,4 +13,22 @@
 
         padding-top: 7px;
     }
+
+    &__side {
+        position: absolute;
+        cursor: pointer;
+        color: white;
+        border: 0;
+        top: 50%;
+        margin-top: -10px;
+        font-size: 16px;
+    }
+
+    &__side--left {
+        left: 15px;
+    }
+
+    &__side--right {
+        right: 15px;
+    }
 }

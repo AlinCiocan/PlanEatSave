@@ -7,6 +7,7 @@ import LoginPage from './components/Login/LoginPage';
 import LandingPage from './components/LandingPage/LandingPage';
 import PantryPageContainer from './components/PantryPage/PantryPageContainer';
 import TokenStore from './services/TokenStore';
+import PantryAddNewItem from './components/PantryPage/PantryAddNewItem';
 
 import './index.css';
 
@@ -28,6 +29,7 @@ ReactDOM.render(
       <Route path="/login" component={LoginPage} />
       <Route path="/register" component={RegisterPage} />
       <Route path="/pantry" component={PantryPageContainer} onEnter={requiresAuthentication} />
+      <Route path="/pantry/:pantryId/add-item" component={PantryAddNewItem} onEnter={requiresAuthentication} />
     </Route>
   </Router>,
   document.getElementById('root')
