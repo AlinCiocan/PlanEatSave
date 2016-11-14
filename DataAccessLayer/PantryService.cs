@@ -21,9 +21,25 @@ namespace PlanEatSave.DataAceessLayer
 
         public async Task<Pantry> GetPantryByUserIdAsync(string userId)
         {
-            return await _context.Pantries
+            var pantryFromDb = await _context.Pantries
                                 .Where(pantry => pantry.UserId == userId)
                                 .Include(pantry => pantry.PantryItems).FirstOrDefaultAsync();
+
+            if (pantryFromDb != null)
+            {
+                return pantryFromDb;
+            }
+
+
+
+            var newPantry = new Pantry
+            {
+                UserId = userId
+            };
+
+            _context.Pantries.Add(newPantry);
+            await _context.SaveChangesAsync();
+            return newPantry;
         }
 
         public async Task<bool> AddItem(string userId, PantryItem item)
