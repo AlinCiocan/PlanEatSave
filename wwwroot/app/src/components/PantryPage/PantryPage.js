@@ -40,7 +40,7 @@ export default class PantryPage extends Component {
     renderPantryList(list) {
         var _this = this;
         return (
-            <div key={list.id} className="pantry__list">
+            <div key={list.key} className="pantry__list">
                 <div className="pantry__list-title">
                     {list.title}
                 </div>

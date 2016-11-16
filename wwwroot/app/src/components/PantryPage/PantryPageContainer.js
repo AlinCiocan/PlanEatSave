@@ -5,6 +5,7 @@ import PantryPage from './PantryPage';
 import { ApiRequest } from '../../services/ApiRequest';
 import TopBar from '../TopBar/TopBar';
 
+const DAYS_EXPIRES_SOON = 30;
 
 export default class PantryPageContainer extends Component {
     constructor(props) {
@@ -17,17 +18,21 @@ export default class PantryPageContainer extends Component {
     }
 
     populatePantry(pantryDb) {
+        
+        debugger;
         let itemsSortedByExpiration = pantryDb.pantryItems.sort((a, b) => new Date(a.expiration).getTime() - new Date(b.expiration).getTime());
         let allProductsList = {
             title: `All products (${itemsSortedByExpiration.length})`,
-            items: itemsSortedByExpiration
+            items: itemsSortedByExpiration,
+            key: 'allProducts'
         };
-
+        
         let now = moment();
-        let itemsThatWillExpireSoon = itemsSortedByExpiration.filter((item) => moment(item.expiration).add(30, 'days') > now)
+        let itemsThatWillExpireSoon = itemsSortedByExpiration.filter((item) => moment(item.expiration).diff(now, 'days') <= DAYS_EXPIRES_SOON)
         let porductsThatWillExpireSoonList = {
             title: `To expire soon (${itemsThatWillExpireSoon.length})`,
-            items: itemsThatWillExpireSoon
+            items: itemsThatWillExpireSoon,
+            key: 'willExpireSoon'
         };
 
         let pantry = {
