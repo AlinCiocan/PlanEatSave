@@ -18,8 +18,6 @@ export default class PantryPageContainer extends Component {
     }
 
     populatePantry(pantryDb) {
-        
-        debugger;
         let itemsSortedByExpiration = pantryDb.pantryItems.sort((a, b) => new Date(a.expiration).getTime() - new Date(b.expiration).getTime());
         let allProductsList = {
             title: `All products (${itemsSortedByExpiration.length})`,
