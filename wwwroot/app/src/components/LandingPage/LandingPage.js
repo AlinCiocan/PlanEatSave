@@ -33,7 +33,11 @@ class LandingPage extends Component {
     return (
       <div>
         <h3> Hey there, have a lovely day!</h3>
+        <Link to={'/pantry'}> My Pantry </Link>
+        <br />
+        <br />        
         <button onClick={() => this.logOut()}> Log out </button>
+        
       </div>  
     );
   }
