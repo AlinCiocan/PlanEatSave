@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TopBar from '../TopBar/TopBar';
 import { ApiRequest } from '../../services/ApiRequest';
+import PikadayWrapper from '../../lib-components/PikadayWrapper';
 
 export default class PantryAddNewItem extends Component {
 
@@ -79,6 +80,9 @@ export default class PantryAddNewItem extends Component {
                     <label htmlFor="productExpiration" className="pantry-add-item__form-label">
                         Expiry date
                     </label>
+
+                    <PikadayWrapper onSelect={() => console.log('on select was called from pikaday wrapper')} />
+
 
                     <input type="date" ref="expiration" id="productExpiration" className="pantry-add-item__form-input" defaultValue={item.expiration} />
                 </div>
