@@ -121,6 +121,7 @@ namespace PlanEatSave
 
             app.UseCors("CorsPolicy");
 
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             var tokenValidationParameters = CreateTokenValidationParameters();

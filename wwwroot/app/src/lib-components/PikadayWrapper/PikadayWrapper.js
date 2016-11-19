@@ -17,7 +17,6 @@ export default class PikadayWrapper extends Component {
          this.setState({ picker });
     }
 
-
     render() {
         return (
             <input type="text" ref="datepickerInput" />
