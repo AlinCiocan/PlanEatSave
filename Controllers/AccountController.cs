@@ -124,8 +124,7 @@ namespace PlanEatSave.Controllers
 
             return userFromDb.Id;
         }
-
-
+        
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] UserRegisterModel user)
