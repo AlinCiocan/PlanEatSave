@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TopBar from '../TopBar/TopBar';
 import { ApiRequest } from '../../services/ApiRequest';
-import PikadayWrapper from '../../lib-components/PikadayWrapper';
+import PikadayWrapper from '../../lib-components/PikadayWrapper/PikadayWrapper';
 
 export default class PantryAddNewItem extends Component {
 
