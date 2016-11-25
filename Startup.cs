@@ -62,7 +62,6 @@ namespace PlanEatSave
                 var policy = new AuthorizationPolicyBuilder()
                      .RequireAuthenticatedUser()
                      .Build();
-                //config.Filters.Add(new CorsAuthorizationFilterFactory("AllowAllOrigins"));
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
 
@@ -72,7 +71,8 @@ namespace PlanEatSave
 
             // Configure JwtIssuerOptions
             //TODO: Make sure to put this variable in a config & keep it safe
-            const string SecretKey = "PlanEatSave-secret-7b3a1bfc-5d22-4fc0-a9b6-399b4f31e65f";
+            string SecretKey = Configuration["SecretKey"];
+            Console.WriteLine($"Secret key: {SecretKey}");
             _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
 
             services.Configure<JwtIssuerOptions>(options =>
@@ -99,12 +99,11 @@ namespace PlanEatSave
                options.User.RequireUniqueEmail = true;
            });
 
-            var sqlConnectionString = Configuration["ConnectionString:DataAccessMySqlProvider"];
-            var sql = @"server=localhost;userid=root;password=1234;database=planeatsave;";
+            var sqlConnectionString = Configuration["ConnectionStrings:DataAccessMySqlProvider"];
+            Console.WriteLine($"sql conn from config file: {sqlConnectionString}");
 
-            Console.WriteLine("Mysql sql conn: " + sql);
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseMySQL(sql)
+                options.UseMySQL(sqlConnectionString)
             );
         }
 
