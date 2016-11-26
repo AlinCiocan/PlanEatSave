@@ -1,10 +1,9 @@
 import request from 'superagent';
 import TokenStore from './TokenStore';
-// TODO: make sure to put this url in a config file
-export const API_BASE_ADDRESS = 'http://localhost:5000/api/';
+import { config } from '../config';
 
 export function apiUrl(path) {
-    return API_BASE_ADDRESS + path;
+    return config.API_BASE_ADDRESS + path;
 }
 
 function postRequest(url) {
