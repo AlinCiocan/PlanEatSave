@@ -14,7 +14,7 @@ export default class PantryAddNewItem extends Component {
     }
 
     saveItem() {
-        debugger; 
+        debugger;
 
         let item = {
             pantryId: this.props.params.pantryId,
@@ -81,8 +81,9 @@ export default class PantryAddNewItem extends Component {
                         Expiry date
                     </label>
 
-                    <PikadayWrapper onSelect={() => console.log('on select was called from pikaday wrapper')} />
-
+                    <div hidden>
+                        <PikadayWrapper onSelect={() => console.log('on select was called from pikaday wrapper')} />
+                    </div>
 
                     <input type="date" ref="expiration" id="productExpiration" className="pantry-add-item__form-input" defaultValue={item.expiration} />
                 </div>
@@ -103,7 +104,7 @@ export default class PantryAddNewItem extends Component {
         return (
             <div>
                 <TopBar leftSide={this.getBackButton()} rightSide={this.getSaveButton()} />
-                
+
 
 
                 {this.renderItemForm()}
