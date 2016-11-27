@@ -19,6 +19,7 @@ using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using AutoMapper;
+using System.IO;
 
 namespace PlanEatSave
 {
@@ -105,6 +106,9 @@ namespace PlanEatSave
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySQL(sqlConnectionString)
             );
+
+            string currentDirectory = Directory.GetCurrentDirectory();
+            Console.WriteLine($"Current directory: {currentDirectory}");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
