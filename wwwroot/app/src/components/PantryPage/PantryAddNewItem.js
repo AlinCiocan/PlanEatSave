@@ -10,19 +10,23 @@ export default class PantryAddNewItem extends Component {
 
         this.state = {
             message: null,
+            expiration: null,
+            name: null
         };
     }
 
+    onSelectDate(newDate) {
+        this.setState({expiration: newDate});
+    }
+
     saveItem() {
-        debugger;
+        this.setState({ message: this.getLoadingMsg() });
 
         let item = {
-            pantryId: this.props.params.pantryId,
-            name: this.refs.productName.value,
-            expiration: this.refs.expiration.valueAsDate
+            name: this.state.name,
+            expiration: this.state.expiration,
+            pantryId: this.props.params.pantryId
         };
-
-        this.setState({ message: this.getLoadingMsg() });
 
         ApiRequest
             .addPantryItem(item)
@@ -62,9 +66,7 @@ export default class PantryAddNewItem extends Component {
         );
     }
 
-    getItemDetails(item) {
-        item = item || {};
-
+    getItemDetails() {
         return (
             <div>
                 <div className="pantry-add-item__form-group">
@@ -72,7 +74,7 @@ export default class PantryAddNewItem extends Component {
                         Product name
                     </label>
 
-                    <input type="text" ref="productName" id="productName" className="pantry-add-item__form-input" defaultValue={item.name} />
+                    <input type="text" className="pantry-add-item__form-input" defaultValue={this.state.name} onChange={evt => this.setState({name: evt.target.value})} />
 
                 </div>
 
@@ -81,11 +83,9 @@ export default class PantryAddNewItem extends Component {
                         Expiry date
                     </label>
 
-                    <div hidden>
-                        <PikadayWrapper onSelect={() => console.log('on select was called from pikaday wrapper')} />
-                    </div>
-
-                    <input type="date" ref="expiration" id="productExpiration" className="pantry-add-item__form-input" defaultValue={item.expiration} />
+                    <PikadayWrapper onSelect={(date) => this.onSelectDate(date)} 
+                                    defaultValue={this.state.expiration}
+                                    className="pantry-add-item__form-input"/>
                 </div>
             </div>
         );
@@ -104,8 +104,6 @@ export default class PantryAddNewItem extends Component {
         return (
             <div>
                 <TopBar leftSide={this.getBackButton()} rightSide={this.getSaveButton()} />
-
-
 
                 {this.renderItemForm()}
             </div>
