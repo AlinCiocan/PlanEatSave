@@ -14,10 +14,11 @@
     "superagent": "^2.3.0",
     "lodash": "^4.16.6",
     "moment": "^2.16.0",
-    "pikaday": "^1.5.1"
+    "pikaday": "^1.5.1",
+    "reset-css": "^2.2.0"
   },
   "scripts": {
-    "sass": "node-sass \"G:\\projects\\planeatsave\\wwwroot\\app\\src\" -o \"G:\\projects\\planeatsave\\wwwroot\\app\\src\" --watch",
+    "sass": "node-sass \"src\" -o \"src\" --watch",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

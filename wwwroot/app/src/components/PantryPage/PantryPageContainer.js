@@ -45,7 +45,6 @@ export default class PantryPageContainer extends Component {
     componentDidMount() {
         this.setState({ errorMsg: null });
         ApiRequest.getPantry().then(response => {
-            console.log('response pantry', response);
             let pantryDb = response.body;
             this.populatePantry(pantryDb);
         }, err => {
