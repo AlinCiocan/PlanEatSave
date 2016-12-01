@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using PlanEatSave.DataAceessLayer;
 using PlanEatSave.Models;
@@ -14,7 +15,7 @@ namespace PlanEatSave.Controllers
     {
 
         private PantryService _pantryService;
-        private IPlanEatSaveLogger _logger;
+        private ILogger<PantryController> _logger;
         public string UserId
         {
             get
@@ -23,7 +24,7 @@ namespace PlanEatSave.Controllers
             }
         }
 
-        public PantryController(PantryService pantryService, IPlanEatSaveLogger logger)
+        public PantryController(PantryService pantryService, ILogger<PantryController> logger)
         {
             _pantryService = pantryService;
             _logger = logger;
@@ -50,7 +51,7 @@ namespace PlanEatSave.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogException(ex, $"Add item failed; user id - {UserId}; item - {JsonConvert.SerializeObject(item)}");
+                _logger.LogError(LoggingEvents.PANTRY_ADD_ITEM, ex, $"Add item failed; user id - {UserId}; item - {JsonConvert.SerializeObject(item)}");
                 return this.InternalServerError();
             }
 

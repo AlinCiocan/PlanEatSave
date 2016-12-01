@@ -12,16 +12,17 @@ using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Authorization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Microsoft.Extensions.Logging;
 
 namespace PlanEatSave.Controllers
 {
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IPlanEatSaveLogger _logger;
+        private readonly ILogger<AccountController> _logger;
         private readonly JsonSerializerSettings _serializerSettings;
         private readonly JwtIssuerOptions _jwtOptions;
-        public AccountController(UserManager<ApplicationUser> userManager, IOptions<JwtIssuerOptions> jwtOptions, IPlanEatSaveLogger logger)
+        public AccountController(UserManager<ApplicationUser> userManager, IOptions<JwtIssuerOptions> jwtOptions, ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _logger = logger;
@@ -56,7 +57,7 @@ namespace PlanEatSave.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogException(ex, $"Login exception for user with email - '{user.Email}'");
+                _logger.LogError(LoggingEvents.ACCOUNT_LOGIN, ex, $"Login exception for user with email - '{user.Email}'");
                 return this.InternalServerError();
             }
 
@@ -97,7 +98,7 @@ namespace PlanEatSave.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogException(ex, "Could not generate JWT Token");
+                _logger.LogError(LoggingEvents.ACCOUNT_LOGIN ,ex, "Could not generate JWT Token");
                 return this.InternalServerError(); // TODO: add the following error message - "There was an issue with login. Please try again later!"
             }
         }
@@ -117,14 +118,14 @@ namespace PlanEatSave.Controllers
             {
                 return null;
             }
-            if(await _userManager.CheckPasswordAsync(userFromDb, user.Password) == false)
+            if (await _userManager.CheckPasswordAsync(userFromDb, user.Password) == false)
             {
                 return null;
             }
 
             return userFromDb.Id;
         }
-        
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] UserRegisterModel user)
@@ -151,7 +152,7 @@ namespace PlanEatSave.Controllers
                 var result = await _userManager.CreateAsync(applicationUser, user.Password);
                 if (!result.Succeeded)
                 {
-                    _logger.LogError($"Failed registration for user with email '{user.Email}' and password '{user.Password}'. Error messages: {string.Join(",", result.Errors)}");
+                    _logger.LogError(LoggingEvents.ACCOUNT_REGISTER, $"Failed registration for user with email '{user.Email}' and password '{user.Password}'. Error messages: {string.Join(",", result.Errors)}");
                     return BadRequest("Your registration could not be completed. Please refer to an admin of the site to help you");
                 }
 
@@ -164,7 +165,7 @@ namespace PlanEatSave.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogException(ex, $"Registration failed for user '{user.Email}' with password '{user.Password}'");
+                _logger.LogError(LoggingEvents.ACCOUNT_REGISTER, ex, $"Registration failed for user '{user.Email}' with password '{user.Password}'");
                 return this.InternalServerError();
             }
         }

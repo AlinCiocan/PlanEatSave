@@ -1,18 +1,16 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using PlanEatSave.Models;
-using PlanEatSave.Utils;
+using Microsoft.Extensions.Logging;
 
 namespace PlanEatSave.DataAceessLayer
 {
     public class PantryService
     {
         private ApplicationDbContext _context;
-        private IPlanEatSaveLogger _logger;
+        private ILogger<PantryService> _logger;
 
-        public PantryService(ApplicationDbContext context, IPlanEatSaveLogger logger)
+        public PantryService(ApplicationDbContext context, ILogger<PantryService> logger)
         {
             _context = context;
             _logger = logger;

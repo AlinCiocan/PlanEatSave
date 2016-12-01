@@ -84,7 +84,6 @@ namespace PlanEatSave
             });
 
             // Add application services
-            services.AddScoped<IPlanEatSaveLogger, PlanEatSaveLogger>();
             services.AddTransient<PantryService, PantryService>();
 
             services.Configure<IdentityOptions>(options =>
