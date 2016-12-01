@@ -125,7 +125,7 @@ body {
   line-height: 32px; }
 
 .pantry-add-item__form-group {
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   margin-left: 24px;
   margin-right: 24px; }
 .pantry-add-item__form-label {
@@ -133,13 +133,18 @@ body {
 .pantry-add-item__form-input {
   width: 100%;
   box-sizing: border-box;
-  height: 25px; }
+  height: 35px;
+  border-radius: 3px;
+  border: 1px solid darkslategrey;
+  margin-top: 5px; }
 .pantry-add-item__form-input--datepicker input {
-  margin-top: 0;
+  margin-top: 4px;
   vertical-align: top;
-  width: calc(100% - 35px);
+  width: calc(100% - 40px);
   height: 25px;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  padding-left: 10px;
+  margin-left: 5px; }
 .pantry-add-item__form-input--datepicker button {
   box-sizing: border-box;
   padding: 0;
@@ -150,6 +155,7 @@ body {
   outline: 0; }
   .pantry-add-item__form-input--datepicker button img {
     width: 25px;
-    height: 25px; }
+    height: 25px;
+    margin-top: 3px; }
 
 /*# sourceMappingURL=App.css.map */
