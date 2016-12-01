@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Pikaday from 'pikaday';
 import './pikaday.css';
+import calendarIcon from '../../images/calendar-icon.svg';
 
 export default class PikadayWrapper extends Component {
     constructor(props) {
@@ -13,27 +14,31 @@ export default class PikadayWrapper extends Component {
     }
 
     onSelect(date) {
-        this.setState({date});
+        this.setState({ date });
         this.props.onSelect(date);
     }
 
     componentDidMount() {
-        var date = this.props.defaultValue? this.props.defaultValue : new Date();
+        var date = this.props.defaultValue ? this.props.defaultValue : new Date();
 
-        var picker = new Pikaday({ 
-             field: this.refs.datepickerInput,
-             defaultDate: date,
-             setDefaultDate: true,
-             onSelect: (date) =>  this.onSelect(date)
-            });
+        var picker = new Pikaday({
+            field: this.refs.datepickerInput,
+            trigger: this.refs.datepickerButton,
+            defaultDate: date,
+            setDefaultDate: true,
+            onSelect: (date) => this.onSelect(date)
+        });
 
-         this.setState({ picker });
+        this.setState({ picker });
     }
 
     render() {
         return (
-            <input type="text" ref="datepickerInput" className={this.props.className}/>
+            <div className={this.props.className}>
+                <input type="text" ref="datepickerInput" disabled/>
+                <button ref="datepickerButton"> <img src={calendarIcon} alt="calendar icon"/> </button>
+            </div>
         );
-    }    
+    }
 
 }

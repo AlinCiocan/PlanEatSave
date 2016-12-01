@@ -85,7 +85,7 @@ export default class PantryAddNewItem extends Component {
 
                     <PikadayWrapper onSelect={(date) => this.onSelectDate(date)} 
                                     defaultValue={this.state.expiration}
-                                    className="pantry-add-item__form-input"/>
+                                    className="pantry-add-item__form-input pantry-add-item__form-input--datepicker"/>
                 </div>
             </div>
         );

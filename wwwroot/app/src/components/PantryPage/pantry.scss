@@ -72,5 +72,33 @@
     &__form-input {
         width: 100%;
         box-sizing: border-box;
+        height: 25px;
     }
+    
+    &__form-input--datepicker {
+        input {
+            margin-top: 0;
+            vertical-align: top;
+            width: calc(100% - 35px);
+            height: 25px;
+            box-sizing: border-box;
+        }
+
+        button {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            margin-left: 5px;
+            background: transparent;
+            border: 0;
+            outline: 0;
+
+            img {
+                width: 25px;
+                height: 25px;
+            }
+
+        }
+    }
+
 }
