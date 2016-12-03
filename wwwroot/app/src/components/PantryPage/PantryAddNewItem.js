@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TopBar from '../TopBar/TopBar';
 import { ApiRequest } from '../../services/ApiRequest';
-import PikadayWrapper from '../../lib-components/PikadayWrapper/PikadayWrapper';
+import PantryItem from './PantryItem';
 
 export default class PantryAddNewItem extends Component {
 
@@ -10,42 +10,36 @@ export default class PantryAddNewItem extends Component {
 
         this.state = {
             message: null,
-            expiration: null,
-            name: null
+            isItemVisible: true,
+            item: {}
         };
+
+        this.onItemChange = this.onItemChange.bind(this);
     }
 
     onSelectDate(newDate) {
-        this.setState({expiration: newDate});
+        this.setState({ expiration: newDate });
     }
 
     saveItem() {
-        this.setState({ message: this.getLoadingMsg() });
+        this.setState({ message: this.getLoadingMsg(), isItemVisible: false });
 
-        let item = {
-            name: this.state.name,
-            expiration: this.state.expiration,
-            pantryId: this.props.params.pantryId
-        };
+        let item = Object.assign({}, this.state.item, { pantryId: this.props.params.pantryId });
 
         ApiRequest
             .addPantryItem(item)
             .then(
             rsp => {
                 this.props.router.push('/pantry');
-            },
-            err => {
+            }, err => {
                 console.log(err);
-                this.setState({ message: this.getErrorMessage(err, item) });
+                this.setState({ message: this.getErrorMessage(err), isItemVisible: true, item: item });
             });
     }
 
     getErrorMessage(err, item) {
         return (
-            <div>
-                <h3 style={{ color: 'red' }}> There was an error with our server. Please try again! </h3>
-                {this.getItemDetails(item)}
-            </div>
+            <h3 style={{ color: 'red' }}> There was an error with our server. Please try again! </h3>
         );
     }
 
@@ -61,49 +55,34 @@ export default class PantryAddNewItem extends Component {
         return (
             <div className="top-bar__side top-bar__side--left" onClick={() => this.props.router.push('/pantry')}>
                 <i className="fa fa-arrow-left" aria-hidden="true"></i>
-                &nbsp; Pantry
+                &nbsp; Add to pantry
             </div>
         );
+    }
+
+    onItemChange(newItem) {
+        this.setState({ item: newItem });
     }
 
     getItemDetails() {
         return (
-            <div>
-                <div className="pantry-add-item__form-group">
-                    <label htmlFor="productName" className="pantry-add-item__form-label">
-                        Product name
-                    </label>
-
-                    <input type="text" className="pantry-add-item__form-input" defaultValue={this.state.name} onChange={evt => this.setState({name: evt.target.value})} />
-
-                </div>
-
-                <div className="pantry-add-item__form-group">
-                    <label htmlFor="productExpiration" className="pantry-add-item__form-label">
-                        Expiry date
-                    </label>
-
-                    <PikadayWrapper onSelect={(date) => this.onSelectDate(date)} 
-                                    defaultValue={this.state.expiration}
-                                    className="pantry-add-item__form-input pantry-add-item__form-input--datepicker"/>
-                </div>
-            </div>
+            <PantryItem item={this.state.item} onItemChange={this.onItemChange} />
         );
     }
 
     renderItemForm() {
-        var _this = this;
-        if (this.state.message) {
-            return _this.state.message;
+        if (this.state.isItemVisible) {
+            return this.getItemDetails();
         }
-
-        return _this.getItemDetails();
     }
+
 
     render() {
         return (
             <div>
                 <TopBar leftSide={this.getBackButton()} rightSide={this.getSaveButton()} />
+
+                {this.state.message}
 
                 {this.renderItemForm()}
             </div>

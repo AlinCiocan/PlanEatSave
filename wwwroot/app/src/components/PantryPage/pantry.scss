@@ -58,7 +58,7 @@
     // outline: 0;
 }
 
-.pantry-add-item {
+.pantry-item {
     &__form-group {
         margin-bottom: 30px;
         margin-left: 24px; 
@@ -77,9 +77,12 @@
         border-radius: 3px;
         border: 1px solid darkslategrey;
         margin-top: 5px;
+        padding: 8px 10px;
     }
     
     &__form-input--datepicker {
+        padding: 0;
+        
         input {
             margin-top: 4px;
             vertical-align: top;
