@@ -16,7 +16,6 @@ namespace PlanEatSave.DataAceessLayer
             _logger = logger;
         }
 
-
         public async Task<Pantry> GetPantryByUserIdAsync(string userId)
         {
             var pantryFromDb = await _context.Pantries
@@ -40,7 +39,7 @@ namespace PlanEatSave.DataAceessLayer
             return newPantry;
         }
 
-        public async Task<bool> AddItem(string userId, PantryItem item)
+        public async Task<bool> InsertOrUpdate(string userId, PantryItem item)
         {
             var pantryDb = await _context.Pantries.Where(pantry => pantry.Id == item.PantryId).FirstOrDefaultAsync();
             if (pantryDb == null || pantryDb.UserId != userId)
@@ -48,7 +47,10 @@ namespace PlanEatSave.DataAceessLayer
                 return false;
             }
 
-            _context.PantryItems.Add(item);
+            _context.Entry(item).State = item.Id > 0 ? 
+                                   EntityState.Modified :
+                                   EntityState.Added; 
+
             await _context.SaveChangesAsync();
             return true;
         }

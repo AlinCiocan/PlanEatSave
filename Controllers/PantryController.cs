@@ -42,19 +42,38 @@ namespace PlanEatSave.Controllers
         {
             try
             {
-                var newItem = Mapper.Map<PantryItem>(item);
-                if (await _pantryService.AddItem(UserId, newItem))
-                {
-                    return Ok(Mapper.Map<PantryItemViewModel>(newItem));
-                }
-                return Forbid("You do not have access to this pantry");
-            }
+                 return await InsertOrUpdateItem(item);
+            }            
             catch (Exception ex)
             {
                 _logger.LogError(LoggingEvents.PANTRY_ADD_ITEM, ex, $"Add item failed; user id - {UserId}; item - {JsonConvert.SerializeObject(item)}");
                 return this.InternalServerError();
             }
 
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateItem([FromBody] PantryItemViewModel item)
+        {
+            try
+            {
+                return await InsertOrUpdateItem(item);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(LoggingEvents.PANTRY_ADD_ITEM, ex, $"Update item failed; user id - {UserId}; item - {JsonConvert.SerializeObject(item)}");
+                return this.InternalServerError();
+            }
+        }
+
+        private async Task<IActionResult> InsertOrUpdateItem(PantryItemViewModel item)
+        {
+            var insertOrUpdateItem = Mapper.Map<PantryItem>(item);
+            if (await _pantryService.InsertOrUpdate(UserId, insertOrUpdateItem))
+            {
+                return Ok(Mapper.Map<PantryItemViewModel>(insertOrUpdateItem));
+            }
+            return Forbid("You do not have access to this pantry");
         }
     }
 }
