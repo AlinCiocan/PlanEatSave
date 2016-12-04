@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Pikaday from 'pikaday';
 import './pikaday.css';
-import calendarIcon from '../../images/calendar-icon.svg';
+import calendarIcon from './calendar-icon.svg';
 
 export default class PikadayWrapper extends Component {
     constructor(props) {

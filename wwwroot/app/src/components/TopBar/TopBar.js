@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import logo from '../../images/logo.svg';
+import logo from './logo.svg';
 
 export default class TopBar extends Component {
     render() {
