@@ -63,7 +63,7 @@ export default class PantryPageContainer extends Component {
             return (<h3> Loading... </h3>);
         }
 
-        return (<PantryPage pantry={this.state.pantry} />)
+        return (<PantryPage pantry={this.state.pantry} router={this.props.router}/>)
     }
 
     getAddPantryItemButton() {

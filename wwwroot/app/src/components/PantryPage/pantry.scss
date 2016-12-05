@@ -1,22 +1,16 @@
-@import '../../layout/fonts';
-
-
 .pantry {
-    &__lists {
-        margin-left: 16px;
-    }
-
     &__list-title {
         @include font-bold();
         font-size: 16px;
         letter-spacing: 2.24px;
         margin-bottom: 10px;
+        padding-left: 14px;
     }
 
     &__item {
         position: relative;
         margin-bottom: 20px;
-        margin-left: 2px;
+        padding-left: 16px;
     }
 
     &__item-img {
@@ -28,20 +22,33 @@
 
     &__item-details {
         position: absolute;
-        top: 12px;
-        left: 140px;
+        top: 0;
+        left: 156px;
     }
 
     &__item-name {
         @include font-bold();
         font-size: 14px;
         letter-spacing: 1.96px;
-        margin-bottom: 6px;
+        margin-top: 3px;
     }
 
     &__item-expiration {
         font-size: 14px;
         letter-spacing: 1.96px;
+        margin-top: 6px;
+    }
+
+    &__item-actions {
+        margin-top: 10px;
+        margin-left: 5px;
+    }
+
+    &__item-action {
+        width: 32px;
+        height: 32px;
+        margin-right: 15px;
+        cursor: pointer;
     }
 }
 

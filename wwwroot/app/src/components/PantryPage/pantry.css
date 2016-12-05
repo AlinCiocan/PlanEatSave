@@ -1,76 +1,77 @@
-.pantry__lists {
-  margin-left: 16px; }
-.pantry__list-title {
-  font-weight: 900;
-  font-size: 16px;
-  letter-spacing: 2.24px;
-  margin-bottom: 10px; }
-.pantry__item {
-  position: relative;
-  margin-bottom: 20px;
-  margin-left: 2px; }
-.pantry__item-img {
-  width: 125px;
-  height: 80px;
-  background-color: #c7d3d0;
-  display: inline-block; }
-.pantry__item-details {
-  position: absolute;
-  top: 12px;
-  left: 140px; }
-.pantry__item-name {
-  font-weight: 900;
-  font-size: 14px;
-  letter-spacing: 1.96px;
-  margin-bottom: 6px; }
-.pantry__item-expiration {
-  font-size: 14px;
-  letter-spacing: 1.96px; }
+/*
+Error: Undefined mixin 'font-bold'.
+        on line 3 of D:\projects\pes\wwwroot\app\src\components\PantryPage\pantry.scss, in `font-bold'
+        from line 3 of D:\projects\pes\wwwroot\app\src\components\PantryPage\pantry.scss
 
-.add-pantry-item {
-  width: 70px;
-  height: 35px;
-  margin-top: -18px;
-  background-color: #8e9e99;
-  border-radius: 4px;
-  font-size: 32px;
-  line-height: 32px; }
+1: .pantry {
+2:     &__list-title {
+3:         @include font-bold();
+4:         font-size: 16px;
+5:         letter-spacing: 2.24px;
+6:         margin-bottom: 10px;
+7:         padding-left: 14px;
+8:     }
 
-.pantry-item__form-group {
-  margin-bottom: 30px;
-  margin-left: 24px;
-  margin-right: 24px; }
-.pantry-item__form-label {
-  margin-bottom: 10px; }
-.pantry-item__form-input {
-  width: 100%;
-  box-sizing: border-box;
-  height: 35px;
-  border-radius: 3px;
-  border: 1px solid darkslategrey;
-  margin-top: 5px;
-  padding: 8px 10px; }
-.pantry-item__form-input--datepicker {
-  padding: 0; }
-  .pantry-item__form-input--datepicker input {
-    margin-top: 4px;
-    vertical-align: top;
-    width: calc(100% - 40px);
-    height: 25px;
-    box-sizing: border-box;
-    padding-left: 10px;
-    margin-left: 5px; }
-  .pantry-item__form-input--datepicker button {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    margin-left: 5px;
-    background: transparent;
-    border: 0;
-    outline: 0; }
-    .pantry-item__form-input--datepicker button img {
-      width: 25px;
-      height: 25px;
-      margin-top: 3px; }
-
-/*# sourceMappingURL=pantry.css.map */
+Backtrace:
+D:\projects\pes\wwwroot\app\src\components\PantryPage\pantry.scss:3:in `font-bold'
+D:\projects\pes\wwwroot\app\src\components\PantryPage\pantry.scss:3
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:338:in `block in visit_mixin'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:98:in `block in with_mixin'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:115:in `with_frame'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:98:in `with_mixin'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:336:in `visit_mixin'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:79:in `block in with_base'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:115:in `with_frame'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:79:in `with_base'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:420:in `block (2 levels) in visit_rule'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:420:in `map'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:420:in `block in visit_rule'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:418:in `visit_rule'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:79:in `block in with_base'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:115:in `with_frame'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:79:in `with_base'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:420:in `block (2 levels) in visit_rule'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:420:in `map'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:420:in `block in visit_rule'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:418:in `visit_rule'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:79:in `block in with_base'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:115:in `with_frame'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:79:in `with_base'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:52:in `map'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:157:in `visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:8:in `visit'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/root_node.rb:36:in `css_tree'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:368:in `_render_with_sourcemap'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:285:in `render_with_sourcemap'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:396:in `run'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:62:in `process_result'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/base.rb:52:in `parse'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/base.rb:19:in `parse!'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/bin/sass:13:in `<top (required)>'
+C:/Program Files (x86)/Koala/bin/sass:18:in `load'
+C:/Program Files (x86)/Koala/bin/sass:18:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Undefined mixin 'font-bold'.\A         on line 3 of D:\projects\pes\wwwroot\app\src\components\PantryPage\pantry.scss, in `font-bold'\A         from line 3 of D:\projects\pes\wwwroot\app\src\components\PantryPage\pantry.scss\A \A 1: .pantry {\A 2:     &__list-title {\A 3:         @include font-bold();\A 4:         font-size: 16px;\A 5:         letter-spacing: 2.24px;\A 6:         margin-bottom: 10px;\A 7:         padding-left: 14px;\A 8:     }"; }

@@ -8,6 +8,7 @@ import LandingPage from './components/LandingPage/LandingPage';
 import PantryPageContainer from './components/PantryPage/PantryPageContainer';
 import TokenStore from './services/TokenStore';
 import PantryAddNewItem from './components/PantryPage/PantryAddNewItem';
+import PantryUpdateItem from './components/PantryPage/PantryUpdateItem';
 
 import './index.css';
 
@@ -26,10 +27,11 @@ ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={App} >
       <IndexRoute component={LandingPage} />
-      <Route path="/login" component={LoginPage} />
-      <Route path="/register" component={RegisterPage} />
-      <Route path="/pantry" component={PantryPageContainer} onEnter={requiresAuthentication} />
-      <Route path="/pantry/:pantryId/add-item" component={PantryAddNewItem} onEnter={requiresAuthentication} />
+      <Route path="login" component={LoginPage} />
+      <Route path="register" component={RegisterPage} />
+      <Route path="pantry" component={PantryPageContainer} onEnter={requiresAuthentication} />
+      <Route path="pantry/:pantryId/add-item" component={PantryAddNewItem} onEnter={requiresAuthentication} />
+      <Route path="pantry/:pantryId/edit-item/:itemId" component={PantryUpdateItem} onEnter={requiresAuthentication} />
     </Route>
   </Router>,
   document.getElementById('root')

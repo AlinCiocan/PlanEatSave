@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using PlanEatSave.DataAceessLayer;
+using PlanEatSave.Exceptions;
 using PlanEatSave.Models;
 using PlanEatSave.Utils;
 using PlanEatSave.Utils.Extensions;
@@ -64,6 +65,27 @@ namespace PlanEatSave.Controllers
                 _logger.LogError(LoggingEvents.PANTRY_ADD_ITEM, ex, $"Update item failed; user id - {UserId}; item - {JsonConvert.SerializeObject(item)}");
                 return this.InternalServerError();
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetItemById(long id) 
+        {
+            try
+            {
+                var item = await _pantryService.GetItemById(UserId, id);
+                return Ok(Mapper.Map<PantryItemViewModel>(item));
+            }
+            catch(ForbiddenAccessException ex)
+            {
+                _logger.LogDebug(LoggingEvents.PANTRY_RETRIEVE_ITEM, ex, $"The user with id - {UserId} from IP - {HttpContext.Connection.RemoteIpAddress} tried to access an item that was not in his pantry.");
+                return Forbid();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(LoggingEvents.PANTRY_RETRIEVE_ITEM, ex, $"Retrieve item failed; user id - {UserId}; item id - {id}");
+                return this.InternalServerError();
+            }
+
         }
 
         private async Task<IActionResult> InsertOrUpdateItem(PantryItemViewModel item)

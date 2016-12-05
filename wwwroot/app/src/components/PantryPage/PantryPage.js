@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import editIcon from './images/edit-icon.svg';
+import removeIcon from './images/remove-icon.svg';
 
 export default class PantryPage extends Component {
     constructor(props) {
@@ -20,6 +22,10 @@ export default class PantryPage extends Component {
         return `Exp: ${twoDigits(date.getDate())}.${twoDigits(date.getMonth() + 1)}.${date.getFullYear()}`;
     }
 
+    onEdit(itemId) {
+        this.props.router.push(`/pantry/${this.props.pantry.id}/edit-item/${itemId}`);
+    }
+
     renderPantryItem(item) {
         return (
             <div className="pantry__item" key={item.id}>
@@ -32,20 +38,31 @@ export default class PantryPage extends Component {
                     <div className="pantry__item-expiration">
                         {this.formatDate(item.expiration)}
                     </div>
+                    <div className="pantry__item-actions">
+                        <img 
+                            src={editIcon} 
+                            onClick={this.onEdit.bind(this, item.id)}
+                            className="pantry__item-action" 
+                            alt="Edit pantry item icon"  />
+                        <img 
+                            src={removeIcon} 
+                            onClick={() => alert('not implemented yet')}
+                            className="pantry__item-action" 
+                            alt="Remove pantry item icon" />
+                    </div>
                 </div>
             </div>
         );
     }
 
     renderPantryList(list) {
-        var _this = this;
         return (
             <div key={list.key} className="pantry__list">
                 <div className="pantry__list-title">
                     {list.title}
                 </div>
                 <div className="pantry__items">
-                    {list.items.map(item => _this.renderPantryItem(item))}
+                    {list.items.map(item => this.renderPantryItem(item))}
                 </div>
             </div>
         );
@@ -53,10 +70,9 @@ export default class PantryPage extends Component {
     }
 
     render() {
-        var _this = this;
         return (
             <div className="pantry__lists">
-                {this.props.pantry.lists.map(pantryList => _this.renderPantryList(pantryList))}
+                {this.props.pantry.lists.map(pantryList => this.renderPantryList(pantryList))}
             </div>
         );
 

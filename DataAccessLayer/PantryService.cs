@@ -1,7 +1,9 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using PlanEatSave.Exceptions;
 
 namespace PlanEatSave.DataAceessLayer
 {
@@ -53,6 +55,24 @@ namespace PlanEatSave.DataAceessLayer
 
             await _context.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<PantryItem> GetItemById(string userId, long id)
+        {
+            var pantryItem = await _context.PantryItems.FirstOrDefaultAsync(item => item.Id == id);
+            if(pantryItem == null)
+            {
+                return null;
+            }
+            
+            var pantry = await _context.Pantries.FirstOrDefaultAsync(p => p.Id == pantryItem.PantryId);
+
+            if(pantry.UserId != userId) 
+            {
+                throw new ForbiddenAccessException();
+            }
+
+            return pantryItem;
         }
     }
 }
