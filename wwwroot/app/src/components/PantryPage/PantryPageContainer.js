@@ -13,8 +13,12 @@ export default class PantryPageContainer extends Component {
 
         this.state = {
             pantry: null,
-            errorMsg: null
+            errorMsg: null,
+            removeItemId: null
         };
+
+
+        this.onRemoveItem = this.onRemoveItem.bind(this);
     }
 
     populatePantry(pantryDb) {
@@ -24,7 +28,7 @@ export default class PantryPageContainer extends Component {
             items: itemsSortedByExpiration,
             key: 'allProducts'
         };
-        
+
         let now = moment();
         let itemsThatWillExpireSoon = itemsSortedByExpiration.filter((item) => moment(item.expiration).diff(now, 'days') <= DAYS_EXPIRES_SOON)
         let porductsThatWillExpireSoonList = {
@@ -42,16 +46,41 @@ export default class PantryPageContainer extends Component {
         this.setState({ pantry });
     }
 
-    componentDidMount() {
-        this.setState({ errorMsg: null });
+    onRemoveItem(itemId) {
+        this.setState({ removeItemId: itemId });
+    }
+
+    removeItem(itemId) {
+        this.setState({removeItemId: null});
+        
+        ApiRequest.removePantryItem(itemId).then(response => {
+            const {isSuccess, message} = response.body;
+            if (!isSuccess) {
+                console.log(message);
+            }
+
+            this.retrievePantryFromServer();
+        }, err => {
+            // TODO: also make sure to treat the forbidden requests
+            console.log(err);
+            this.setState({ errorMsg: 'There was an error with our servers. Please try again later!' });
+        });
+    }
+
+    retrievePantryFromServer() {
+        this.setState({pantry: null});
         ApiRequest.getPantry().then(response => {
             let pantryDb = response.body;
             this.populatePantry(pantryDb);
         }, err => {
             console.log(err);
             this.setState({ errorMsg: 'There was an error with our servers. Please try again later!' });
-
         });
+    }
+
+    componentDidMount() {
+        this.setState({ errorMsg: null });
+        this.retrievePantryFromServer();
     }
 
     renderPantry() {
@@ -63,14 +92,38 @@ export default class PantryPageContainer extends Component {
             return (<h3> Loading... </h3>);
         }
 
-        return (<PantryPage pantry={this.state.pantry} router={this.props.router}/>)
+        return (<PantryPage
+            pantry={this.state.pantry}
+            onRemoveItem={this.onRemoveItem}
+            router={this.props.router} />);
     }
 
     getAddPantryItemButton() {
         return (
-            <button className="top-bar__side top-bar__side--right add-pantry-item"
+            <button
+                className="top-bar__side top-bar__side--right add-pantry-item"
                 onClick={() => this.props.router.push(`/pantry/${this.state.pantry.id}/add-item`)}>+</button>
         );
+    }
+
+    renderRemoveWindow() {
+        if (this.state.removeItemId) {
+            return (
+                <div>
+                    <p>
+                        Remove this product from the pantry?
+                    </p>
+
+                    <button onClick={() => this.setState({ removeItemId: null })}>
+                        Cancel
+                    </button>
+
+                    <button onClick={() => this.removeItem(this.state.removeItemId)}>
+                        Remove
+                    </button>
+                </div>
+            );
+        }
     }
 
     render() {
@@ -78,10 +131,10 @@ export default class PantryPageContainer extends Component {
             <div>
                 <TopBar rightSide={this.getAddPantryItemButton()} />
                 {this.renderPantry()}
+
+                {this.renderRemoveWindow()}
             </div>
         );
-
-
     }
 
 

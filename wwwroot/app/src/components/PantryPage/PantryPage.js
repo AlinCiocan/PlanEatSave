@@ -26,6 +26,10 @@ export default class PantryPage extends Component {
         this.props.router.push(`/pantry/${this.props.pantry.id}/edit-item/${itemId}`);
     }
 
+    onRemove(itemId) {
+        this.props.onRemoveItem(itemId);
+    }
+
     renderPantryItem(item) {
         return (
             <div className="pantry__item" key={item.id}>
@@ -46,7 +50,7 @@ export default class PantryPage extends Component {
                             alt="Edit pantry item icon"  />
                         <img 
                             src={removeIcon} 
-                            onClick={() => alert('not implemented yet')}
+                            onClick={this.onRemove.bind(this, item.id)}
                             className="pantry__item-action" 
                             alt="Remove pantry item icon" />
                     </div>

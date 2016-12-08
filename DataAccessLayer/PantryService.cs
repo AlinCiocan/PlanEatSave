@@ -74,5 +74,25 @@ namespace PlanEatSave.DataAceessLayer
 
             return pantryItem;
         }
+
+        internal async Task<bool> RemoveItemById(string userId, long id)
+        {
+           var pantryItem = await _context.PantryItems.FirstOrDefaultAsync(item => item.Id == id);
+            if(pantryItem == null)
+            {
+                return false;
+            }
+            
+            var pantry = await _context.Pantries.FirstOrDefaultAsync(p => p.Id == pantryItem.PantryId);
+
+            if(pantry.UserId != userId) 
+            {
+                throw new ForbiddenAccessException();
+            }
+
+            _context.PantryItems.Remove(pantryItem);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }
