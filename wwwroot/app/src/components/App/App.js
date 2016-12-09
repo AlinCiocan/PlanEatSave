@@ -6,7 +6,7 @@ class App extends Component {
     var _this = this;
 
     return (
-      <div>
+      <div className="full-height">
         {React.Children.map(this.props.children, (child => React.cloneElement(child, { router: _this.props.router })))}
       </div>
     );

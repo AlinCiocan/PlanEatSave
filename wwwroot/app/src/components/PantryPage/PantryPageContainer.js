@@ -51,8 +51,8 @@ export default class PantryPageContainer extends Component {
     }
 
     removeItem(itemId) {
-        this.setState({removeItemId: null});
-        
+        this.setState({ removeItemId: null });
+
         ApiRequest.removePantryItem(itemId).then(response => {
             const {isSuccess, message} = response.body;
             if (!isSuccess) {
@@ -68,7 +68,7 @@ export default class PantryPageContainer extends Component {
     }
 
     retrievePantryFromServer() {
-        this.setState({pantry: null});
+        this.setState({ pantry: null });
         ApiRequest.getPantry().then(response => {
             let pantryDb = response.body;
             this.populatePantry(pantryDb);
@@ -109,18 +109,28 @@ export default class PantryPageContainer extends Component {
     renderRemoveWindow() {
         if (this.state.removeItemId) {
             return (
-                <div>
-                    <p>
-                        Remove this product from the pantry?
-                    </p>
+                <div className="modal-container">
+                    <div className="pantry-remove-item">
+                        <div className="pantry-remove-item__container">
+                            <p className="pantry-remove-item__title">
+                                Remove this product from the pantry?
+                            </p>
 
-                    <button onClick={() => this.setState({ removeItemId: null })}>
-                        Cancel
-                    </button>
+                            <div className="pantry-remove-item__buttons">
+                                <button
+                                    className="pantry-remove-item__button"
+                                    onClick={() => this.setState({ removeItemId: null })}>
+                                    Cancel
+                                </button>
 
-                    <button onClick={() => this.removeItem(this.state.removeItemId)}>
-                        Remove
-                    </button>
+                                <button
+                                    className="pantry-remove-item__button pantry-remove-item__button--gray"
+                                    onClick={() => this.removeItem(this.state.removeItemId)}>
+                                    Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             );
         }
@@ -128,7 +138,7 @@ export default class PantryPageContainer extends Component {
 
     render() {
         return (
-            <div>
+            <div className="pantry-page-container">
                 <TopBar rightSide={this.getAddPantryItemButton()} />
                 {this.renderPantry()}
 
