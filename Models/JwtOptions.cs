@@ -6,6 +6,9 @@ namespace PlanEatSave.Models
 {
   public class JwtIssuerOptions
   {
+
+    const int TokenLifetimeInDays = 365;
+
     /// <summary>
     /// "iss" (Issuer) Claim
     /// </summary>
@@ -67,7 +70,7 @@ namespace PlanEatSave.Models
     /// <summary>
     /// Set the timespan the token will be valid for 
     /// </summary>
-    public TimeSpan ValidFor { get; set; } = TimeSpan.FromDays(30);
+    public TimeSpan ValidFor { get; set; } = TimeSpan.FromDays(TokenLifetimeInDays);
 
     /// <summary>
     /// "exp" (Expiration Time) Claim (returns IssuedAt + ValidFor)
