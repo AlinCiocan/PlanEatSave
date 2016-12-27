@@ -12,15 +12,15 @@ export default class PantryItem extends Component {
     }
 
     onSelectDate(newDate) {
-        this.setState({ expiration: newDate });
-
-        this.props.onItemChange(this.getItem());
+        this.setState({ expiration: newDate }, () => {
+            this.props.onItemChange(this.getItem());
+        });
     }
 
     onNameChange(newName) {
-        this.setState({ name: newName });
-
-        this.props.onItemChange(this.getItem());
+        this.setState({ name: newName }, () => {
+            this.props.onItemChange(this.getItem());
+        });
     }
 
     getItem() {
@@ -37,7 +37,7 @@ export default class PantryItem extends Component {
                     <label className="pantry-item__form-label">
                         Product name
 
-                        <input type="text" className="pantry-item__form-input" defaultValue={this.state.name} onChange={evt => this.onNameChange(evt.target.value) } />
+                        <input type="text" className="pantry-item__form-input" defaultValue={this.state.name} onChange={evt => this.onNameChange(evt.target.value)} />
                     </label>
 
 
@@ -48,8 +48,8 @@ export default class PantryItem extends Component {
                         Expiry date
 
                         <PikadayWrapper onSelect={(date) => this.onSelectDate(date)}
-                                defaultValue={this.state.expiration}
-                                className="pantry-item__form-input pantry-item__form-input--datepicker" />
+                            defaultValue={this.state.expiration}
+                            className="pantry-item__form-input pantry-item__form-input--datepicker" />
 
                     </label>
                 </div>
