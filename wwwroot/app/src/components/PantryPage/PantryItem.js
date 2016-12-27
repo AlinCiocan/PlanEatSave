@@ -5,8 +5,10 @@ export default class PantryItem extends Component {
     constructor(props) {
         super(props);
 
+        let expiration = this.props.item.expiration? this.props.item.expiration : new Date();
+
         this.state = {
-            expiration: this.props.item.expiration,
+            expiration,
             name: this.props.item.name
         };
     }
