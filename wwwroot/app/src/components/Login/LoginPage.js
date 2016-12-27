@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ApiRequest } from '../../services/ApiRequest';
 import ApiRequestsErrorHandler from '../../services/ApiRequestsErrorHandler';
-import TokenStore from '../../services/TokenStore';
+import BrowserStore from '../../services/BrowserStore';
 import TopBar from '../TopBar/TopBar';
 
 export default class LoginPage extends Component {
@@ -30,11 +30,6 @@ export default class LoginPage extends Component {
         return '/pantry';
     }
 
-    loginSuccessfully(rsp) {
-        TokenStore.storeTokenFromApi(rsp.text);
-        this.props.router.push(this.getNextPath());
-    }
-
     failedLogin(err) {
         this.showErrorMsg(ApiRequestsErrorHandler.getErrorMessage(err));
     }
@@ -49,7 +44,14 @@ export default class LoginPage extends Component {
 
         ApiRequest
             .login(user)
-            .then(this.loginSuccessfully.bind(this), this.failedLogin.bind(this));
+            .then(token => {
+                BrowserStore.storeTokenFromApi(token.text);
+                return ApiRequest.getUserInfo();
+            }, this.failedLogin.bind(this))
+            .then(userInfo => {
+                BrowserStore.storeUserInfo(userInfo.text);
+                this.props.router.push(this.getNextPath());
+            }, this.failedLogin.bind(this));
     }
 
 

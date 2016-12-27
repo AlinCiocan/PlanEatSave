@@ -1,5 +1,5 @@
 import request from 'superagent';
-import TokenStore from './TokenStore';
+import BrowserStore from './BrowserStore';
 import { config } from '../config';
 
 export function apiUrl(path) {
@@ -31,28 +31,28 @@ function deleteRequest(url) {
 }
 
 function authGetRequest(url) {
-    var token = TokenStore.getAuthToken();
+    var token = BrowserStore.getAuthToken();
 
     return getRequest(url)
         .set('Authorization', `Bearer ${token}`);
 }
 
 function authPostRequest(url) {
-    var token = TokenStore.getAuthToken();
+    var token = BrowserStore.getAuthToken();
 
     return postRequest(url)
         .set('Authorization', `Bearer ${token}`);
 }
 
 function authPutRequest(url) {
-    var token = TokenStore.getAuthToken();
+    var token = BrowserStore.getAuthToken();
 
     return putRequest(url)
         .set('Authorization', `Bearer ${token}`);
 }
 
 function authDeleteRequest(url) {
-    var token = TokenStore.getAuthToken();
+    var token = BrowserStore.getAuthToken();
 
     return deleteRequest(url)
         .set('Authorization', `Bearer ${token}`);
@@ -69,9 +69,13 @@ export class ApiRequest {
         return postRequest('account/login')
             .send(user);
     }
+    
+    static getUserInfo() {
+        return authGetRequest('account/userInfo');
+    }
 
     static getPantry() {
-        return authGetRequest('pantry/getpantry');
+        return authGetRequest('pantry/getPantry');
     }
 
     static addPantryItem(item) {

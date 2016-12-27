@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import TopBar from '../TopBar/TopBar';
-import TokenStore from '../../services/TokenStore';
+import BrowserStore from '../../services/BrowserStore';
 
 class LandingPage extends Component {
 
@@ -9,15 +9,16 @@ class LandingPage extends Component {
     super(props);
 
     this.state = {
-      isUserLoggedIn: TokenStore.isUserLoggedIn()
+      isUserLoggedIn: BrowserStore.isUserLoggedIn(),
+      userInfo: BrowserStore.getUserInfo()
     };
-  }  
-  
+  }
+
 
   logOut() {
-    TokenStore.logOut();
-    this.setState({isUserLoggedIn: false});
-  }  
+    BrowserStore.logOut();
+    this.setState({ isUserLoggedIn: false });
+  }
 
   renderNotLoggedUserActions() {
     return (
@@ -30,15 +31,19 @@ class LandingPage extends Component {
   }
 
   renderLoggedInUserActions() {
+    let email = '';
+    if (this.state.userInfo && this.state.userInfo.email) {
+      email = `(${this.state.userInfo.email})`;
+    }
     return (
       <div>
-        <h3> Hey there, have a lovely day!</h3>
+        <h3> Hey there, have a lovely day! {email}</h3>
         <Link to={'/pantry'}> My Pantry </Link>
         <br />
-        <br />        
+        <br />
         <button onClick={() => this.logOut()}> Log out </button>
-        
-      </div>  
+
+      </div>
     );
   }
 

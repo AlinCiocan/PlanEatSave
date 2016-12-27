@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using AutoMapper;
 using System.IO;
+using PlanEatSave.Models.UserModels;
 
 namespace PlanEatSave
 {
@@ -56,6 +57,7 @@ namespace PlanEatSave
             {
                 cfg.CreateMap<Pantry, PantryViewModel>().ReverseMap();
                 cfg.CreateMap<PantryItem, PantryItemViewModel>().ReverseMap();
+                cfg.CreateMap<UserModel, ApplicationUser>().ReverseMap();
             });
 
             services.AddMvc(config =>

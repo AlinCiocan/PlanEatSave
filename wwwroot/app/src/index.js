@@ -6,7 +6,7 @@ import RegisterPage from './components/Register/RegisterPage';
 import LoginPage from './components/Login/LoginPage';
 import LandingPage from './components/LandingPage/LandingPage';
 import PantryPageContainer from './components/PantryPage/PantryPageContainer';
-import TokenStore from './services/TokenStore';
+import BrowserStore from './services/BrowserStore';
 import PantryAddNewItem from './components/PantryPage/PantryAddNewItem';
 import PantryUpdateItem from './components/PantryPage/PantryUpdateItem';
 
@@ -14,7 +14,7 @@ import './index.css';
 
 
 function requiresAuthentication(nextState, replace) {
-  if (!TokenStore.getAuthToken()) {
+  if (!BrowserStore.getAuthToken()) {
     replace({
       pathname: '/login',
       state: { nextPathname: nextState.location.pathname }

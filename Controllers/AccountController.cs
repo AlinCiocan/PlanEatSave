@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Authorization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.Extensions.Logging;
+using PlanEatSave.Models.UserModels;
+using AutoMapper;
 
 namespace PlanEatSave.Controllers
 {
@@ -35,6 +37,15 @@ namespace PlanEatSave.Controllers
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             };
         }
+
+        [HttpGet]
+        public async Task<IActionResult> UserInfo() 
+        {
+            var userId = this.GetUserId();
+            var userFromDatabase = await _userManager.FindByIdAsync(userId);
+            return Ok(Mapper.Map<UserModel>(userFromDatabase));
+        }
+
 
         [HttpPost]
         [AllowAnonymous]
