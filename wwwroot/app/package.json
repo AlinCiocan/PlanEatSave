@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "create-react-app-sass": "^1.1.0",
     "node-sass": "^3.10.1",
     "react-scripts": "0.7.0"
   },
