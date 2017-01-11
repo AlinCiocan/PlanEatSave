@@ -9,6 +9,7 @@ import PantryPageContainer from './components/PantryPage/PantryPageContainer';
 import BrowserStore from './services/BrowserStore';
 import PantryAddNewItem from './components/PantryPage/PantryAddNewItem';
 import PantryUpdateItem from './components/PantryPage/PantryUpdateItem';
+import MyRecipesPageContainer from './components/MyRecipesPage/MyRecipesPageContainer';
 
 import './index.css';
 
@@ -32,6 +33,7 @@ ReactDOM.render(
       <Route path="pantry" component={PantryPageContainer} onEnter={requiresAuthentication} />
       <Route path="pantry/:pantryId/add-item" component={PantryAddNewItem} onEnter={requiresAuthentication} />
       <Route path="pantry/:pantryId/edit-item/:itemId" component={PantryUpdateItem} onEnter={requiresAuthentication} />
+      <Route path="my-recipes" component={MyRecipesPageContainer} onEnter={requiresAuthentication} />
     </Route>
   </Router>,
   document.getElementById('root')
