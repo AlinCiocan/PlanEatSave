@@ -101,8 +101,8 @@ export default class PantryPageContainer extends Component {
     getAddPantryItemButton() {
         return (
             <button
-                className="top-bar__side top-bar__side--right add-pantry-item"
-                onClick={() => this.props.router.push(`/pantry/${this.state.pantry.id}/add-item`)}>+</button>
+                className="top-bar__side top-bar__side--right top-bar__add-button"
+                onClick={() => this.props.router.push(`/pantry/${this.state.pantry.id}/add-item`)}>+ ADD</button>
         );
     }
 

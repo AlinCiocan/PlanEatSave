@@ -78,6 +78,22 @@ body {
     left: 15px; }
   .top-bar__side--right {
     right: 15px; }
+  .top-bar__add-button {
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 14px;
+    height: 35px;
+    margin-top: -18px;
+    background-color: #8e9e99;
+    border-radius: 4px;
+    padding-left: 26px;
+    padding-right: 9px; }
+  .top-bar__add-button::before {
+    content: '+';
+    font-size: 20px;
+    color: #ffffff;
+    position: absolute;
+    left: 10px; }
 
 .login__error-msg {
   padding-top: 10px;
@@ -127,15 +143,6 @@ body {
   height: 32px;
   margin-right: 15px;
   cursor: pointer; }
-
-.add-pantry-item {
-  width: 70px;
-  height: 35px;
-  margin-top: -18px;
-  background-color: #8e9e99;
-  border-radius: 4px;
-  font-size: 32px;
-  line-height: 32px; }
 
 .pantry-item__form-group {
   margin-bottom: 30px;

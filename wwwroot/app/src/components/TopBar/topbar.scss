@@ -31,4 +31,27 @@
     &__side--right {
         right: 15px;
     }
+
+    &__add-button {
+        font-size: 14px;
+        color: $white;
+        line-height: 14px;
+
+        height: 35px;
+        margin-top: -18px;
+        background-color: #8e9e99;
+        border-radius: 4px;
+        padding-left: 26px;
+        padding-right: 9px;
+    }
+
+    &__add-button::before {
+        content: '+';
+        font-size: 20px;
+        color: $white;
+        position: absolute;
+        left: 10px;
+    }
 }
+
+

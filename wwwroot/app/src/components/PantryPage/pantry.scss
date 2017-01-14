@@ -52,19 +52,6 @@
     }
 }
 
-.add-pantry-item {
-    width: 70px;
-    height: 35px;
-    margin-top: -18px;
-    background-color: #8e9e99;
-    border-radius: 4px;
-    font-size: 32px;
-    line-height: 32px;
-
-    // TODO: check with the designer about the outline
-    // outline: 0;
-}
-
 .pantry-item {
     &__form-group {
         margin-bottom: 30px;
