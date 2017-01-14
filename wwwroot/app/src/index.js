@@ -27,7 +27,7 @@ function requiresAuthentication(nextState, replace) {
 
 ReactDOM.render(
   <Router history={hashHistory}>
-    <Route path={"/"} component={App} >
+    <Route path="/" component={App} >
       <IndexRoute component={LandingPage} />
       <Route path="login" component={LoginPage} />
       <Route path="register" component={RegisterPage} />
