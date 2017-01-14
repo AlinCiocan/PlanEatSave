@@ -98,14 +98,6 @@ export default class PantryPageContainer extends Component {
             router={this.props.router} />);
     }
 
-    getAddPantryItemButton() {
-        return (
-            <button
-                className="top-bar__side top-bar__side--right top-bar__add-button"
-                onClick={() => this.props.router.push(`/pantry/${this.state.pantry.id}/add-item`)}>+ ADD</button>
-        );
-    }
-
     renderRemoveWindow() {
         if (this.state.removeItemId) {
             return (
@@ -139,7 +131,7 @@ export default class PantryPageContainer extends Component {
     render() {
         return (
             <div className="pantry-page-container">
-                <TopBar rightSide={this.getAddPantryItemButton()} />
+                <TopBar addButton addButtonOnClick={() => this.props.router.push(`/pantry/${this.state.pantry.id}/add-item`)} />
                 {this.renderPantry()}
 
                 {this.renderRemoveWindow()}

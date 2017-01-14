@@ -47,10 +47,6 @@ export default class PantryAddNewItem extends Component {
         return (<h3> Adding your item... </h3>);
     }
 
-    getSaveButton() {
-        return (<div className="top-bar__side top-bar__side--right" onClick={() => this.saveItem()}> SAVE </div>);
-    }
-
     getBackButton() {
         return (
             <div className="top-bar__side top-bar__side--left" onClick={() => this.props.router.push('/pantry')}>
@@ -80,7 +76,7 @@ export default class PantryAddNewItem extends Component {
     render() {
         return (
             <div>
-                <TopBar leftSide={this.getBackButton()} rightSide={this.getSaveButton()} />
+                <TopBar leftSide={this.getBackButton()} saveButton saveButtonOnClick={() => this.saveItem()} />
 
                 {this.state.message}
 
