@@ -253,4 +253,4 @@ paket-files/
 
 
 # css maps
-.map
+*.css.map
