@@ -10,6 +10,7 @@ import BrowserStore from './services/BrowserStore';
 import PantryAddNewItem from './components/PantryPage/PantryAddNewItem';
 import PantryUpdateItem from './components/PantryPage/PantryUpdateItem';
 import MyRecipesPageContainer from './components/MyRecipesPage/MyRecipesPageContainer';
+import Routes from './services/Routes';
 
 import './index.css';
 
@@ -17,7 +18,7 @@ import './index.css';
 function requiresAuthentication(nextState, replace) {
   if (!BrowserStore.getAuthToken()) {
     replace({
-      pathname: '/login',
+      pathname: Routes.login(),
       state: { nextPathname: nextState.location.pathname }
     })
   }
@@ -26,7 +27,7 @@ function requiresAuthentication(nextState, replace) {
 
 ReactDOM.render(
   <Router history={hashHistory}>
-    <Route path="/" component={App} >
+    <Route path={"/"} component={App} >
       <IndexRoute component={LandingPage} />
       <Route path="login" component={LoginPage} />
       <Route path="register" component={RegisterPage} />

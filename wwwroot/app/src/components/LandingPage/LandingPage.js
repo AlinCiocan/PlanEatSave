@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import TopBar from '../TopBar/TopBar';
 import BrowserStore from '../../services/BrowserStore';
+import Routes from '../../services/Routes';
 
 class LandingPage extends Component {
 
@@ -23,9 +24,9 @@ class LandingPage extends Component {
   renderNotLoggedUserActions() {
     return (
       <div>
-        <Link to={`/register`}>Create new account</Link>
+        <Link to={Routes.register()}>Create new account</Link>
         <br />
-        <Link to={`/login`}>Login</Link>
+        <Link to={Routes.login()}>Login</Link>
       </div>
     );
   }
@@ -38,9 +39,9 @@ class LandingPage extends Component {
     return (
       <div>
         <h3> Hey there, have a lovely day! {email}</h3>
-        <Link to={'/pantry'}> My Pantry </Link>
+        <Link to={Routes.myPantry()}> My Pantry </Link>
         <br />
-        <Link to={'/my-recipes'}> My Recipes </Link>
+        <Link to={Routes.myRecipes()}> My Recipes </Link>
         <br />
         <br />
         <button onClick={() => this.logOut()}> Log out </button>

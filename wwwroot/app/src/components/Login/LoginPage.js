@@ -3,6 +3,7 @@ import { ApiRequest } from '../../services/ApiRequest';
 import ApiRequestsErrorHandler from '../../services/ApiRequestsErrorHandler';
 import BrowserStore from '../../services/BrowserStore';
 import TopBar from '../TopBar/TopBar';
+import Routes from '../../services/Routes';
 
 export default class LoginPage extends Component {
     constructor(props) {
@@ -27,7 +28,7 @@ export default class LoginPage extends Component {
             return this.props.location.state.nextPathname;
         }
 
-        return '/pantry';
+        return Routes.myPantry();
     }
 
     failedLogin(err) {

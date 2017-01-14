@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ApiRequest } from '../../services/ApiRequest';
 import  ApiRequestsErrorHandler  from '../../services/ApiRequestsErrorHandler';
 import TopBar from '../TopBar/TopBar';
+import Routes from '../../services/Routes';
 
 export default class RegisterPage extends Component {
 
@@ -27,7 +28,7 @@ export default class RegisterPage extends Component {
 
     accountWasCreatedSuccessfully(value) {
         alert('Your account was created successfully. Now you\'ll be redirected to login page!');
-        this.props.router.push('/login');
+        this.props.router.push(Routes.login());
     }
 
 
