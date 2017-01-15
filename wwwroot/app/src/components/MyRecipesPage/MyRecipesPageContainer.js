@@ -7,10 +7,12 @@ import TopBar from '../TopBar/TopBar';
 
 export default class MyRecipesPageContainer extends Component {
     render() {
+        const myRecipesId = 123;
+
         return (
             <div>
-                <TopBar addButton addButtonOnClick={() => this.props.router.push(Routes.addMyRecipe())} />
-                <h1> My recipes here !!</h1>
+                <TopBar addButton addButtonOnClick={() => this.props.router.push(Routes.addMyRecipe(myRecipesId))} />
+                <h1> List of my recipes here !!</h1>
             </div>
         );
     }
