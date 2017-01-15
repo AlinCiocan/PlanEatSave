@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { hashHistory, Router, Route, IndexRoute } from 'react-router'
+import { hashHistory, Router, Route, IndexRoute } from 'react-router';
+import Routes from './services/Routes';
 import App from './components/App/App';
 import RegisterPage from './components/Register/RegisterPage';
 import LoginPage from './components/Login/LoginPage';
@@ -10,7 +11,7 @@ import BrowserStore from './services/BrowserStore';
 import PantryAddNewItem from './components/PantryPage/PantryAddNewItem';
 import PantryUpdateItem from './components/PantryPage/PantryUpdateItem';
 import MyRecipesPageContainer from './components/MyRecipesPage/MyRecipesPageContainer';
-import Routes from './services/Routes';
+import AddNewRecipe from './components/MyRecipesPage/AddNewRecipe';
 
 import './index.css';
 
@@ -35,6 +36,7 @@ ReactDOM.render(
       <Route path="pantry/:pantryId/add-item" component={PantryAddNewItem} onEnter={requiresAuthentication} />
       <Route path="pantry/:pantryId/edit-item/:itemId" component={PantryUpdateItem} onEnter={requiresAuthentication} />
       <Route path="my-recipes" component={MyRecipesPageContainer} onEnter={requiresAuthentication} />
+      <Route path="my-recipes/:myRecipesId/add-recipe" component={AddNewRecipe} onEnter={requiresAuthentication} />
     </Route>
   </Router>,
   document.getElementById('root')

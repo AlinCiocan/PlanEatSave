@@ -5,7 +5,7 @@ import { ApiRequest } from '../../services/ApiRequest';
 import Routes from '../../services/Routes';
 import TopBar from '../TopBar/TopBar';
 
-export default class PantryPageContainer extends Component {
+export default class MyRecipesPageContainer extends Component {
     render() {
         return (
             <div>

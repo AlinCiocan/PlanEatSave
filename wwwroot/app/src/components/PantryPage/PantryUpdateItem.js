@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import TopBar from '../TopBar/TopBar';
 import { ApiRequest } from '../../services/ApiRequest';
+import Routes from '../../services/Routes';
 import PantryItem from './PantryItem';
-import {Link} from 'react-router';
 
 export default class PantryUpdateItem extends Component {
 
@@ -22,18 +23,18 @@ export default class PantryUpdateItem extends Component {
         ApiRequest
             .retrievePantryItemById(this.props.params.itemId)
             .then(
-                rsp => {
-                    if(!rsp.body) {
-                        this.setState({message: this.getPantryItemNotFoundMsg()})
-                        return;
-                    }
-
-                    this.setState({isItemVisible: true, message: null, item: rsp.body});                    
-                },
-                err => {
-                    console.log(err);
-                    this.setState({ message: this.getErrorMessage(err), isItemVisible: true, item: {} });
+            rsp => {
+                if (!rsp.body) {
+                    this.setState({ message: this.getPantryItemNotFoundMsg() })
+                    return;
                 }
+
+                this.setState({ isItemVisible: true, message: null, item: rsp.body });
+            },
+            err => {
+                console.log(err);
+                this.setState({ message: this.getErrorMessage(err), isItemVisible: true, item: {} });
+            }
             );
     }
 
@@ -75,15 +76,6 @@ export default class PantryUpdateItem extends Component {
         return (<h3> Loading your item from the pantry... </h3>);
     }
 
-    getBackButton() {
-        return (
-            <div className="top-bar__side top-bar__side--left" onClick={() => this.props.router.push('/pantry')}>
-                <i className="fa fa-arrow-left" aria-hidden="true"></i>
-                &nbsp; Edit pantry
-            </div>
-        );
-    }
-
     onItemChange(newItem) {
         this.setState({ item: newItem });
     }
@@ -104,7 +96,9 @@ export default class PantryUpdateItem extends Component {
     render() {
         return (
             <div>
-                <TopBar leftSide={this.getBackButton()} saveButton saveButtonOnClick={() => this.saveItem()} />
+                <TopBar
+                    backButton backButtonText="Edit pantry" backButtonOnClick={() => this.props.router.push(Routes.myPantry())}
+                    saveButton saveButtonOnClick={() => this.saveItem()} />
 
                 {this.state.message}
 

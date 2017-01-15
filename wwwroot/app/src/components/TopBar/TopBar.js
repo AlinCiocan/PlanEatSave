@@ -18,9 +18,22 @@ export default class TopBar extends Component {
     }
 
     renderSaveButton() {
-        if(this.props.saveButton) {
+        if (this.props.saveButton) {
             return (
                 <div className="top-bar__side top-bar__side--right top-bar__save-button" onClick={() => this.props.saveButtonOnClick()}> SAVE </div>
+            );
+        }
+
+        return null;
+    }
+
+    renderBackButton() {
+        if (this.props.backButton) {
+            return (
+                <div className="top-bar__side top-bar__side--left" onClick={this.props.backButtonOnClick}>
+                    <i className="fa fa-arrow-left" aria-hidden="true"></i>
+                    &nbsp; {this.props.backButtonText}
+                </div>
             );
         }
 
@@ -31,7 +44,7 @@ export default class TopBar extends Component {
         return (
             <div className="top-bar">
 
-                {this.props.leftSide}
+                {this.renderBackButton()}
 
                 <Link to="/" className="top-bar__logo">
                     <img src={logo} alt="logo" />

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TopBar from '../TopBar/TopBar';
 import { ApiRequest } from '../../services/ApiRequest';
+import Routes from '../../services/Routes';
 import PantryItem from './PantryItem';
 
 export default class PantryAddNewItem extends Component {
@@ -47,15 +48,6 @@ export default class PantryAddNewItem extends Component {
         return (<h3> Adding your item... </h3>);
     }
 
-    getBackButton() {
-        return (
-            <div className="top-bar__side top-bar__side--left" onClick={() => this.props.router.push('/pantry')}>
-                <i className="fa fa-arrow-left" aria-hidden="true"></i>
-                &nbsp; Add to pantry
-            </div>
-        );
-    }
-
     onItemChange(newItem) {
         this.setState({ item: newItem });
     }
@@ -76,7 +68,9 @@ export default class PantryAddNewItem extends Component {
     render() {
         return (
             <div>
-                <TopBar leftSide={this.getBackButton()} saveButton saveButtonOnClick={() => this.saveItem()} />
+                <TopBar
+                    backButton backButtonText="Add to pantry" backButtonOnClick={() => this.props.router.push(Routes.myPantry())}
+                    saveButton saveButtonOnClick={() => this.saveItem()} />
 
                 {this.state.message}
 
