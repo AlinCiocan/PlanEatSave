@@ -235,4 +235,15 @@ body {
   .pantry-remove-item__button--gray {
     background-color: #e8e8e8; }
 
+.my-recipe {
+  padding: 16px; }
+  .my-recipe__recipe-name, .my-recipe__ingredients {
+    margin-bottom: 20px; }
+  .my-recipe__recipe-name-input {
+    display: block;
+    width: 100%; }
+  .my-recipe__preparation-textarea {
+    display: block;
+    width: 100%; }
+
 /*# sourceMappingURL=App.css.map */

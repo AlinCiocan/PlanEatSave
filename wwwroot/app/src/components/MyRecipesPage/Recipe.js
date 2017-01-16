@@ -3,40 +3,33 @@ import moment from 'moment';
 import { ApiRequest } from '../../services/ApiRequest';
 import Routes from '../../services/Routes';
 import TopBar from '../TopBar/TopBar';
+import Ingredients from './Ingredients';
 
 export default class Recipe extends Component {
 
     render() {
         return (
             <div className="my-recipe">
-                <label>
-                    Recipe name
-                </label>
+                <div className="my-recipe__recipe-name">
+                    <label className="my-recipe__recipe-name-label">
+                        Recipe name
 
-                <input type="text" placeholder="Add name" />
-
-
-                <div className="my-recipe__ingredients">
-                    <label>
-                        Ingredients
+                        <input className="my-recipe__recipe-name-input" type="text" placeholder="Add name" />
                     </label>
-                    <input type="text" placeholder="Add new ingredient" />
+
                 </div>
 
+
+                <Ingredients className="my-recipe__ingredients" />
 
                 <div className="my-recipe__preparation">
                     <label>
                         Preparation
+
+
+                        <textarea className="my-recipe__preparation-textarea" placeholder="Add how the recipe is prepared"></textarea>
                     </label>
-
-
-                    <textarea placeholder="Add">
-
-                    </textarea>
                 </div>
-
-
-
 
             </div>
         );

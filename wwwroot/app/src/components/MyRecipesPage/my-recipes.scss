@@ -1,0 +1,21 @@
+.my-recipe {
+    padding: 16px;
+
+    &__recipe-name,
+    &__ingredients {
+        margin-bottom: 20px;
+    }
+
+
+
+    &__recipe-name-input {
+        display: block;
+        width: 100%;
+    }
+
+
+    &__preparation-textarea {
+        display: block;
+        width: 100%;
+    }
+}
