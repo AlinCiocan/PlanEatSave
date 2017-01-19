@@ -20,7 +20,7 @@ export default class Recipe extends Component {
                 </div>
 
 
-                <Ingredients className="my-recipe__ingredients" />
+                <Ingredients className="my-recipe__ingredients" ingredients={[{name: 'porto'}, {name: 'caramel 2'}]} />
 
                 <div className="my-recipe__preparation">
                     <label>
