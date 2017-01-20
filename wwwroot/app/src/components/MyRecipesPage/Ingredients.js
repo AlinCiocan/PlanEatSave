@@ -11,18 +11,21 @@ export default class Ingredients extends Component {
             ingredient.isRemoveVisible = true;
             return ingredient;
         });
+
         this.state = {
             ingredients: [...ingredientsWithKeys, this.createEmptyIngredient()]
         };
     }
 
+    getIngredients() {
+        return this.state.map(ingredient => ({ name: ingredient.name }));
+    }
 
     createEmptyIngredient() {
         return {
             name: '',
             isRemoveVisible: false,
-            key: uuid.v4(),
-            isDeleted: false
+            key: uuid.v4()
         };
     }
 
@@ -37,21 +40,11 @@ export default class Ingredients extends Component {
     }
 
     onItemRemove(ingredientToRemove) {
-        if (ingredientToRemove.databaseId === 0) {
-            const ingredients = this.state.ingredients.filter(ingredient => ingredient !== ingredientToRemove);
-            this.setState({ ingredients });
-            return;
-        }
-
-        ingredientToRemove.isDeleted = true;
-        this.forceUpdate();
+        const ingredients = this.state.ingredients.filter(ingredient => ingredient !== ingredientToRemove);
+        this.setState({ ingredients });
     }
 
     renderItem(ingredient) {
-        if(ingredient.isDeleted) {
-            return null;
-        }
-        
         return (
             <div key={ingredient.key} className="ingredients__item">
                 <input type="text" placeholder="Add new ingredient" defaultValue={ingredient.name} onFocus={() => this.onItemFocus(ingredient)} />

@@ -20,7 +20,10 @@ export default class Recipe extends Component {
                 </div>
 
 
-                <Ingredients className="my-recipe__ingredients" ingredients={[{name: 'porto'}, {name: 'caramel 2'}]} />
+                <Ingredients
+                    className="my-recipe__ingredients"
+                    ref={ingredients => this.ingredients = ingredients}
+                    ingredients={[{ name: 'apples' }, { name: 'pears' }]} />
 
                 <div className="my-recipe__preparation">
                     <label>
