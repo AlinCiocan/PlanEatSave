@@ -7,18 +7,36 @@ import Recipe from './Recipe';
 
 export default class AddNewRecipe extends Component {
 
-    saveRecipe() {
+    constructor(props) {
+        super(props);
 
+        this.state = {
+            recipe: this.createEmptyRecipe()
+        };
+    }
+
+    createEmptyRecipe() {
+        return {
+            name: '',
+            ingredients: [],
+            preparation: ''
+        }
+    }
+
+    saveRecipe() {
+        
     }
 
     render() {
         return (
             <div>
-                <TopBar 
-                backButton backButtonText="Add recipe" backButtonOnClick={() => this.props.router.push(Routes.myRecipes())}
-                saveButton saveButtonOnClick={() => this.saveRecipe()} />
-               
-                <Recipe />
+                <TopBar
+                    backButton backButtonText="Add recipe" backButtonOnClick={() => this.props.router.push(Routes.myRecipes())}
+                    saveButton saveButtonOnClick={() => this.saveRecipe()} />
+
+                <Recipe
+                    recipe={this.state.recipe}
+                    onChange={recipe => this.setState({ recipe })} />
             </div>
         );
     }

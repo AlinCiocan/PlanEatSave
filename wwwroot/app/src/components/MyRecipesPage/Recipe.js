@@ -1,40 +1,47 @@
-import React, { Component } from 'react';
-import moment from 'moment';
-import { ApiRequest } from '../../services/ApiRequest';
-import Routes from '../../services/Routes';
-import TopBar from '../TopBar/TopBar';
+import React from 'react';
 import Ingredients from './Ingredients';
 
-export default class Recipe extends Component {
 
-    render() {
-        return (
-            <div className="my-recipe">
-                <div className="my-recipe__recipe-name">
-                    <label className="my-recipe__recipe-name-label">
-                        Recipe name
+const Recipe = (props) => {
+    const {recipe, onChange} = props;
 
-                        <input className="my-recipe__recipe-name-input" type="text" placeholder="Add name" />
-                    </label>
+    return (
+        <div className="my-recipe">
+            <div className="my-recipe__recipe-name">
+                <label className="my-recipe__recipe-name-label">
+                    Recipe name
 
-                </div>
-
-
-                <Ingredients
-                    className="my-recipe__ingredients"
-                    ref={ingredients => this.ingredients = ingredients}
-                    ingredients={[{ name: 'apples' }, { name: 'pears' }]} />
-
-                <div className="my-recipe__preparation">
-                    <label>
-                        Preparation
-
-
-                        <textarea className="my-recipe__preparation-textarea" placeholder="Add how the recipe is prepared"></textarea>
-                    </label>
-                </div>
+                        <input
+                        value={recipe.name}
+                        onChange={evt => onChange({ ...recipe, name: evt.target.value })}
+                        className="my-recipe__recipe-name-input"
+                        type="text"
+                        placeholder="Add name" />
+                </label>
 
             </div>
-        );
-    }
-}
+
+
+            <Ingredients
+                className="my-recipe__ingredients"
+                onChange={newIngredients => onChange({ ...recipe, ingredients: newIngredients })}
+                ingredients={recipe.ingredients} />
+
+            <div className="my-recipe__preparation">
+                <label>
+                    Preparation
+
+                        <textarea
+                        value={recipe.preparation}
+                        onChange={evt => onChange({ ...recipe, preparation: evt.target.value })}
+                        className="my-recipe__preparation-textarea"
+                        placeholder="Add how the recipe is prepared">
+                    </textarea>
+                </label>
+            </div>
+
+        </div>
+    );
+};
+
+export default Recipe;

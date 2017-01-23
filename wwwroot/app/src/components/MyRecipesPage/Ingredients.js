@@ -6,35 +6,30 @@ export default class Ingredients extends Component {
     constructor(props) {
         super(props);
 
-        const ingredientsWithKeys = this.props.ingredients.map(ingredient => {
-            ingredient.key = uuid.v4();
-            ingredient.isRemoveVisible = true;
-            return ingredient;
-        });
-
+        const ingredients = this.props.ingredients;
+        if(ingredients.every(ingredient => ingredient.canBeDeleted)) {
+            ingredients.push(this.createEmptyIngredient());
+        }
+    
         this.state = {
-            ingredients: [...ingredientsWithKeys, this.createEmptyIngredient()]
+            ingredients
         };
-    }
-
-    getIngredients() {
-        return this.state.map(ingredient => ({ name: ingredient.name }));
     }
 
     createEmptyIngredient() {
         return {
             name: '',
-            isRemoveVisible: false,
-            key: uuid.v4()
+            id: uuid.v4(),
+            canBeDeleted: false
         };
     }
 
     onItemFocus(ingredientOnFocus) {
-        if (ingredientOnFocus.isRemoveVisible) {
+        if (ingredientOnFocus.canBeDeleted) {
             return;
         }
 
-        const ingredients = this.state.ingredients.map(ingredient => ingredient === ingredientOnFocus ? { ...ingredientOnFocus, isRemoveVisible: true } : ingredient);
+        const ingredients = this.state.ingredients.map(ingredient => ingredient === ingredientOnFocus ? { ...ingredientOnFocus, canBeDeleted: true } : ingredient);
         const newIngredients = [...ingredients, this.createEmptyIngredient()];
         this.setState({ ingredients: newIngredients });
     }
@@ -46,9 +41,9 @@ export default class Ingredients extends Component {
 
     renderItem(ingredient) {
         return (
-            <div key={ingredient.key} className="ingredients__item">
+            <div key={ingredient.id} className="ingredients__item">
                 <input type="text" placeholder="Add new ingredient" defaultValue={ingredient.name} onFocus={() => this.onItemFocus(ingredient)} />
-                {ingredient.isRemoveVisible ? <button onClick={() => this.onItemRemove(ingredient)}> Remove </button> : null}
+                {ingredient.canBeDeleted ? <button onClick={() => this.onItemRemove(ingredient)}> Remove </button> : null}
             </div>
         );
     }
