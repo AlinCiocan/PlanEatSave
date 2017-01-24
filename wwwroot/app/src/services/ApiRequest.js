@@ -97,7 +97,7 @@ export class ApiRequest {
     }
     
     static saveRecipe(recipe) {
-        return authPostRequest('myRecipes/addRecipe')
+        return authPostRequest('recipes/addRecipe')
             .send(recipe);
     }
 }
