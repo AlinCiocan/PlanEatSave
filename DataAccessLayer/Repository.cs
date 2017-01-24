@@ -11,14 +11,12 @@ namespace PlanEatSave.DataAceessLayer
         public string Lastname { get; set; }
     }
 
-
     public class Pantry
     {
         public long Id { get; set; }
         public string UserId { get; set; }
         public List<PantryItem> PantryItems { get; set; }
     }
-
 
     public class PantryItem
     {
@@ -29,10 +27,20 @@ namespace PlanEatSave.DataAceessLayer
         public Pantry Pantry { get; set; }
     }
 
+    public class Recipe
+    {
+        public long Id { get; set; }
+        public string UserId { get; set; }
+        public string Name { get; set; }
+        public string IngredientsJson { get; set; }
+        public string Preparation { get; set; }
+    }
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public virtual DbSet<Pantry> Pantries { get; set; }
         public virtual DbSet<PantryItem> PantryItems { get; set; }
+        public virtual DbSet<Recipe> Recipes {get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 

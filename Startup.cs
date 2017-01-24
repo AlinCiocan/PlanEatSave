@@ -21,6 +21,8 @@ using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using AutoMapper;
 using System.IO;
 using PlanEatSave.Models.UserModels;
+using PlanEatSave.Models.RecipeModels;
+using Newtonsoft.Json;
 
 namespace PlanEatSave
 {
@@ -58,6 +60,12 @@ namespace PlanEatSave
                 cfg.CreateMap<Pantry, PantryViewModel>().ReverseMap();
                 cfg.CreateMap<PantryItem, PantryItemViewModel>().ReverseMap();
                 cfg.CreateMap<UserModel, ApplicationUser>().ReverseMap();
+
+                cfg.CreateMap<Recipe, RecipeViewModel>()
+                   .ForMember(recipeViewModel => recipeViewModel.Ingredients, configuration => configuration.MapFrom(recipe => JsonConvert.DeserializeObject<List<string>>(recipe.IngredientsJson)));
+
+                cfg.CreateMap<RecipeViewModel, Recipe>()
+                    .ForMember(recipe => recipe.IngredientsJson, configuration => configuration.MapFrom(recipeViewModel => JsonConvert.SerializeObject(recipeViewModel.Ingredients)));
             });
 
             services.AddMvc(config =>

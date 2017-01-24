@@ -7,5 +7,6 @@ namespace PlanEatSave.Utils
         public const int PANTRY_ADD_ITEM = 2000;
         public const int PANTRY_RETRIEVE_ITEM = 2001;
         public const int PANTRY_REMOVE_ITEM = 2002;
+        public const int RECIPES_ADD_RECIPE = 3000;
     }
 }

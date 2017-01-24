@@ -1,0 +1,58 @@
+using System;
+using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using PlanEatSave.DataAceessLayer;
+using PlanEatSave.Exceptions;
+using PlanEatSave.Models;
+using PlanEatSave.Models.RecipeModels;
+using PlanEatSave.Utils;
+using PlanEatSave.Utils.Extensions;
+
+namespace PlanEatSave.Controllers
+{
+    public class RecipesController : Controller
+    {
+        private RecipeService _recipeService;
+        private ILogger<PantryController> _logger;
+        public string UserId
+        {
+            get
+            {
+                return this.GetUserId();
+            }
+        }
+
+        public RecipesController(RecipeService recipeService, ILogger<PantryController> logger)
+        {
+            _recipeService = recipeService;
+            _logger = logger;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddRecipe([FromBody] RecipeViewModel recipe)
+        {
+            try
+            {
+                return await InsertOrUpdateRecipe(recipe);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(LoggingEvents.RECIPES_ADD_RECIPE, ex, $"Add recipe failed; user id - {UserId}; recipe - {JsonConvert.SerializeObject(recipe)}");
+                return this.InternalServerError();
+            }
+        }
+
+        private async Task<IActionResult> InsertOrUpdateRecipe(RecipeViewModel recipe)
+        {
+            var insertOrUpdateRecipe = Mapper.Map<Recipe>(recipe);
+            if (await _recipeService.InsertOrUpdate(UserId, insertOrUpdateRecipe))
+            {
+                return Ok(Mapper.Map<RecipeViewModel>(insertOrUpdateRecipe));
+            }
+            return Forbid("You do not have access to this recipe");
+        }
+    }
+}
