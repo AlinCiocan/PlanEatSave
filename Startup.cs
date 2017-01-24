@@ -95,6 +95,7 @@ namespace PlanEatSave
 
             // Add application services
             services.AddTransient<PantryService, PantryService>();
+            services.AddTransient<RecipeService, RecipeService>();
 
             services.Configure<IdentityOptions>(options =>
            {

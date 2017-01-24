@@ -2,20 +2,6 @@ import React, { Component } from 'react';
 import uuid from 'uuid';
 
 export default class Ingredients extends Component {
-
-    constructor(props) {
-        super(props);
-
-        const ingredients = this.props.ingredients;
-        if(ingredients.every(ingredient => ingredient.canBeDeleted)) {
-            ingredients.push(this.createEmptyIngredient());
-        }
-    
-        this.state = {
-            ingredients
-        };
-    }
-
     createEmptyIngredient() {
         return {
             name: '',
@@ -29,32 +15,48 @@ export default class Ingredients extends Component {
             return;
         }
 
-        const ingredients = this.state.ingredients.map(ingredient => ingredient === ingredientOnFocus ? { ...ingredientOnFocus, canBeDeleted: true } : ingredient);
-        const newIngredients = [...ingredients, this.createEmptyIngredient()];
-        this.setState({ ingredients: newIngredients });
+        const ingredients = this.ingredients.map(ingredient => ingredient === ingredientOnFocus ? { ...ingredientOnFocus, canBeDeleted: true } : ingredient);
+        this.props.onChange([...ingredients, this.createEmptyIngredient()]);
     }
 
     onItemRemove(ingredientToRemove) {
-        const ingredients = this.state.ingredients.filter(ingredient => ingredient !== ingredientToRemove);
-        this.setState({ ingredients });
+        const ingredients = this.ingredients.filter(ingredient => ingredient !== ingredientToRemove);
+        this.props.onChange(ingredients);
+    }
+
+    onIngredientValueChange(ingredient, newValue) {
+        const ingredients = this.ingredients.map(x => x === ingredient ? { ...ingredient, name: newValue } : x);
+        this.props.onChange(ingredients);
     }
 
     renderItem(ingredient) {
         return (
             <div key={ingredient.id} className="ingredients__item">
-                <input type="text" placeholder="Add new ingredient" defaultValue={ingredient.name} onFocus={() => this.onItemFocus(ingredient)} />
+                <input
+                    type="text"
+                    placeholder="Add new ingredient"
+                    value={ingredient.name}
+                    onChange={evt => this.onIngredientValueChange(ingredient, evt.target.value)}
+                    onFocus={() => this.onItemFocus(ingredient)} />
                 {ingredient.canBeDeleted ? <button onClick={() => this.onItemRemove(ingredient)}> Remove </button> : null}
             </div>
         );
     }
 
     renderItems() {
-        return this.state.ingredients.map(ingredient => {
+        return this.ingredients.map(ingredient => {
             return this.renderItem(ingredient);
         });
     }
 
     render() {
+        // TODO: refactor this (Ingredients should be split in IngredientsList and IngredientItem)
+        const ingredients = [...this.props.ingredients];
+        if (ingredients.every(ingredient => ingredient.canBeDeleted)) {
+            ingredients.push(this.createEmptyIngredient());
+        }
+        this.ingredients = ingredients;
+
         return (
             <div className={this.props.className}>
                 <label>

@@ -27,11 +27,11 @@ export default class Routes {
         return `${Routes.base()}my-recipes`;
     }
 
-    static addMyRecipe(myRecipesId) {
-        return `${Routes.myRecipes()}/${myRecipesId}/add-recipe`;
+    static addMyRecipe() {
+        return `${Routes.myRecipes()}/add-recipe`;
     }
 
-    static editMyRecipe(myRecipesId, recipeId) {
-        return `${Routes.myRecipes()}/${myRecipesId}/edit-recipe/${recipeId}`;
+    static editMyRecipe(recipeId) {
+        return `${Routes.myRecipes()}/edit-recipe/${recipeId}`;
     }
 }

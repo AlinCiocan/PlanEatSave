@@ -38,7 +38,13 @@ export default class AddNewRecipe extends Component {
     saveRecipe() {
         this.setState({ isRecipeVisible: false, message: this.getLoadingMsg() });
 
-        const recipe = { ...this.state.recipe, myRecipesId: this.props.params.myRecipesId };
+        const ingredients = this.state.recipe.ingredients
+                            .map(ingredient => ingredient.name)
+                            .filter(ingredientName => ingredientName.trim().length > 0);
+
+        const recipe = { ...this.state.recipe, ingredients };
+
+        
         ApiRequest
             .saveRecipe(recipe)
             .then(
@@ -51,12 +57,16 @@ export default class AddNewRecipe extends Component {
             });
     }
 
+    onRecipeChange(recipe) {
+        this.setState({ recipe });
+    }
+
     renderRecipe() {
         if (this.state.isRecipeVisible) {
             return (
                 <Recipe
                     recipe={this.state.recipe}
-                    onChange={recipe => this.setState({ recipe })} />
+                    onChange={recipe => this.onRecipeChange(recipe)} />
             );
         }
 

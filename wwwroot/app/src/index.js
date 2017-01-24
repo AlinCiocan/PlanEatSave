@@ -36,7 +36,7 @@ ReactDOM.render(
       <Route path="pantry/:pantryId/add-item" component={PantryAddNewItem} onEnter={requiresAuthentication} />
       <Route path="pantry/:pantryId/edit-item/:itemId" component={PantryUpdateItem} onEnter={requiresAuthentication} />
       <Route path="my-recipes" component={MyRecipesPageContainer} onEnter={requiresAuthentication} />
-      <Route path="my-recipes/:myRecipesId/add-recipe" component={AddNewRecipe} onEnter={requiresAuthentication} />
+      <Route path="my-recipes/add-recipe" component={AddNewRecipe} onEnter={requiresAuthentication} />
     </Route>
   </Router>,
   document.getElementById('root')
