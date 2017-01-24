@@ -11,7 +11,9 @@ export default class AddNewRecipe extends Component {
         super(props);
 
         this.state = {
-            recipe: this.createEmptyRecipe()
+            recipe: this.createEmptyRecipe(),
+            isRecipeVisible: true,
+            message: null
         };
     }
 
@@ -23,8 +25,42 @@ export default class AddNewRecipe extends Component {
         }
     }
 
+    getLoadingMsg() {
+        return (<h3> Adding your recipe... </h3>);
+    }
+
+    getErrorMessage(err, item) {
+        return (
+            <h3 style={{ color: 'red' }}> There was an error with our server. Please try again! </h3>
+        );
+    }
+
     saveRecipe() {
-        
+        this.setState({ isRecipeVisible: false, message: this.getLoadingMsg() });
+
+        const recipe = { ...this.state.recipe, myRecipesId: this.props.params.myRecipesId };
+        ApiRequest
+            .saveRecipe(recipe)
+            .then(
+            rsp => {
+                this.props.router.push(Routes.myRecipes());
+            },
+            err => {
+                console.log(err);
+                this.setState({ message: this.getErrorMessage(err), isRecipeVisible: true });
+            });
+    }
+
+    renderRecipe() {
+        if (this.state.isRecipeVisible) {
+            return (
+                <Recipe
+                    recipe={this.state.recipe}
+                    onChange={recipe => this.setState({ recipe })} />
+            );
+        }
+
+        return null;
     }
 
     render() {
@@ -34,9 +70,9 @@ export default class AddNewRecipe extends Component {
                     backButton backButtonText="Add recipe" backButtonOnClick={() => this.props.router.push(Routes.myRecipes())}
                     saveButton saveButtonOnClick={() => this.saveRecipe()} />
 
-                <Recipe
-                    recipe={this.state.recipe}
-                    onChange={recipe => this.setState({ recipe })} />
+                {this.state.message}
+
+                {this.renderRecipe()}
             </div>
         );
     }

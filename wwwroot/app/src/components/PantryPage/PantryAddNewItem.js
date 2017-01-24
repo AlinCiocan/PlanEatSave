@@ -31,10 +31,11 @@ export default class PantryAddNewItem extends Component {
             .addPantryItem(item)
             .then(
             rsp => {
-                this.props.router.push('/pantry');
-            }, err => {
+                this.props.router.push(Routes.myPantry());
+            },
+            err => {
                 console.log(err);
-                this.setState({ message: this.getErrorMessage(err), isItemVisible: true, item: item });
+                this.setState({ message: this.getErrorMessage(err), isItemVisible: true });
             });
     }
 

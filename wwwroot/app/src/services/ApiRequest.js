@@ -95,4 +95,9 @@ export class ApiRequest {
     static removePantryItem(itemId) {
         return authDeleteRequest(`pantry/removeItem?id=${itemId}`);
     }
+    
+    static saveRecipe(recipe) {
+        return authPostRequest('myRecipes/addRecipe')
+            .send(recipe);
+    }
 }

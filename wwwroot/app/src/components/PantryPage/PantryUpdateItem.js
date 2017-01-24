@@ -34,8 +34,7 @@ export default class PantryUpdateItem extends Component {
             err => {
                 console.log(err);
                 this.setState({ message: this.getErrorMessage(err), isItemVisible: true, item: {} });
-            }
-            );
+            });
     }
 
     onSelectDate(newDate) {
@@ -54,7 +53,7 @@ export default class PantryUpdateItem extends Component {
                 this.props.router.push('/pantry');
             }, err => {
                 console.log(err);
-                this.setState({ message: this.getErrorMessage(err), isItemVisible: true, item: item });
+                this.setState({ message: this.getErrorMessage(err), isItemVisible: true });
             });
     }
 
