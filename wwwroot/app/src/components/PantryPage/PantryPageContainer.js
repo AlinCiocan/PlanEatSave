@@ -99,33 +99,35 @@ export default class PantryPageContainer extends Component {
     }
 
     renderRemoveWindow() {
-        if (this.state.removeItemId) {
-            return (
-                <div className="modal-container">
-                    <div className="pantry-remove-item">
-                        <div className="pantry-remove-item__container">
-                            <p className="pantry-remove-item__title">
-                                Remove this product from the pantry?
+        if (!this.state.removeItemId) {
+            return null;
+        }
+        
+        return (
+            <div className="modal-container">
+                <div className="pantry-remove-item">
+                    <div className="pantry-remove-item__container">
+                        <p className="pantry-remove-item__title">
+                            Remove this product from the pantry?
                             </p>
 
-                            <div className="pantry-remove-item__buttons">
-                                <button
-                                    className="pantry-remove-item__button"
-                                    onClick={() => this.setState({ removeItemId: null })}>
-                                    Cancel
+                        <div className="pantry-remove-item__buttons">
+                            <button
+                                className="pantry-remove-item__button"
+                                onClick={() => this.setState({ removeItemId: null })}>
+                                Cancel
                                 </button>
 
-                                <button
-                                    className="pantry-remove-item__button pantry-remove-item__button--gray"
-                                    onClick={() => this.removeItem(this.state.removeItemId)}>
-                                    Remove
+                            <button
+                                className="pantry-remove-item__button pantry-remove-item__button--gray"
+                                onClick={() => this.removeItem(this.state.removeItemId)}>
+                                Remove
                                 </button>
-                            </div>
                         </div>
                     </div>
                 </div>
-            );
-        }
+            </div>
+        );
     }
 
     render() {
