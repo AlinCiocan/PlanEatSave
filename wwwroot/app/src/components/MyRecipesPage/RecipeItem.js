@@ -3,7 +3,9 @@ import React from 'react';
 const RecipeItem = (props) => {
     return (
         <div className="recipe-item">
-            {props.recipe.name}
+            <div className="recipe-item__name">
+                {props.recipe.name}
+            </div>
         </div>
     );
 };

@@ -4,13 +4,11 @@
         font-size: 16px;
         letter-spacing: 2.24px;
         margin-bottom: 10px;
-        padding-left: 14px;
     }
 
     &__item {
         position: relative;
         margin-bottom: 20px;
-        padding-left: 16px;
     }
 
     &__item-img {
@@ -23,7 +21,7 @@
     &__item-details {
         position: absolute;
         top: 0;
-        left: 156px;
+        left: 134px;
     }
 
     &__item-name {
@@ -55,9 +53,6 @@
 .pantry-item {
     &__form-group {
         margin-bottom: 30px;
-        margin-left: 24px; 
-        margin-right: 24px; 
-      
     }
 
     &__form-label {

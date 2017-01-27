@@ -2,6 +2,10 @@
     font-weight: 900;
 }
 
+@mixin font-light-bold() {
+    font-weight: 500;
+}
+
 @mixin font-style() {
     font-style: italic;
 }

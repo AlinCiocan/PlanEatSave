@@ -39,12 +39,12 @@ export default class AddNewRecipe extends Component {
         this.setState({ isRecipeVisible: false, message: this.getLoadingMsg() });
 
         const ingredients = this.state.recipe.ingredients
-                            .map(ingredient => ingredient.name)
-                            .filter(ingredientName => ingredientName.trim().length > 0);
+            .map(ingredient => ingredient.name)
+            .filter(ingredientName => ingredientName.trim().length > 0);
 
         const recipe = { ...this.state.recipe, ingredients };
 
-        
+
         ApiRequest
             .saveRecipe(recipe)
             .then(
@@ -79,10 +79,11 @@ export default class AddNewRecipe extends Component {
                 <TopBar
                     backButton backButtonText="Add recipe" backButtonOnClick={() => this.props.router.push(Routes.myRecipes())}
                     saveButton saveButtonOnClick={() => this.saveRecipe()} />
+                <div className="row">
+                    {this.state.message}
 
-                {this.state.message}
-
-                {this.renderRecipe()}
+                    {this.renderRecipe()}
+                </div>
             </div>
         );
     }

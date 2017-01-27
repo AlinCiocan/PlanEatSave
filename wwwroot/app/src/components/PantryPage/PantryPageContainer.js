@@ -102,7 +102,7 @@ export default class PantryPageContainer extends Component {
         if (!this.state.removeItemId) {
             return null;
         }
-        
+
         return (
             <div className="modal-container">
                 <div className="pantry-remove-item">
@@ -134,7 +134,10 @@ export default class PantryPageContainer extends Component {
         return (
             <div className="pantry-page-container">
                 <TopBar addButton addButtonOnClick={() => this.props.router.push(`/pantry/${this.state.pantry.id}/add-item`)} />
-                {this.renderPantry()}
+
+                <div className="row">
+                    {this.renderPantry()}
+                </div>
 
                 {this.renderRemoveWindow()}
             </div>

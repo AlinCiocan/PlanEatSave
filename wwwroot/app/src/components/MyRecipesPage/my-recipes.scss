@@ -1,6 +1,4 @@
 .my-recipe {
-    padding: 16px;
-
     &__recipe-name,
     &__ingredients {
         margin-bottom: 20px;
@@ -17,5 +15,34 @@
     &__preparation-textarea {
         display: block;
         width: 100%;
+    }
+}
+
+
+.recipes-list {
+    &__title {
+        font-size: 16px;
+        @include font-bold();
+        margin-bottom: 10px;
+    }
+}
+
+.recipe-item {
+    background-color: $silver;
+    height: 120px;
+    width: 100%;
+    position: relative;
+    margin-bottom: 10px;
+
+    &__name {
+        background-color: $darkGrey;
+        color: white;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 4px 12px;
+        font-size: 14px;
+        box-sizing: border-box;
+        @include font-light-bold();
     }
 }

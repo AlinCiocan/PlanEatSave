@@ -73,9 +73,11 @@ export default class PantryAddNewItem extends Component {
                     backButton backButtonText="Add to pantry" backButtonOnClick={() => this.props.router.push(Routes.myPantry())}
                     saveButton saveButtonOnClick={() => this.saveItem()} />
 
-                {this.state.message}
+                <div className="row">
+                    {this.state.message}
 
-                {this.renderItemForm()}
+                    {this.renderItemForm()}
+                </div>
             </div>
         );
     }
