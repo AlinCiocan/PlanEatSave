@@ -100,4 +100,8 @@ export class ApiRequest {
         return authPostRequest('recipes/addRecipe')
             .send(recipe);
     }
+
+    static retrieveRecipes() {
+        return authGetRequest('recipes/retrieveAll');
+    }
 }

@@ -28,8 +28,6 @@ namespace PlanEatSave.DataAceessLayer
                 return pantryFromDb;
             }
 
-
-
             var newPantry = new Pantry
             {
                 UserId = userId

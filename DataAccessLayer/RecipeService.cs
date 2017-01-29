@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -43,6 +44,11 @@ namespace PlanEatSave.DataAceessLayer
         private async Task<bool> RecipeDoesNotExistInDatabase(Recipe recipe)
         {
             return await _context.Recipes.FirstOrDefaultAsync(r => r.Id == recipe.Id && r.UserId == recipe.UserId) == null;
+        }
+
+        public async Task<List<Recipe>> RetrieveRecipes(string userId)
+        {
+           return await _context.Recipes.Where(recipe => recipe.UserId == userId).ToListAsync();
         }
     }
 }

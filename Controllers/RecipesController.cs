@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -41,6 +42,20 @@ namespace PlanEatSave.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(LoggingEvents.RECIPES_ADD_RECIPE, ex, $"Add recipe failed; user id - {UserId}; recipe - {JsonConvert.SerializeObject(recipe)}");
+                return this.InternalServerError();
+            }
+        }
+
+        public async Task<IActionResult> RetrieveAll()
+        {
+            try
+            {
+                var recipes = await _recipeService.RetrieveRecipes(UserId);
+                return Ok(Mapper.Map<List<RecipeViewModel>>(recipes));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(LoggingEvents.RECIPES_ADD_RECIPE, ex, $"Retrieve recipes failed; user id - {UserId}");
                 return this.InternalServerError();
             }
         }
