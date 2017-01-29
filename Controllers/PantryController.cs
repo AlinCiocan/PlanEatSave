@@ -34,8 +34,16 @@ namespace PlanEatSave.Controllers
         [HttpGet]
         public async Task<IActionResult> GetPantry()
         {
-            var pantry = await _pantryService.GetPantryByUserIdAsync(UserId);
-            return Ok(Mapper.Map<PantryViewModel>(pantry));
+            try
+            {
+                var pantry = await _pantryService.GetPantryByUserIdAsync(UserId);
+                return Ok(Mapper.Map<PantryViewModel>(pantry));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(LoggingEvents.PANTRY_RETRIEVE_USER_PANTRY, ex, $"Retrieve user pantry failed; user id - {UserId}");
+                return this.InternalServerError();
+            }
         }
 
         [HttpPost]
