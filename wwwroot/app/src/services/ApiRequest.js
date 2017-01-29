@@ -69,7 +69,7 @@ export class ApiRequest {
         return postRequest('account/login')
             .send(user);
     }
-    
+
     static getUserInfo() {
         return authGetRequest('account/userInfo');
     }
@@ -95,7 +95,7 @@ export class ApiRequest {
     static removePantryItem(itemId) {
         return authDeleteRequest(`pantry/removeItem?id=${itemId}`);
     }
-    
+
     static saveRecipe(recipe) {
         return authPostRequest('recipes/addRecipe')
             .send(recipe);
@@ -103,5 +103,14 @@ export class ApiRequest {
 
     static retrieveRecipes() {
         return authGetRequest('recipes/retrieveAll');
+    }
+
+    static retrieveRecipe(recipeId) {
+        return authGetRequest(`recipes/getRecipeById?id=${recipeId}`);
+    }
+
+    static editRecipe(recipe) {
+        return authPutRequest('recipes/editRecipe')
+            .send(recipe);
     }
 }

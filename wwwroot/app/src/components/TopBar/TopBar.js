@@ -4,13 +4,14 @@ import logo from './logo.svg';
 
 export default class TopBar extends Component {
 
-
     renderAddButton() {
         if (this.props.addButton) {
             return (
                 <button
                     className="top-bar__side top-bar__side--right top-bar__add-button"
-                    onClick={this.props.addButtonOnClick}>ADD</button>
+                    onClick={this.props.addButtonOnClick}>
+                    ADD
+                </button>
             );
         }
 
@@ -20,7 +21,25 @@ export default class TopBar extends Component {
     renderSaveButton() {
         if (this.props.saveButton) {
             return (
-                <div className="top-bar__side top-bar__side--right top-bar__save-button" onClick={() => this.props.saveButtonOnClick()}> SAVE </div>
+                <div
+                    className="top-bar__side top-bar__side--right top-bar__save-button"
+                    onClick={this.props.saveButtonOnClick}>
+                    SAVE
+                </div>
+            );
+        }
+
+        return null;
+    }
+
+    renderEditButton() {
+        if (this.props.editButton) {
+            return (
+                <div
+                    className="top-bar__side top-bar__side--right top-bar__edit-button"
+                    onClick={this.props.editButtonOnClick}>
+                    EDIT
+                </div>
             );
         }
 
@@ -52,6 +71,7 @@ export default class TopBar extends Component {
 
                 {this.renderAddButton()}
                 {this.renderSaveButton()}
+                {this.renderEditButton()}
             </div>
         );
     }

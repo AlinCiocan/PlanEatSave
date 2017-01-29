@@ -34,4 +34,8 @@ export default class Routes {
     static editMyRecipe(recipeId) {
         return `${Routes.myRecipes()}/edit-recipe/${recipeId}`;
     }
+
+    static viewRecipe(recipeId) {
+        return `${Routes.myRecipes()}/recipe/${recipeId}`;
+    }
 }

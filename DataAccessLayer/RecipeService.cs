@@ -50,5 +50,10 @@ namespace PlanEatSave.DataAceessLayer
         {
            return await _context.Recipes.Where(recipe => recipe.UserId == userId).ToListAsync();
         }
+
+        public async Task<Recipe> RetrieveRecipeById(string userId, long id)
+        {
+            return await _context.Recipes.FirstOrDefaultAsync(recipe => recipe.Id == id && recipe.UserId == userId);
+        }
     }
 }

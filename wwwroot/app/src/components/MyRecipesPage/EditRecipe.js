@@ -1,32 +1,26 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 import { ApiRequest } from '../../services/ApiRequest';
 import Routes from '../../services/Routes';
 import TopBar from '../TopBar/TopBar';
 import Recipe from './Recipe';
 
-export default class AddNewRecipe extends Component {
-
+export default class EditRecipe extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            recipe: this.createEmptyRecipe(),
+            recipe: null,
             isRecipeVisible: true,
             message: null
         };
     }
 
-    createEmptyRecipe() {
-        return {
-            name: '',
-            ingredients: [],
-            preparation: ''
-        }
+    getLoadingMsgForUpdating() {
+        return (<h3> Updating your recipe... </h3>);
     }
 
-    getLoadingMsg() {
-        return (<h3> Adding your recipe... </h3>);
+    getLoadingMsgForFetching() {
+        return (<h3> Retrieve your recipe... </h3>);
     }
 
     getErrorMessage() {
@@ -35,8 +29,8 @@ export default class AddNewRecipe extends Component {
         );
     }
 
-    saveRecipe() {
-        this.setState({ isRecipeVisible: false, message: this.getLoadingMsg() });
+    editRecipe() {
+        this.setState({ isRecipeVisible: false, message: this.getLoadingMsgForUpdating() });
 
         const ingredients = this.state.recipe.ingredients
             .map(ingredient => ingredient.name)
@@ -46,15 +40,19 @@ export default class AddNewRecipe extends Component {
 
 
         ApiRequest
-            .saveRecipe(recipe)
+            .editRecipe(recipe)
             .then(
             rsp => {
-                this.props.router.push(Routes.myRecipes());
+                this.goToViewRecipe();
             },
             err => {
                 console.log(err);
                 this.setState({ message: this.getErrorMessage(err), isRecipeVisible: true });
             });
+    }
+
+    goToViewRecipe() {
+        this.props.router.push(Routes.viewRecipe(this.props.param.recipeId))
     }
 
     onRecipeChange(recipe) {
@@ -77,11 +75,10 @@ export default class AddNewRecipe extends Component {
         return (
             <div>
                 <TopBar
-                    backButton backButtonText="Add recipe" backButtonOnClick={() => this.props.router.push(Routes.myRecipes())}
-                    saveButton saveButtonOnClick={() => this.saveRecipe()} />
+                    backButton backButtonText="Edit recipe" backButtonOnClick={() => this.goToViewRecipe()}
+                    saveButton saveButtonOnClick={() => this.editRecipe()} />
                 <div className="row">
                     {this.state.message}
-
                     {this.renderRecipe()}
                 </div>
             </div>

@@ -46,6 +46,23 @@ namespace PlanEatSave.Controllers
             }
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> GetRecipeById(long id)
+        {
+            try
+            {
+                var recipe = await _recipeService.RetrieveRecipeById(UserId, id);
+                return Ok(Mapper.Map<RecipeViewModel>(recipe));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(LoggingEvents.RECIPES_RETRIEVE_RECIPE, ex, $"Retrieve recipe failed; user id - {UserId}; recipe id - {id}");
+                return this.InternalServerError();
+            }
+        }
+
+        [HttpGet]
         public async Task<IActionResult> RetrieveAll()
         {
             try
@@ -55,7 +72,7 @@ namespace PlanEatSave.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(LoggingEvents.RECIPES_ADD_RECIPE, ex, $"Retrieve recipes failed; user id - {UserId}");
+                _logger.LogError(LoggingEvents.RECIPES_RETRIEVE_ALL, ex, $"Retrieve recipes failed; user id - {UserId}");
                 return this.InternalServerError();
             }
         }

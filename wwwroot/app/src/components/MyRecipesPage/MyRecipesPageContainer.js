@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import uuid from 'uuid';
 
 import { ApiRequest } from '../../services/ApiRequest';
 import Routes from '../../services/Routes';
+import RecipeService from '../../services/RecipeService';
 import TopBar from '../TopBar/TopBar';
 import RecipesList from './RecipesList';
 
@@ -16,14 +16,6 @@ export default class MyRecipesPageContainer extends Component {
         };
     }
 
-    processRecipes(recipes) {
-        return recipes.map(recipe => ({ ...recipe, ingredients: this.addUniqueIdsForIngredients(recipe.ingredients) }));
-    }
-
-    addUniqueIdsForIngredients(ingredients) {
-        return ingredients.map(ingredient => ({ ...ingredient, id: uuid.v4() }));
-    }
-
     componentDidMount() {
         this.setState({ message: this.getLoadingMessage() });
 
@@ -31,7 +23,7 @@ export default class MyRecipesPageContainer extends Component {
             .retrieveRecipes()
             .then(
             rsp => {
-                this.setState({ recipes: this.processRecipes(rsp.body), message: null })
+                this.setState({ recipes: RecipeService.processRecipes(rsp.body), message: null })
             },
             err => {
                 this.setState({ message: this.getErrorMessage() })
@@ -42,7 +34,7 @@ export default class MyRecipesPageContainer extends Component {
         return (<h3> Loading your recipes... </h3>);
     }
 
-    getErrorMessage(err, item) {
+    getErrorMessage() {
         return (
             <h3 style={{ color: 'red' }}> There was an error with our server. Please try again! </h3>
         );
@@ -51,7 +43,7 @@ export default class MyRecipesPageContainer extends Component {
     renderRecipes() {
         if (this.state.recipes !== null) {
             return (
-                <RecipesList title="Recipes" recipes={this.state.recipes} />
+                <RecipesList title="Recipes" recipes={this.state.recipes} onRecipeClick={recipeId => this.props.router.push(Routes.viewRecipe(recipeId))} />
             );
         }
 

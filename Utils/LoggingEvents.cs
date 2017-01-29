@@ -13,5 +13,6 @@ namespace PlanEatSave.Utils
         public const int RECIPES_UPDATE_RECIPE = 3001;
         public const int RECIPES_RETRIEVE_ALL = 3002;
         public const int RECIPES_REMOVE_RECIPE = 3003;
+        public const int RECIPES_RETRIEVE_RECIPE = 3004;
     }
 }

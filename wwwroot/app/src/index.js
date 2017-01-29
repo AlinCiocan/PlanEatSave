@@ -12,6 +12,8 @@ import PantryAddNewItem from './components/PantryPage/PantryAddNewItem';
 import PantryUpdateItem from './components/PantryPage/PantryUpdateItem';
 import MyRecipesPageContainer from './components/MyRecipesPage/MyRecipesPageContainer';
 import AddNewRecipe from './components/MyRecipesPage/AddNewRecipe';
+import ViewRecipeContainer from './components/MyRecipesPage/ViewRecipeContainer';
+import EditRecipe from './components/MyRecipesPage/EditRecipe';
 
 import './index.css';
 
@@ -36,7 +38,9 @@ ReactDOM.render(
       <Route path="pantry/:pantryId/add-item" component={PantryAddNewItem} onEnter={requiresAuthentication} />
       <Route path="pantry/:pantryId/edit-item/:itemId" component={PantryUpdateItem} onEnter={requiresAuthentication} />
       <Route path="my-recipes" component={MyRecipesPageContainer} onEnter={requiresAuthentication} />
+      <Route path="my-recipes/recipe/:recipeId" component={ViewRecipeContainer} onEnter={requiresAuthentication} />
       <Route path="my-recipes/add-recipe" component={AddNewRecipe} onEnter={requiresAuthentication} />
+      <Route path="my-recipes/edit-recipe/:recipeId" component={EditRecipe} onEnter={requiresAuthentication} />
     </Route>
   </Router>,
   document.getElementById('root')
