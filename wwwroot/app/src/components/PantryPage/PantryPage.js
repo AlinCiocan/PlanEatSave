@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import editIcon from './images/edit-icon.svg';
 import removeIcon from './images/remove-icon.svg';
+import Routes from '../../services/Routes';
 
 export default class PantryPage extends Component {
     constructor(props) {
@@ -23,7 +24,7 @@ export default class PantryPage extends Component {
     }
 
     onEdit(itemId) {
-        this.props.router.push(`/pantry/${this.props.pantry.id}/edit-item/${itemId}`);
+        this.props.router.push(Routes.editPantryItem(this.props.pantry.id, itemId));
     }
 
     onRemove(itemId) {

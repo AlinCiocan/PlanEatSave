@@ -4,6 +4,7 @@ import moment from 'moment';
 import PantryPage from './PantryPage';
 import { ApiRequest } from '../../services/ApiRequest';
 import TopBar from '../TopBar/TopBar';
+import Routes from '../../services/Routes';
 
 const DAYS_EXPIRES_SOON = 30;
 
@@ -133,7 +134,7 @@ export default class PantryPageContainer extends Component {
     render() {
         return (
             <div className="pantry-page-container">
-                <TopBar addButton addButtonOnClick={() => this.props.router.push(`/pantry/${this.state.pantry.id}/add-item`)} />
+                <TopBar addButton addButtonOnClick={() => this.props.router.push(Routes.addPantryItem(this.state.pantry.id))} />
 
                 <div className="row">
                     {this.renderPantry()}

@@ -50,7 +50,7 @@ export default class PantryUpdateItem extends Component {
             .updatePantryItem(item)
             .then(
             rsp => {
-                this.props.router.push('/pantry');
+                this.props.router.push(Routes.myPantry());
             }, err => {
                 console.log(err);
                 this.setState({ message: this.getErrorMessage(err), isItemVisible: true });
@@ -58,7 +58,7 @@ export default class PantryUpdateItem extends Component {
     }
 
     getPantryItemNotFoundMsg() {
-        return (<h3> We could not found your item id. Please go to your <Link to="/pantry"> pantry </Link> </h3>);
+        return (<h3> We could not found your item id. Please go to your <Link to={Routes.myPantry()}> pantry </Link> </h3>);
     }
 
     getErrorMessage(err, item) {
