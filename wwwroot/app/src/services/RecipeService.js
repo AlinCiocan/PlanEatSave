@@ -2,7 +2,7 @@ import uuid from 'uuid';
 
 export default class RecipeService {
     static addUniqueIdsForIngredients(ingredients) {
-        return ingredients.map(ingredient => ({id: uuid.v4(), name: ingredient }));
+        return ingredients.map(ingredient => ({id: uuid.v4(), name: ingredient, canBeDeleted: true }));
     }
 
     static processRecipe(recipe) {
