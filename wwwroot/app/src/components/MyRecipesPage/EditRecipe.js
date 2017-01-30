@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ApiRequest } from '../../services/ApiRequest';
+import RecipeService from '../../services/RecipeService';
 import Routes from '../../services/Routes';
 import TopBar from '../TopBar/TopBar';
 import Recipe from './Recipe';
@@ -15,18 +16,40 @@ export default class EditRecipe extends Component {
         };
     }
 
-    getLoadingMsgForUpdating() {
-        return (<h3> Updating your recipe... </h3>);
+    componentDidMount() {
+        ApiRequest
+            .retrieveRecipe(this.props.params.recipeId)
+            .then(
+            rsp => {
+                const recipe = rsp.body;
+                if (recipe) {
+                    this.setState({ recipe: RecipeService.processRecipe(recipe), message: null });
+                    return;
+                }
+
+                this.setState({ message: this.noRecipeFoundMessage() });
+            },
+            err => {
+                this.setState({ message: this.getErrorMessage() });
+            });
+    }
+
+    noRecipeFoundMessage() {
+        return (<h3> No recipe was found </h3>);
     }
 
     getLoadingMsgForFetching() {
-        return (<h3> Retrieve your recipe... </h3>);
+        return (<h3> Loading your recipe... </h3>);
     }
 
     getErrorMessage() {
         return (
             <h3 style={{ color: 'red' }}> There was an error with our server. Please try again! </h3>
         );
+    }
+
+    getLoadingMsgForUpdating() {
+        return (<h3> Updating your recipe... </h3>);
     }
 
     editRecipe() {
@@ -52,7 +75,7 @@ export default class EditRecipe extends Component {
     }
 
     goToViewRecipe() {
-        this.props.router.push(Routes.viewRecipe(this.props.param.recipeId))
+        this.props.router.push(Routes.viewRecipe(this.props.params.recipeId))
     }
 
     onRecipeChange(recipe) {
@@ -60,7 +83,7 @@ export default class EditRecipe extends Component {
     }
 
     renderRecipe() {
-        if (this.state.isRecipeVisible) {
+        if (this.state.isRecipeVisible && this.state.recipe) {
             return (
                 <Recipe
                     recipe={this.state.recipe}

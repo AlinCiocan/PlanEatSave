@@ -254,7 +254,8 @@ body {
   height: 120px;
   width: 100%;
   position: relative;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  cursor: pointer; }
   .recipe-item__name {
     background-color: #6d7977;
     color: white;

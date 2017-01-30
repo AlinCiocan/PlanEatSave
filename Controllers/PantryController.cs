@@ -70,7 +70,7 @@ namespace PlanEatSave.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(LoggingEvents.PANTRY_UPDATE_ITEM, ex, $"Update item failed; user id - {UserId}; item - {JsonConvert.SerializeObject(item)}");
+                _logger.LogError(LoggingEvents.PANTRY_EDIT_ITEM, ex, $"Update item failed; user id - {UserId}; item - {JsonConvert.SerializeObject(item)}");
                 return this.InternalServerError();
             }
         }

@@ -46,6 +46,20 @@ namespace PlanEatSave.Controllers
             }
         }
 
+        [HttpPut]
+        public async Task<IActionResult> EditRecipe([FromBody] RecipeViewModel recipe)
+        {
+            try
+            {
+                return await InsertOrUpdateRecipe(recipe);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(LoggingEvents.RECIPES_EDIT_RECIPE, ex, $"Edit recipe failed; user id - {UserId}; recipe - {JsonConvert.SerializeObject(recipe)}");
+                return this.InternalServerError();
+            }
+
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetRecipeById(long id)

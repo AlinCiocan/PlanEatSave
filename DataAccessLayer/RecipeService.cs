@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using PlanEatSave.Exceptions;
 
 namespace PlanEatSave.DataAceessLayer
 {
@@ -30,20 +28,19 @@ namespace PlanEatSave.DataAceessLayer
                 return true;
             }
 
-            if (await RecipeDoesNotExistInDatabase(recipe))
+
+            var recipeFromDatabase = await _context.Recipes.FirstOrDefaultAsync(r => r.Id == recipe.Id && r.UserId == recipe.UserId);
+            if (recipeFromDatabase == null)
             {
                 return false;
             }
 
-            _context.Entry(recipe).State = EntityState.Modified;
+            recipeFromDatabase.Name = recipe.Name;
+            recipeFromDatabase.IngredientsJson = recipe.IngredientsJson;
+            recipeFromDatabase.Preparation = recipe.Preparation;
+
             await _context.SaveChangesAsync();
             return true;
-
-        }
-
-        private async Task<bool> RecipeDoesNotExistInDatabase(Recipe recipe)
-        {
-            return await _context.Recipes.FirstOrDefaultAsync(r => r.Id == recipe.Id && r.UserId == recipe.UserId) == null;
         }
 
         public async Task<List<Recipe>> RetrieveRecipes(string userId)

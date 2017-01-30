@@ -36,6 +36,7 @@ export default class ViewRecipeContainer extends Component {
     noRecipeFoundMessage() {
         return (<h3> No recipe was found </h3>);
     }
+    
     getLoadingMessage() {
         return (<h3> Loading your recipe... </h3>);
     }
