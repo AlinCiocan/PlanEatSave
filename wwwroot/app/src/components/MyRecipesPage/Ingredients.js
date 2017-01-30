@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
 
-export default class Ingredients extends Component {
+class Ingredients extends Component {
     createEmptyIngredient() {
         return {
             name: '',
@@ -70,3 +70,13 @@ export default class Ingredients extends Component {
     }
 
 }
+
+Ingredients.propTypes = {
+    ingredients: React.PropTypes.arrayOf(React.PropTypes.shape({
+        name: React.PropTypes.string.isRequired,
+        id: React.PropTypes.string.isRequired,
+        canBeDeleted: React.PropTypes.bool.isRequired
+    })).isRequired
+};
+
+export default Ingredients;
