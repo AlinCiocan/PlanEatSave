@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
 
+
+const ENTER_KEY = 13;
+const UP_ARROW_KEY = 38;
+const DOWN_ARROW_KEY = 40;
+
 class Ingredients extends Component {
     createEmptyIngredient() {
         return {
@@ -29,6 +34,45 @@ class Ingredients extends Component {
         this.props.onChange(ingredients);
     }
 
+    doFocusOnIngredient(ingredient) {
+        const ingredientDomElement = this.refs[ingredient.id];
+        
+        // hack in order to move the cursor of the input always at the end
+        ingredientDomElement.value = '';
+        ingredientDomElement.value = ingredient.name;
+        ingredientDomElement.focus();
+    }
+
+    doFocusOnNextIngredient(ingredient) {
+        const nextIngredientIndex = this.ingredients.indexOf(ingredient) + 1;
+        if (nextIngredientIndex >= this.ingredients.length) {
+            return;
+        }
+
+        this.doFocusOnIngredient(this.ingredients[nextIngredientIndex]);
+    }
+
+    doFocusOnPreviousIngredient(ingredient) {
+        const previousIngredientIndex = this.ingredients.indexOf(ingredient) - 1;
+        if (previousIngredientIndex < 0) {
+            return;
+        }
+
+        this.doFocusOnIngredient(this.ingredients[previousIngredientIndex]);
+    }
+
+    onIngredientKeyDown(evt, ingredient) {
+        if (evt.keyCode === ENTER_KEY || evt.keyCode === DOWN_ARROW_KEY) {
+            this.doFocusOnNextIngredient(ingredient);
+            return;
+        }
+
+        if (evt.keyCode === UP_ARROW_KEY) {
+            evt.preventDefault();
+            this.doFocusOnPreviousIngredient(ingredient);
+        }
+    }
+
     renderItem(ingredient) {
         return (
             <div key={ingredient.id} className="ingredients__item">
@@ -37,7 +81,9 @@ class Ingredients extends Component {
                     placeholder="Add new ingredient"
                     value={ingredient.name}
                     onChange={evt => this.onIngredientValueChange(ingredient, evt.target.value)}
-                    onFocus={() => this.onItemFocus(ingredient)} />
+                    onFocus={() => this.onItemFocus(ingredient)}
+                    ref={ingredient.id}
+                    onKeyDown={evt => this.onIngredientKeyDown(evt, ingredient)} />
                 {ingredient.canBeDeleted ? <button onClick={() => this.onItemRemove(ingredient)}> Remove </button> : null}
             </div>
         );
