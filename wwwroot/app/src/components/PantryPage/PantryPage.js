@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import editIcon from './images/edit-icon.svg';
-import removeIcon from './images/remove-icon.svg';
+import RemoveIcon from '../base/icons/RemoveIcon';
 import Routes from '../../services/Routes';
 
 export default class PantryPage extends Component {
@@ -8,7 +8,7 @@ export default class PantryPage extends Component {
         super(props);
 
         this.state = {
-            
+
         };
     }
 
@@ -19,7 +19,7 @@ export default class PantryPage extends Component {
     formatDate(dateString) {
         var date = new Date(dateString);
         var twoDigits = this.twoDigits;
-        
+
         return `Exp: ${twoDigits(date.getDate())}.${twoDigits(date.getMonth() + 1)}.${date.getFullYear()}`;
     }
 
@@ -44,15 +44,15 @@ export default class PantryPage extends Component {
                         {this.formatDate(item.expiration)}
                     </div>
                     <div className="pantry__item-actions">
-                        <img 
-                            src={editIcon} 
+                        <img
+                            src={editIcon}
                             onClick={this.onEdit.bind(this, item.id)}
-                            className="pantry__item-action" 
-                            alt="Edit pantry item icon"  />
-                        <img 
-                            src={removeIcon} 
+                            className="pantry__item-action"
+                            alt="Edit pantry item icon" />
+
+                        <RemoveIcon
                             onClick={this.onRemove.bind(this, item.id)}
-                            className="pantry__item-action" 
+                            className="pantry__item-action"
                             alt="Remove pantry item icon" />
                     </div>
                 </div>

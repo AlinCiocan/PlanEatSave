@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-
 import PantryPage from './PantryPage';
 import { ApiRequest } from '../../services/ApiRequest';
 import TopBar from '../TopBar/TopBar';
