@@ -84,3 +84,12 @@
         margin-bottom: 5px;
     }
 }
+
+.ingredients {
+    &__remove-button {
+        border: none;
+        background: none;
+        outline: none;
+        cursor: pointer;
+    }
+}

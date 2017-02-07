@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
+import RemoveIcon from '../base/icons/RemoveIcon';
 
 
 const ENTER_KEY = 13;
@@ -36,7 +37,7 @@ class Ingredients extends Component {
 
     doFocusOnIngredient(ingredient) {
         const ingredientDomElement = this.refs[ingredient.id];
-        
+
         // hack in order to move the cursor of the input always at the end
         ingredientDomElement.value = '';
         ingredientDomElement.value = ingredient.name;
@@ -73,6 +74,15 @@ class Ingredients extends Component {
         }
     }
 
+    renderRemoveButton(ingredient) {
+        if (ingredient.canBeDeleted) {
+            return (
+                <button className="ingredients__remove-button" onClick={() => this.onItemRemove(ingredient)}> <RemoveIcon /> </button>
+            );
+        }
+        return null;
+    }
+
     renderItem(ingredient) {
         return (
             <div key={ingredient.id} className="ingredients__item">
@@ -84,7 +94,7 @@ class Ingredients extends Component {
                     onFocus={() => this.onItemFocus(ingredient)}
                     ref={ingredient.id}
                     onKeyDown={evt => this.onIngredientKeyDown(evt, ingredient)} />
-                {ingredient.canBeDeleted ? <button onClick={() => this.onItemRemove(ingredient)}> Remove </button> : null}
+                    {this.renderRemoveButton(ingredient)}
             </div>
         );
     }

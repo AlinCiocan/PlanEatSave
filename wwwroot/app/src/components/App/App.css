@@ -287,4 +287,10 @@ body {
   font-weight: 900;
   margin-bottom: 5px; }
 
+.ingredients__remove-button {
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer; }
+
 /*# sourceMappingURL=App.css.map */
