@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import PikadayWrapper from '../../lib-components/PikadayWrapper/PikadayWrapper';
+import Input from '../base/form/Input';
 
 export default class PantryItem extends Component {
     constructor(props) {
         super(props);
 
-        let expiration = this.props.item.expiration? this.props.item.expiration : new Date();
+        let expiration = this.props.item.expiration ? this.props.item.expiration : new Date();
 
         this.state = {
             expiration,
-            name: this.props.item.name
+            name: this.props.item.name || ''
         };
     }
 
@@ -39,7 +40,7 @@ export default class PantryItem extends Component {
                     <label className="pantry-item__form-label">
                         Product name
 
-                        <input type="text" className="pantry-item__form-input" defaultValue={this.state.name} onChange={evt => this.onNameChange(evt.target.value)} />
+                        <Input value={this.state.name} onChange={newValue => this.onNameChange(newValue)} />
                     </label>
 
 

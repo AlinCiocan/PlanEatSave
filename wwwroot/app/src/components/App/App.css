@@ -293,4 +293,13 @@ body {
   outline: none;
   cursor: pointer; }
 
+.pes-form-input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 35px;
+  border-radius: 3px;
+  border: 1px solid darkslategrey;
+  margin-top: 5px;
+  padding: 8px 10px; }
+
 /*# sourceMappingURL=App.css.map */
