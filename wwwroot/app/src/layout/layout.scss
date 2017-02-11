@@ -1,10 +1,9 @@
 @import '../../node_modules/reset-css/_reset';
-
 @import 'colors';
 @import 'fonts';
 
 html {
-    font-family: 'Roboto', sans-serif;;
+    font-family: $primaryFont;
     height: 100%;
 }
 

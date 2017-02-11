@@ -44,7 +44,7 @@ table {
   border-spacing: 0; }
 
 html {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   height: 100%; }
 
 body {
@@ -67,7 +67,8 @@ body {
   border-radius: 3px;
   border: 1px solid #c0c0c0;
   margin-top: 5px;
-  padding: 8px 10px; }
+  padding: 8px 10px;
+  font-family: "Roboto", sans-serif; }
 
 .pes-form-input, .ingredients__item-input {
   height: 35px; }
