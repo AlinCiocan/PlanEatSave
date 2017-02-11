@@ -87,6 +87,7 @@ class Ingredients extends Component {
         return (
             <div key={ingredient.id} className="ingredients__item">
                 <input
+                    className="ingredients__item-input"
                     type="text"
                     placeholder="Add new ingredient"
                     value={ingredient.name}

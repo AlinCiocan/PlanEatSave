@@ -77,6 +77,14 @@
 }
 
 .ingredients {
+    &__item {
+        display: flex;
+    }
+
+    &__item-input {
+        @extend .pes-form-input;
+    }
+
     &__remove-button {
         border: none;
         background: none;
