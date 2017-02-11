@@ -63,12 +63,15 @@ body {
 
 .pes-form-textarea, .pes-form-input, .ingredients__item-input {
   width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
   border-radius: 3px;
   border: 1px solid #c0c0c0;
   margin-top: 5px;
   padding: 8px 10px;
-  font-family: "Roboto", sans-serif; }
+  font-family: "Roboto", sans-serif;
+  outline: none;
+  resize: none; }
 
 .pes-form-input, .ingredients__item-input {
   height: 35px; }
@@ -213,25 +216,14 @@ body {
 
 .pantry-remove-item {
   background: #ffffff;
-  height: 210px;
-  width: 290px;
-  position: absolute;
-  top: 50%;
-  margin-top: -105px;
-  left: 50%;
-  margin-left: -145px;
-  border: 2px solid #f3f4f6; }
-  .pantry-remove-item__container {
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 48px; }
-  .pantry-remove-item__title {
-    font-size: 16px;
-    letter-spacing: 2.24px;
-    text-align: center;
-    font-weight: bold;
-    color: #323f40;
-    margin-bottom: 50px; }
+  border: 2px solid #f3f4f6;
+  width: .pantry-remove-item __title;
+    width-font-size: 16px;
+    width-letter-spacing: 2.24px;
+    width-text-align: center;
+    width-font-weight: bold;
+    width-color: #323f40;
+    width-margin-bottom: 50px; }
   .pantry-remove-item__buttons {
     text-align: center; }
   .pantry-remove-item__button {

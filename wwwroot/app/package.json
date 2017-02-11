@@ -16,7 +16,9 @@
     "reset-css": "^2.2.0",
     "superagent": "^2.3.0",
     "uuid": "^3.0.1",
-    "classnames": "^2.2.5"
+    "classnames": "^2.2.5",
+    "react-modal": "^1.6.5",
+    "react-textarea-autosize": "^4.0.5"
   },
   "scripts": {
     "sass": "node-sass \"src\" -o \"src\" --watch",

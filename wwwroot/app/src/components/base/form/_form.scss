@@ -4,12 +4,15 @@
 
 .pes-form-textarea {
     width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
     border-radius: 3px;
     border: 1px solid $pinkishGrey;
     margin-top: 5px;
     padding: 8px 10px;
     font-family: $primaryFont;
+    outline: none;
+    resize: none;
 }
 
 .pes-form-input {
