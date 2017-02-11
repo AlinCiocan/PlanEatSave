@@ -1,25 +1,19 @@
 import React from 'react';
 import Ingredients from './Ingredients';
-
+import InputGroup from '../base/form/InputGroup';
 
 const Recipe = (props) => {
     const {recipe, onChange} = props;
 
     return (
         <div className="my-recipe">
-            <div className="my-recipe__recipe-name">
-                <label className="my-recipe__recipe-name-label">
-                    Recipe name
 
-                        <input
-                        value={recipe.name}
-                        onChange={evt => onChange({ ...recipe, name: evt.target.value })}
-                        className="my-recipe__recipe-name-input"
-                        type="text"
-                        placeholder="Add name" />
-                </label>
-
-            </div>
+            <InputGroup
+                label="Recipe name"
+                value={recipe.name}
+                onChange={name => onChange({ ...recipe, name })}
+                placeholder="Add name"
+            />
 
 
             <Ingredients

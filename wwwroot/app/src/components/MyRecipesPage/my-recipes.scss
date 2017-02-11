@@ -1,16 +1,7 @@
 .my-recipe {
-    &__recipe-name,
     &__ingredients {
-        margin-bottom: 20px;
+        margin-bottom: 30px;
     }
-
-
-
-    &__recipe-name-input {
-        display: block;
-        width: 100%;
-    }
-
 
     &__preparation-textarea {
         display: block;

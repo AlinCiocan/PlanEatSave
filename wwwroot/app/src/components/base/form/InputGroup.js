@@ -8,7 +8,8 @@ const InputGroup = (props) => {
                 {props.label}
                 <Input 
                     value={props.value} 
-                    onChange={props.onChange} />
+                    onChange={props.onChange}
+                    placeholder={props.placeholder} />
             </label>
         </div>
     );
