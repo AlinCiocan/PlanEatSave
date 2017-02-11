@@ -51,6 +51,7 @@
 }
 
 .pantry-item {
+    // TODO: refactor datepicker (it is mostly duplicate from base/form/input)
     &__form-group {
         margin-bottom: 30px;
     }
@@ -58,13 +59,13 @@
     &__form-label {
         margin-bottom: 10px;
     }
-
+    
     &__form-input {
         width: 100%;
         box-sizing: border-box;
         height: 35px;
         border-radius: 3px;
-        border: 1px solid darkslategrey;
+        border: 1px solid $pinkishGrey;
         margin-top: 5px;
         padding: 8px 10px;
     }

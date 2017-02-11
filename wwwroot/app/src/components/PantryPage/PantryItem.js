@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PikadayWrapper from '../../lib-components/PikadayWrapper/PikadayWrapper';
-import Input from '../base/form/Input';
+import InputGroup from '../base/form/InputGroup';
 
 export default class PantryItem extends Component {
     constructor(props) {
@@ -36,15 +36,10 @@ export default class PantryItem extends Component {
     render() {
         return (
             <div>
-                <div className="pantry-item__form-group">
-                    <label className="pantry-item__form-label">
-                        Product name
-
-                        <Input value={this.state.name} onChange={newValue => this.onNameChange(newValue)} />
-                    </label>
-
-
-                </div>
+                <InputGroup
+                    label="Product name"
+                    value={this.state.name}
+                    onChange={newValue => this.onNameChange(newValue)} />
 
                 <div className="pantry-item__form-group">
                     <label className="pantry-item__form-label">
