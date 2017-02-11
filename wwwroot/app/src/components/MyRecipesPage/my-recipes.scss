@@ -9,7 +9,6 @@
     }
 }
 
-
 .recipes-list {
     &__title {
         font-size: 16px;
@@ -90,5 +89,9 @@
         background: none;
         outline: none;
         cursor: pointer;
+    }
+
+    &__remove-button--not-visible {
+        visibility: hidden;
     }
 }

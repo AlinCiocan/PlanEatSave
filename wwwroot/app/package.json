@@ -15,7 +15,8 @@
     "react-router": "^3.0.0",
     "reset-css": "^2.2.0",
     "superagent": "^2.3.0",
-    "uuid": "^3.0.1"
+    "uuid": "^3.0.1",
+    "classnames": "^2.2.5"
   },
   "scripts": {
     "sass": "node-sass \"src\" -o \"src\" --watch",

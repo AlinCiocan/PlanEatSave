@@ -61,14 +61,16 @@ body {
 .pes-form-group {
   margin-bottom: 30px; }
 
-.pes-form-input, .ingredients__item-input {
+.pes-form-textarea, .pes-form-input, .ingredients__item-input {
   width: 100%;
   box-sizing: border-box;
-  height: 35px;
   border-radius: 3px;
   border: 1px solid #c0c0c0;
   margin-top: 5px;
   padding: 8px 10px; }
+
+.pes-form-input, .ingredients__item-input {
+  height: 35px; }
 
 .pes-form-label {
   margin-bottom: 10px; }
@@ -306,5 +308,7 @@ body {
   background: none;
   outline: none;
   cursor: pointer; }
+.ingredients__remove-button--not-visible {
+  visibility: hidden; }
 
 /*# sourceMappingURL=App.css.map */

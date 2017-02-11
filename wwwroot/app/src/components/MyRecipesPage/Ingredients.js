@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import uuid from 'uuid';
 import RemoveIcon from '../base/icons/RemoveIcon';
 import Label from '../base/form/Label';
+import classNames from 'classnames';
 
 const ENTER_KEY = 13;
 const UP_ARROW_KEY = 38;
@@ -75,12 +76,20 @@ class Ingredients extends Component {
     }
 
     renderRemoveButton(ingredient) {
-        if (ingredient.canBeDeleted) {
-            return (
-                <button className="ingredients__remove-button" onClick={() => this.onItemRemove(ingredient)}> <RemoveIcon /> </button>
-            );
-        }
-        return null;
+        const cannotBeDeleted = !ingredient.canBeDeleted;
+        const buttonClasses = classNames({
+            "ingredients__remove-button": true,
+            "ingredients__remove-button--not-visible": cannotBeDeleted
+        });
+
+        return (
+            <button
+                className={buttonClasses}
+                onClick={() => this.onItemRemove(ingredient)}
+            >
+                <RemoveIcon />
+            </button>
+        );
     }
 
     renderItem(ingredient) {

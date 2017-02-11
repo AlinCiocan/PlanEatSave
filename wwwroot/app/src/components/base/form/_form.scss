@@ -2,16 +2,21 @@
     margin-bottom: 30px;
 }
 
-.pes-form-input {
+.pes-form-textarea {
     width: 100%;
     box-sizing: border-box;
-    height: 35px;
     border-radius: 3px;
     border: 1px solid $pinkishGrey;
     margin-top: 5px;
     padding: 8px 10px;
 }
 
+.pes-form-input {
+    @extend .pes-form-textarea;
+    height: 35px;
+}
+
 .pes-form-label {
     margin-bottom: 10px;
 }
+
