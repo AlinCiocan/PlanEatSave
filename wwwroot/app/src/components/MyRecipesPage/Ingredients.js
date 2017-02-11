@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
 import RemoveIcon from '../base/icons/RemoveIcon';
-
+import Label from '../base/form/Label';
 
 const ENTER_KEY = 13;
 const UP_ARROW_KEY = 38;
@@ -94,7 +94,7 @@ class Ingredients extends Component {
                     onFocus={() => this.onItemFocus(ingredient)}
                     ref={ingredient.id}
                     onKeyDown={evt => this.onIngredientKeyDown(evt, ingredient)} />
-                    {this.renderRemoveButton(ingredient)}
+                {this.renderRemoveButton(ingredient)}
             </div>
         );
     }
@@ -115,9 +115,7 @@ class Ingredients extends Component {
 
         return (
             <div className={this.props.className}>
-                <label>
-                    Ingredients
-                    </label>
+                <Label text="Ingredients" />
                 <div className="ingredients__list">
                     {this.renderItems()}
                 </div>

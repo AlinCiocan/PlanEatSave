@@ -15,7 +15,6 @@ const Recipe = (props) => {
                 placeholder="Add name"
             />
 
-
             <Ingredients
                 className="my-recipe__ingredients"
                 onChange={newIngredients => onChange({ ...recipe, ingredients: newIngredients })}
