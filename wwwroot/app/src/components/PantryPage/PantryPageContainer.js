@@ -4,6 +4,7 @@ import PantryPage from './PantryPage';
 import { ApiRequest } from '../../services/ApiRequest';
 import TopBar from '../TopBar/TopBar';
 import Routes from '../../services/Routes';
+import ReactModal from 'react-modal';
 
 const DAYS_EXPIRES_SOON = 30;
 
@@ -99,34 +100,39 @@ export default class PantryPageContainer extends Component {
     }
 
     renderRemoveWindow() {
-        if (!this.state.removeItemId) {
-            return null;
-        }
+        const isAnItemToBeDeleted = !!this.state.removeItemId;
+
+        const modalTitle = 'Remove this product from the pantry?';
 
         return (
-            <div className="modal-container">
-                <div className="pantry-remove-item">
-                    <div className="pantry-remove-item__container">
-                        <p className="pantry-remove-item__title">
-                            Remove this product from the pantry?
-                            </p>
+            <ReactModal
+                isOpen={isAnItemToBeDeleted}
+                contentLabel={modalTitle}
+                className="pantry-remove-item"
+                overlayClassName="pantry-remove-item-overlay"
+            >
+                <div className="pantry-remove-item__container">
+                    <p className="pantry-remove-item__title">
+                        {modalTitle}
+                    </p>
 
-                        <div className="pantry-remove-item__buttons">
-                            <button
-                                className="pantry-remove-item__button"
-                                onClick={() => this.setState({ removeItemId: null })}>
-                                Cancel
-                                </button>
+                    <div className="pantry-remove-item__buttons">
+                        <button
+                            className="pantry-remove-item__button"
+                            onClick={() => this.setState({ removeItemId: null })}
+                        >
+                            Cancel
+                            </button>
 
-                            <button
-                                className="pantry-remove-item__button pantry-remove-item__button--gray"
-                                onClick={() => this.removeItem(this.state.removeItemId)}>
-                                Remove
-                                </button>
-                        </div>
+                        <button
+                            className="pantry-remove-item__button pantry-remove-item__button--gray"
+                            onClick={() => this.removeItem(this.state.removeItemId)}
+                        >
+                            Remove
+                            </button>
                     </div>
                 </div>
-            </div>
+            </ReactModal>
         );
     }
 
