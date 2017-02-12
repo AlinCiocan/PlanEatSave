@@ -4,7 +4,7 @@ import PantryPage from './PantryPage';
 import { ApiRequest } from '../../services/ApiRequest';
 import TopBar from '../TopBar/TopBar';
 import Routes from '../../services/Routes';
-import Modal from '../base/modal';
+import ConfirmModal from '../base/modal/ConfirmModal';
 
 const DAYS_EXPIRES_SOON = 30;
 
@@ -101,36 +101,17 @@ export default class PantryPageContainer extends Component {
 
     renderRemoveWindow() {
         const isAnItemToBeDeleted = !!this.state.removeItemId;
-
         const modalTitle = 'Remove this product from the pantry?';
 
         return (
-            <Modal
+            <ConfirmModal
                 isOpen={isAnItemToBeDeleted}
-                contentLabel={modalTitle}
-            >
-                <div className="pantry-remove-item">
-                    <p className="pantry-remove-item__title">
-                        {modalTitle}
-                    </p>
-
-                    <div className="pantry-remove-item__buttons">
-                        <button
-                            className="pantry-remove-item__button"
-                            onClick={() => this.setState({ removeItemId: null })}
-                        >
-                            Cancel
-                            </button>
-
-                        <button
-                            className="pantry-remove-item__button pantry-remove-item__button--gray"
-                            onClick={() => this.removeItem(this.state.removeItemId)}
-                        >
-                            Remove
-                            </button>
-                    </div>
-                </div>
-            </Modal>
+                title={modalTitle}
+                cancelButtonText="Cancel"
+                onCancel={() => this.setState({ removeItemId: null })}
+                actionButtonText="Remove"
+                onAction={() => this.removeItem(this.state.removeItemId)}
+            />
         );
     }
 

@@ -103,47 +103,7 @@
 
 }
 
-
 .pantry-page-container {
     position: relative;
     height: 100%;
-}
-
-.pantry-remove-item {
-    &__title {
-        font-size: 16px;
-        letter-spacing: 2.24px;        
-        text-align: center;
-        font-weight: bold;
-        color: $charcoalGrey;
-        margin-bottom: 50px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-    &__buttons {
-        text-align: center;
-    }
-
-    &__button {
-        height: 40px;
-        width: 100px;
-        border: solid 1px $warmGrey;
-        border-radius: 4px;
-        outline: none;
-        background-color: $white;
-        cursor: pointer;
-
-        font-size: 16px;
-        letter-spacing: 2.24px;                
-        text-align: center;
-        font-weight: bold;
-        color: $charcoalGrey;
-    }
-
-    &__button--gray {
-        background-color: $coolGrey;
-        color: $white;
-        margin-left: 10px;
-    }
 }

@@ -58,6 +58,24 @@ body {
   padding-left: 16px;
   padding-right: 16px; }
 
+.pes-button {
+  background-color: #8e9e99;
+  color: #ffffff;
+  height: 40px;
+  border: solid 1px #979797;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 16px;
+  font-weight: 500; }
+
+.pes-button--ghost-button {
+  background-color: #ffffff;
+  color: #323f40; }
+
 .pes-form-group {
   margin-bottom: 30px; }
 
@@ -98,6 +116,19 @@ body {
   border-radius: 2px;
   border: solid 1px #979797;
   outline: none; }
+  .pes-modal__title {
+    font-size: 16px;
+    letter-spacing: 2.24px;
+    text-align: center;
+    font-weight: bold;
+    color: #323f40;
+    margin-bottom: 50px;
+    padding-left: 20px;
+    padding-right: 20px; }
+  .pes-modal__buttons {
+    text-align: center; }
+  .pes-modal__buttons *:not(:last-child) {
+    margin-right: 20px; }
 
 .top-bar {
   width: 100%;
@@ -225,35 +256,6 @@ body {
 .pantry-page-container {
   position: relative;
   height: 100%; }
-
-.pantry-remove-item__title {
-  font-size: 16px;
-  letter-spacing: 2.24px;
-  text-align: center;
-  font-weight: bold;
-  color: #323f40;
-  margin-bottom: 50px;
-  padding-left: 20px;
-  padding-right: 20px; }
-.pantry-remove-item__buttons {
-  text-align: center; }
-.pantry-remove-item__button {
-  height: 40px;
-  width: 100px;
-  border: solid 1px #979797;
-  border-radius: 4px;
-  outline: none;
-  background-color: #ffffff;
-  cursor: pointer;
-  font-size: 16px;
-  letter-spacing: 2.24px;
-  text-align: center;
-  font-weight: bold;
-  color: #323f40; }
-.pantry-remove-item__button--gray {
-  background-color: #8e9e99;
-  color: #ffffff;
-  margin-left: 10px; }
 
 .my-recipe__ingredients {
   margin-bottom: 30px; }

@@ -21,4 +21,23 @@
     border-radius: 2px;
     border: solid 1px $warmGrey;
     outline: none;
+
+    &__title {
+        font-size: 16px;
+        letter-spacing: 2.24px;        
+        text-align: center;
+        font-weight: bold;
+        color: $charcoalGrey;
+        margin-bottom: 50px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    &__buttons {
+        text-align: center;
+    }
+
+    &__buttons *:not(:last-child) {
+        margin-right: 20px;
+    }
 }
