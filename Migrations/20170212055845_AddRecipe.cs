@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PlanEatSave.Migrations
 {
-    public partial class AddRecipes : Migration
+    public partial class AddRecipe : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,9 +22,9 @@ namespace PlanEatSave.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("MySQL:AutoIncrement", true),
-                    IngredientsJson = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Preparation = table.Column<string>(nullable: true),
+                    IngredientsJson = table.Column<string>(maxLength: 10000, nullable: true),
+                    Name = table.Column<string>(maxLength: 250, nullable: true),
+                    Preparation = table.Column<string>(maxLength: 10000, nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

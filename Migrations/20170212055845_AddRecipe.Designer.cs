@@ -8,8 +8,8 @@ using PlanEatSave.DataAceessLayer;
 namespace PlanEatSave.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170124100903_AddRecipes")]
-    partial class AddRecipes
+    [Migration("20170212055845_AddRecipe")]
+    partial class AddRecipe
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -212,11 +212,14 @@ namespace PlanEatSave.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("IngredientsJson");
+                    b.Property<string>("IngredientsJson")
+                        .HasMaxLength(10000);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(250);
 
-                    b.Property<string>("Preparation");
+                    b.Property<string>("Preparation")
+                        .HasMaxLength(10000);
 
                     b.Property<string>("UserId");
 

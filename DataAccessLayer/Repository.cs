@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using PlanEatSave.Constants;
 
 namespace PlanEatSave.DataAceessLayer
 {
@@ -31,8 +33,14 @@ namespace PlanEatSave.DataAceessLayer
     {
         public long Id { get; set; }
         public string UserId { get; set; }
+        
+        [MaxLength(RecipeConstants.NameMaxLength)]
         public string Name { get; set; }
+
+        [MaxLength(RecipeConstants.IngredientsMaxLength)]
         public string IngredientsJson { get; set; }
+
+        [MaxLength(RecipeConstants.PreparationMaxLength)]
         public string Preparation { get; set; }
     }
 
@@ -40,7 +48,7 @@ namespace PlanEatSave.DataAceessLayer
     {
         public virtual DbSet<Pantry> Pantries { get; set; }
         public virtual DbSet<PantryItem> PantryItems { get; set; }
-        public virtual DbSet<Recipe> Recipes {get; set; }
+        public virtual DbSet<Recipe> Recipes { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 

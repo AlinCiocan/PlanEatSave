@@ -3,6 +3,7 @@ import uuid from 'uuid';
 import RemoveIcon from '../base/icons/RemoveIcon';
 import Label from '../base/form/Label';
 import classNames from 'classnames';
+import { applicationSettings, recipeSettings } from '../../constants/settings';
 
 const ENTER_KEY = 13;
 const UP_ARROW_KEY = 38;
@@ -19,6 +20,10 @@ class Ingredients extends Component {
 
     onItemFocus(ingredientOnFocus) {
         if (ingredientOnFocus.canBeDeleted) {
+            return;
+        }
+
+        if (this.ingredients.length >= recipeSettings.MAX_NUMBER_OF_INGREDIENTS) {
             return;
         }
 
@@ -99,6 +104,7 @@ class Ingredients extends Component {
                     className="ingredients__item-input"
                     type="text"
                     placeholder="Add new ingredient"
+                    maxLength={applicationSettings.MAX_LENGTH_INPUT}
                     value={ingredient.name}
                     onChange={evt => this.onIngredientValueChange(ingredient, evt.target.value)}
                     onFocus={() => this.onItemFocus(ingredient)}

@@ -211,11 +211,14 @@ namespace PlanEatSave.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("IngredientsJson");
+                    b.Property<string>("IngredientsJson")
+                        .HasMaxLength(10000);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(250);
 
-                    b.Property<string>("Preparation");
+                    b.Property<string>("Preparation")
+                        .HasMaxLength(10000);
 
                     b.Property<string>("UserId");
 
