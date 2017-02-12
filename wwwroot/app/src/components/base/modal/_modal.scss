@@ -1,0 +1,24 @@
+.pes-modal-overlay {
+    background-color: rgba($charcoalGrey, 0.67);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.pes-modal {
+    background: $white;
+    position: absolute;
+
+    left: 20px;
+    right: 20px;
+    top: 100px;
+
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+    border-radius: 2px;
+    border: solid 1px $warmGrey;
+    outline: none;
+}

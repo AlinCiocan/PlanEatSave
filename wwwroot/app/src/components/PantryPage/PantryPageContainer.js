@@ -4,7 +4,7 @@ import PantryPage from './PantryPage';
 import { ApiRequest } from '../../services/ApiRequest';
 import TopBar from '../TopBar/TopBar';
 import Routes from '../../services/Routes';
-import ReactModal from 'react-modal';
+import Modal from '../base/modal';
 
 const DAYS_EXPIRES_SOON = 30;
 
@@ -105,13 +105,11 @@ export default class PantryPageContainer extends Component {
         const modalTitle = 'Remove this product from the pantry?';
 
         return (
-            <ReactModal
+            <Modal
                 isOpen={isAnItemToBeDeleted}
                 contentLabel={modalTitle}
-                className="pantry-remove-item"
-                overlayClassName="pantry-remove-item-overlay"
             >
-                <div className="pantry-remove-item__container">
+                <div className="pantry-remove-item">
                     <p className="pantry-remove-item__title">
                         {modalTitle}
                     </p>
@@ -132,7 +130,7 @@ export default class PantryPageContainer extends Component {
                             </button>
                     </div>
                 </div>
-            </ReactModal>
+            </Modal>
         );
     }
 

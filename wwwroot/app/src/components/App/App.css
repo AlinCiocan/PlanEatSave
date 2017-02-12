@@ -79,6 +79,26 @@ body {
 .pes-form-label {
   margin-bottom: 10px; }
 
+.pes-modal-overlay {
+  background-color: rgba(50, 63, 64, 0.67);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; }
+
+.pes-modal {
+  background: #ffffff;
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  top: 100px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  border-radius: 2px;
+  border: solid 1px #979797;
+  outline: none; }
+
 .top-bar {
   width: 100%;
   height: 60px;
@@ -206,59 +226,34 @@ body {
   position: relative;
   height: 100%; }
 
-.modal-container {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(115, 123, 121, 0.5);
-  position: absolute;
-  top: 0;
-  left: 0; }
-
-.pantry-remove-item-overlay {
-  background-color: rgba(50, 63, 64, 0.67);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0; }
-
-.pantry-remove-item {
-  background: #ffffff;
-  position: absolute;
-  left: 40px;
-  right: 40px;
-  top: 100px;
-  padding: 44px;
-  border-radius: 2px;
+.pantry-remove-item__title {
+  font-size: 16px;
+  letter-spacing: 2.24px;
+  text-align: center;
+  font-weight: bold;
+  color: #323f40;
+  margin-bottom: 50px;
+  padding-left: 20px;
+  padding-right: 20px; }
+.pantry-remove-item__buttons {
+  text-align: center; }
+.pantry-remove-item__button {
+  height: 40px;
+  width: 100px;
   border: solid 1px #979797;
-  outline: none; }
-  .pantry-remove-item__title {
-    font-size: 16px;
-    letter-spacing: 2.24px;
-    text-align: center;
-    font-weight: bold;
-    color: #323f40;
-    margin-bottom: 50px; }
-  .pantry-remove-item__buttons {
-    text-align: center; }
-  .pantry-remove-item__button {
-    height: 40px;
-    width: 100px;
-    border: solid 1px #979797;
-    border-radius: 4px;
-    outline: none;
-    background-color: #ffffff;
-    cursor: pointer;
-    margin-right: 10px;
-    margin-left: 10px;
-    font-size: 16px;
-    letter-spacing: 2.24px;
-    text-align: center;
-    font-weight: bold;
-    color: #323f40; }
-  .pantry-remove-item__button--gray {
-    background-color: #8e9e99;
-    color: #ffffff; }
+  border-radius: 4px;
+  outline: none;
+  background-color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+  letter-spacing: 2.24px;
+  text-align: center;
+  font-weight: bold;
+  color: #323f40; }
+.pantry-remove-item__button--gray {
+  background-color: #8e9e99;
+  color: #ffffff;
+  margin-left: 10px; }
 
 .my-recipe__ingredients {
   margin-bottom: 30px; }
