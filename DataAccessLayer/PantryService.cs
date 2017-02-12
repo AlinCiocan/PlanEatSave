@@ -46,9 +46,9 @@ namespace PlanEatSave.DataAceessLayer
                 return false;
             }
 
-            _context.Entry(item).State = item.Id > 0 ? 
+            _context.Entry(item).State = item.Id > 0 ?
                                    EntityState.Modified :
-                                   EntityState.Added; 
+                                   EntityState.Added;
 
             await _context.SaveChangesAsync();
             return true;
@@ -57,14 +57,14 @@ namespace PlanEatSave.DataAceessLayer
         public async Task<PantryItem> GetItemById(string userId, long id)
         {
             var pantryItem = await _context.PantryItems.FirstOrDefaultAsync(item => item.Id == id);
-            if(pantryItem == null)
+            if (pantryItem == null)
             {
                 return null;
             }
-            
+
             var pantry = await _context.Pantries.FirstOrDefaultAsync(p => p.Id == pantryItem.PantryId);
 
-            if(pantry.UserId != userId) 
+            if (pantry.UserId != userId)
             {
                 throw new ForbiddenAccessException();
             }
@@ -72,17 +72,17 @@ namespace PlanEatSave.DataAceessLayer
             return pantryItem;
         }
 
-        internal async Task<bool> RemoveItemById(string userId, long id)
+        public async Task<bool> RemoveItemById(string userId, long id)
         {
-           var pantryItem = await _context.PantryItems.FirstOrDefaultAsync(item => item.Id == id);
-            if(pantryItem == null)
+            var pantryItem = await _context.PantryItems.FirstOrDefaultAsync(item => item.Id == id);
+            if (pantryItem == null)
             {
                 return false;
             }
-            
+
             var pantry = await _context.Pantries.FirstOrDefaultAsync(p => p.Id == pantryItem.PantryId);
 
-            if(pantry.UserId != userId) 
+            if (pantry.UserId != userId)
             {
                 throw new ForbiddenAccessException();
             }

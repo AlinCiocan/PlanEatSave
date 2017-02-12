@@ -7,6 +7,8 @@ using Newtonsoft.Json;
 using PlanEatSave.DataAceessLayer;
 using PlanEatSave.Exceptions;
 using PlanEatSave.Models;
+using PlanEatSave.Models.PantryModels;
+using PlanEatSave.Models.Responses;
 using PlanEatSave.Utils;
 using PlanEatSave.Utils.Extensions;
 
@@ -103,10 +105,10 @@ namespace PlanEatSave.Controllers
             {
                 if (await _pantryService.RemoveItemById(UserId, id))
                 {
-                    return Ok(new PantryRemoveResponse { IsSuccess = true });
+                    return Ok(new RemoveResponse { IsSuccess = true });
                 }
 
-                return Ok(new PantryRemoveResponse { IsSuccess = false, Message = "This item does not exist" });
+                return Ok(new RemoveResponse { IsSuccess = false, Message = "This item does not exist" });
             }
             catch (ForbiddenAccessException ex)
             {

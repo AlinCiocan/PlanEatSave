@@ -7,8 +7,8 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using PlanEatSave.DataAceessLayer;
 using PlanEatSave.Exceptions;
-using PlanEatSave.Models;
 using PlanEatSave.Models.RecipeModels;
+using PlanEatSave.Models.Responses;
 using PlanEatSave.Utils;
 using PlanEatSave.Utils.Extensions;
 
@@ -88,6 +88,31 @@ namespace PlanEatSave.Controllers
             {
                 _logger.LogError(LoggingEvents.RECIPES_RETRIEVE_ALL, ex, $"Retrieve recipes failed; user id - {UserId}");
                 return this.InternalServerError();
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> RemoveRecipe(long id)
+        {
+            try
+            {
+                if (await _recipeService.RemoveRecipeById(UserId, id))
+                {
+                    return Ok(new RemoveResponse { IsSuccess = true });
+                }
+
+                return Ok(new RemoveResponse { IsSuccess = false, Message = "This recipe does not exist" });
+            }
+            catch (ForbiddenAccessException ex)
+            {
+                _logger.LogDebug(LoggingEvents.PANTRY_REMOVE_ITEM, ex, $"The user with id - {UserId} from IP - {HttpContext.Connection.RemoteIpAddress} tried to remove a recipe that was not in his pantry.");
+                return Forbid("You are not allowed to remove this recipe");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(LoggingEvents.RECIPES_REMOVE_RECIPE, ex, $"Remove recipe failed; user id - {UserId}; recipe id - {id}");
+                return this.InternalServerError();
+
             }
         }
 

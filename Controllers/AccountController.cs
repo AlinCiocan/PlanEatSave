@@ -15,6 +15,7 @@ using System.Security.Claims;
 using Microsoft.Extensions.Logging;
 using PlanEatSave.Models.UserModels;
 using AutoMapper;
+using PlanEatSave.Models.LoginModels;
 
 namespace PlanEatSave.Controllers
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PlanEatSave.Models
+namespace PlanEatSave.Models.PantryModels
 {
     public class PantryViewModel
     {
@@ -18,11 +18,4 @@ namespace PlanEatSave.Models
         public DateTime Expiration { get; set; }
         public long PantryId { get; set; }
     }
-
-    public class PantryRemoveResponse
-    {
-        public bool IsSuccess { get; set; }
-        public string Message { get; set; }    
-    }
-
 }

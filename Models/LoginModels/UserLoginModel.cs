@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace PlanEatSave.Models
+namespace PlanEatSave.Models.LoginModels
 {
     public class UserLoginModel
     {
