@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
+import classNames from 'classnames';
 import RemoveIcon from '../base/icons/RemoveIcon';
 import Label from '../base/form/Label';
-import classNames from 'classnames';
 import { applicationSettings, recipeSettings } from '../../constants/settings';
+import IconButton from '../base/buttons/IconButton';
 
 const ENTER_KEY = 13;
 const UP_ARROW_KEY = 38;
@@ -83,17 +84,16 @@ class Ingredients extends Component {
     renderRemoveButton(ingredient) {
         const cannotBeDeleted = !ingredient.canBeDeleted;
         const buttonClasses = classNames({
-            "ingredients__remove-button": true,
             "ingredients__remove-button--not-visible": cannotBeDeleted
         });
 
         return (
-            <button
+            <IconButton
                 className={buttonClasses}
                 onClick={() => this.onItemRemove(ingredient)}
             >
                 <RemoveIcon />
-            </button>
+            </IconButton>
         );
     }
 

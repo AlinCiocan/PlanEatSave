@@ -77,6 +77,12 @@ body {
   background-color: #ffffff;
   color: #323f40; }
 
+.pes-icon-button {
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer; }
+
 .pes-form-group {
   margin-bottom: 30px; }
 
@@ -308,11 +314,6 @@ body {
 
 .ingredients__item {
   display: flex; }
-.ingredients__remove-button {
-  border: none;
-  background: none;
-  outline: none;
-  cursor: pointer; }
 .ingredients__remove-button--not-visible {
   visibility: hidden; }
 

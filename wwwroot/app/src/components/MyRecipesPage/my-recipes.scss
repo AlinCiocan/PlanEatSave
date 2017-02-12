@@ -84,13 +84,6 @@
         @extend .pes-form-input;
     }
 
-    &__remove-button {
-        border: none;
-        background: none;
-        outline: none;
-        cursor: pointer;
-    }
-
     &__remove-button--not-visible {
         visibility: hidden;
     }

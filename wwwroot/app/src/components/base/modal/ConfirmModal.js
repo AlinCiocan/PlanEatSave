@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from './Modal';
-import Button from '../button/Button';
+import Button from '../buttons/Button';
 
 const ConfirmModal = (props) => {
     return (
