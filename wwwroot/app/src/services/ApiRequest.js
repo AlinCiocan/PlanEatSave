@@ -113,4 +113,8 @@ export class ApiRequest {
         return authPutRequest('recipes/editRecipe')
             .send(recipe);
     }
+
+    static removeRecipe(recipeId) {
+        return authDeleteRequest(`recipes/removeRecipe?id=${recipeId}`);
+    }
 }

@@ -9,8 +9,12 @@ const RecipesList = (props) => {
 
             {props.recipes.map(recipe => {
                 return (
-                    <div key={recipe.id} onClick={() => props.onRecipeClick(recipe.id)}> 
-                        <RecipeItem recipe={recipe} />
+                    <div key={recipe.id}>
+                        <RecipeItem
+                            recipe={recipe}
+                            onRecipeClick={props.onRecipeClick}
+                            onRemove={recipeId => props.onRecipeRemove(recipeId)}
+                        />
                     </div>
                 );
             })}

@@ -99,7 +99,7 @@ export default class PantryPageContainer extends Component {
             router={this.props.router} />);
     }
 
-    renderRemoveWindow() {
+    renderRemoveModal() {
         const isAnItemToBeDeleted = !!this.state.removeItemId;
         const modalTitle = 'Remove this item from the pantry?';
 
@@ -124,7 +124,7 @@ export default class PantryPageContainer extends Component {
                     {this.renderPantry()}
                 </div>
 
-                {this.renderRemoveWindow()}
+                {this.renderRemoveModal()}
             </div>
         );
     }

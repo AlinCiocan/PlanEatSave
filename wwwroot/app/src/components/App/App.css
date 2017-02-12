@@ -279,8 +279,7 @@ body {
   height: 120px;
   width: 100%;
   position: relative;
-  margin-bottom: 10px;
-  cursor: pointer; }
+  margin-bottom: 10px; }
   .recipe-item__name {
     background-color: #6d7977;
     color: white;
@@ -291,6 +290,17 @@ body {
     font-size: 14px;
     box-sizing: border-box;
     font-weight: 500; }
+  .recipe-item__clickable-area {
+    position: absolute;
+    width: calc(100% - 50px);
+    height: 100%;
+    cursor: pointer; }
+  .recipe-item__remove-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 40px;
+    width: 40px; }
 
 .view-recipe__title {
   font-size: 16px;
