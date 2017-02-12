@@ -59,9 +59,10 @@ body {
   padding-right: 16px; }
 
 .pes-button {
+  height: 40px;
+  min-width: 100px;
   background-color: #8e9e99;
   color: #ffffff;
-  height: 40px;
   border: solid 1px #979797;
   border-radius: 4px;
   outline: none;

@@ -101,7 +101,7 @@ export default class PantryPageContainer extends Component {
 
     renderRemoveWindow() {
         const isAnItemToBeDeleted = !!this.state.removeItemId;
-        const modalTitle = 'Remove this product from the pantry?';
+        const modalTitle = 'Remove this item from the pantry?';
 
         return (
             <ConfirmModal

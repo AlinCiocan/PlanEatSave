@@ -4,6 +4,7 @@ import TopBar from '../TopBar/TopBar';
 import { ApiRequest } from '../../services/ApiRequest';
 import Routes from '../../services/Routes';
 import PantryItem from './PantryItem';
+import EmptyItemNameAlert from './EmptyItemNameAlert';
 
 export default class PantryUpdateItem extends Component {
 
@@ -13,7 +14,8 @@ export default class PantryUpdateItem extends Component {
         this.state = {
             message: this.getLoadingItemMsg(),
             isItemVisible: false,
-            item: {}
+            item: {},
+            shouldDisplayIsItemNameEmptyAlert: false
         };
 
         this.onItemChange = this.onItemChange.bind(this);
@@ -42,9 +44,13 @@ export default class PantryUpdateItem extends Component {
     }
 
     saveItem() {
-        this.setState({ message: this.getLoadingMsg(), isItemVisible: false });
+        if (!this.state.item.name) {
+            this.setState({ shouldDisplayIsItemNameEmptyAlert: true });
+            return;
+        }
 
-        let item = Object.assign({}, this.state.item, { pantryId: this.props.params.pantryId, id: this.props.params.itemId });
+        this.setState({ message: this.getLoadingMsg(), isItemVisible: false });
+        let item = { ...this.state.item, pantryId: this.props.params.pantryId, id: this.props.params.itemId };
 
         ApiRequest
             .updatePantryItem(item)
@@ -104,6 +110,11 @@ export default class PantryUpdateItem extends Component {
 
                     {this.renderItemForm()}
                 </div>
+
+                <EmptyItemNameAlert
+                    isOpen={this.state.shouldDisplayIsItemNameEmptyAlert}
+                    onAction={() => this.setState({ shouldDisplayIsItemNameEmptyAlert: false })}
+                />
             </div>
         );
     }
