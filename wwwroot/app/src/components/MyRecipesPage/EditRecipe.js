@@ -4,6 +4,7 @@ import RecipeService from '../../services/RecipeService';
 import Routes from '../../services/Routes';
 import TopBar from '../TopBar/TopBar';
 import Recipe from './Recipe';
+import EmptyRecipeNameAlert from './EmptyRecipeNameAlert';
 
 export default class EditRecipe extends Component {
     constructor(props) {
@@ -12,7 +13,8 @@ export default class EditRecipe extends Component {
         this.state = {
             recipe: null,
             isRecipeVisible: true,
-            message: null
+            message: null,
+            shouldDisplayIsRecipeNameEmptyAlert: false
         };
     }
 
@@ -53,6 +55,11 @@ export default class EditRecipe extends Component {
     }
 
     editRecipe() {
+        if (!this.state.recipe.name) {
+            this.setState({ shouldDisplayIsRecipeNameEmptyAlert: true });
+            return;
+        }
+
         this.setState({ isRecipeVisible: false, message: this.getLoadingMsgForUpdating() });
 
         const ingredients = this.state.recipe.ingredients
@@ -60,8 +67,6 @@ export default class EditRecipe extends Component {
             .filter(ingredientName => ingredientName.trim().length > 0);
 
         const recipe = { ...this.state.recipe, ingredients };
-
-
         ApiRequest
             .editRecipe(recipe)
             .then(
@@ -104,6 +109,11 @@ export default class EditRecipe extends Component {
                     {this.state.message}
                     {this.renderRecipe()}
                 </div>
+
+                <EmptyRecipeNameAlert
+                    isOpen={this.state.shouldDisplayIsRecipeNameEmptyAlert}
+                    onAction={() => this.setState({ shouldDisplayIsRecipeNameEmptyAlert: false })}
+                />
             </div>
         );
     }

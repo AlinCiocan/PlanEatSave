@@ -3,6 +3,7 @@ import { ApiRequest } from '../../services/ApiRequest';
 import Routes from '../../services/Routes';
 import TopBar from '../TopBar/TopBar';
 import Recipe from './Recipe';
+import EmptyRecipeNameAlert from './EmptyRecipeNameAlert';
 
 export default class AddNewRecipe extends Component {
 
@@ -12,7 +13,8 @@ export default class AddNewRecipe extends Component {
         this.state = {
             recipe: this.createEmptyRecipe(),
             isRecipeVisible: true,
-            message: null
+            message: null,
+            shouldDisplayIsRecipeNameEmptyAlert: false
         };
     }
 
@@ -35,6 +37,11 @@ export default class AddNewRecipe extends Component {
     }
 
     saveRecipe() {
+        if (!this.state.recipe.name) {
+            this.setState({ shouldDisplayIsRecipeNameEmptyAlert: true });
+            return;
+        }
+
         this.setState({ isRecipeVisible: false, message: this.getLoadingMsg() });
 
         const ingredients = this.state.recipe.ingredients
@@ -42,8 +49,6 @@ export default class AddNewRecipe extends Component {
             .filter(ingredientName => ingredientName.trim().length > 0);
 
         const recipe = { ...this.state.recipe, ingredients };
-
-
         ApiRequest
             .saveRecipe(recipe)
             .then(
@@ -80,9 +85,13 @@ export default class AddNewRecipe extends Component {
                     saveButton saveButtonOnClick={() => this.saveRecipe()} />
                 <div className="row">
                     {this.state.message}
-
                     {this.renderRecipe()}
                 </div>
+
+                <EmptyRecipeNameAlert
+                    isOpen={this.state.shouldDisplayIsRecipeNameEmptyAlert}
+                    onAction={() => this.setState({ shouldDisplayIsRecipeNameEmptyAlert: false })}
+                />
             </div>
         );
     }

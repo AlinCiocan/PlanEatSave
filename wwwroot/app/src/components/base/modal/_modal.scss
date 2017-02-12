@@ -24,13 +24,12 @@
 
     &__title {
         font-size: 16px;
-        letter-spacing: 2.24px;        
         text-align: center;
-        font-weight: bold;
-        color: $charcoalGrey;
+        @include font-light-bold();
         margin-bottom: 50px;
         padding-left: 20px;
         padding-right: 20px;
+        color: $charcoalGrey;
     }
 
     &__buttons {
