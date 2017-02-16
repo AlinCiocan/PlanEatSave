@@ -14,7 +14,8 @@ export default class MyRecipesPageContainer extends Component {
         this.state = {
             recipes: null,
             message: null,
-            recipeIdToBeRemoved: null
+            recipeIdToBeRemoved: null,
+            searchTerm: ''
         };
     }
 
@@ -50,16 +51,32 @@ export default class MyRecipesPageContainer extends Component {
         );
     }
 
+    onSearch(searchTerm) {
+        this.setState({ searchTerm });
+    }
+
+    getSearchedRecipes() {
+        const searchTerm = this.state.searchTerm.trim().toLocaleLowerCase();
+        if (!searchTerm) {
+            return this.state.recipes;
+        }
+
+        return this.state.recipes.filter(recipe => recipe.name.toLocaleLowerCase().indexOf(searchTerm) >= 0);
+    }
+
     renderRecipes() {
         if (this.state.recipes !== null) {
+            const searchedRecipes = this.getSearchedRecipes();
+
             return (
                 <div>
                     <div className="my-recipe-container__search">
-                        <SearchInput />
+                        <SearchInput onChange={searchTerm => this.onSearch(searchTerm)} />
                     </div>
+
                     <RecipesList
                         title="Recipes"
-                        recipes={this.state.recipes}
+                        recipes={searchedRecipes}
                         onRecipeClick={recipeId => this.props.router.push(Routes.viewRecipe(recipeId))}
                         onRecipeRemove={recipeId => this.setState({ recipeIdToBeRemoved: recipeId })}
                     />

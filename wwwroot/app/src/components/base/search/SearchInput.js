@@ -1,15 +1,23 @@
 import React from 'react';
 import SearchIcon from '../icons/SearchIcon';
+import IconButton from '../buttons/IconButton';
 
-const SearchInput = (props) => {
-    return (
-        <div className="pes-search">
-            <input
-                type="text"
-                className="pes-search__input" />
-            <SearchIcon />
-        </div>
-    );
+class SearchInput extends React.Component {
+    render() {
+        return (
+            <div className="pes-search">
+                <input
+                    type="text"
+                    className="pes-search__input"
+                    ref={input => this.input = input}
+                    onChange={evt => this.props.onChange(evt.target.value)} />
+                <IconButton
+                    onClick={() => this.props.onChange(this.input.value)}>
+                    <SearchIcon />
+                </IconButton>
+            </div>
+        );
+    }
 };
 
 export default SearchInput;
