@@ -1,0 +1,18 @@
+.pes-search {
+    border: 1px solid black;
+    border-radius: 18px;
+    border: solid 1px $pinkishGrey;
+    padding-left: 18px;
+    padding-right: 9px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+
+    &__input {
+        border: none;
+        outline: none;
+        flex-grow: 1;
+
+        font-size: 14px;
+    }
+}

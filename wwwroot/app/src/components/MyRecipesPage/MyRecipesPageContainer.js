@@ -5,6 +5,7 @@ import RecipeService from '../../services/RecipeService';
 import TopBar from '../TopBar/TopBar';
 import RecipesList from './RecipesList';
 import ConfirmModal from '../base/modal/ConfirmModal';
+import SearchInput from '../base/search/SearchInput';
 
 export default class MyRecipesPageContainer extends Component {
     constructor(props) {
@@ -52,12 +53,17 @@ export default class MyRecipesPageContainer extends Component {
     renderRecipes() {
         if (this.state.recipes !== null) {
             return (
-                <RecipesList
-                    title="Recipes"
-                    recipes={this.state.recipes}
-                    onRecipeClick={recipeId => this.props.router.push(Routes.viewRecipe(recipeId))}
-                    onRecipeRemove={recipeId => this.setState({ recipeIdToBeRemoved: recipeId })}
-                />
+                <div>
+                    <div className="my-recipe-container__search">
+                        <SearchInput />
+                    </div>
+                    <RecipesList
+                        title="Recipes"
+                        recipes={this.state.recipes}
+                        onRecipeClick={recipeId => this.props.router.push(Routes.viewRecipe(recipeId))}
+                        onRecipeRemove={recipeId => this.setState({ recipeIdToBeRemoved: recipeId })}
+                    />
+                </div>
             );
         }
 
