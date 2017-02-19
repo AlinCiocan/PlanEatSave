@@ -65,6 +65,7 @@
         font-size: 16px;
         @include font-light-bold();
         margin-bottom: 10px;
+        word-wrap: break-word;
     }
 
     &__img-container {
@@ -76,7 +77,7 @@
 
     &__ingredients {
         margin-bottom: 20px;
-        
+        word-wrap: break-word;
     }
 
     &__ingredients-list {
@@ -93,6 +94,11 @@
     &__preparation-title {
         @include font-bold();
         margin-bottom: 5px;
+    }
+
+    &__preparation-description {
+        word-wrap: break-word; /* IE */
+        white-space: pre-wrap; /* modern browsers */
     }
 }
 
