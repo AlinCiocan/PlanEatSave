@@ -117,6 +117,8 @@ export default class PantryPageContainer extends Component {
                     options={options}
                     value={this.state.filterOption}
                     onChange={option => this.setState({ filterOption: option.value })}
+                    clearable={false}
+                    searchable={false}
                 />
             </div>
         );
