@@ -82,6 +82,7 @@ export default class PantryPageContainer extends Component {
 
         return (
             <PantryPage
+                pantryId={this.state.pantry.id}
                 items={PantryService.filterPantry(this.state.pantry, this.state.filterOption, this.state.searchTerm)}
                 onRemoveItem={this.onRemoveItem}
                 router={this.props.router} />

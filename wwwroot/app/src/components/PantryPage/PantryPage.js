@@ -17,7 +17,7 @@ export default class PantryPage extends Component {
     }
 
     onEdit(itemId) {
-        this.props.router.push(Routes.editPantryItem(this.props.pantry.id, itemId));
+        this.props.router.push(Routes.editPantryItem(this.props.pantryId, itemId));
     }
 
     onRemove(itemId) {
