@@ -4,7 +4,7 @@ import { ApiRequest } from '../../services/ApiRequest';
 import TopBar from '../TopBar/TopBar';
 import Routes from '../../services/Routes';
 import ConfirmModal from '../base/modal/ConfirmModal';
-import PantryService from '../../services/PantryService';
+import { PantryService, filterOptions } from '../../services/PantryService';
 
 export default class PantryPageContainer extends Component {
     constructor(props) {
@@ -13,15 +13,15 @@ export default class PantryPageContainer extends Component {
         this.state = {
             pantry: null,
             errorMsg: null,
-            removeItemId: null
+            removeItemId: null,
+            filterOption: filterOptions.ALL_ITEMS
         };
-
 
         this.onRemoveItem = this.onRemoveItem.bind(this);
     }
 
     populatePantry(pantryDb) {
-        let pantry = {
+        const pantry = {
             id: pantryDb.id,
             lists: PantryService.separatePantryInCategories(pantryDb)
         };
@@ -52,8 +52,9 @@ export default class PantryPageContainer extends Component {
 
     retrievePantryFromServer() {
         this.setState({ pantry: null });
+
         ApiRequest.getPantry().then(response => {
-            let pantryDb = response.body;
+            const pantryDb = response.body;
             this.populatePantry(pantryDb);
         }, err => {
             console.log(err);
@@ -77,6 +78,7 @@ export default class PantryPageContainer extends Component {
 
         return (
             <PantryPage
+                filterOption={this.state.filterOption}
                 pantry={this.state.pantry}
                 onRemoveItem={this.onRemoveItem}
                 router={this.props.router} />
@@ -99,12 +101,23 @@ export default class PantryPageContainer extends Component {
         );
     }
 
+    renderFilterOptions() {
+        return (
+            <select value={this.state.filterOption} onChange={evt => this.setState({ filterOption: evt.target.value })}>
+                <option value={filterOptions.ALL_ITEMS}> ALL </option>
+                <option value={filterOptions.EXPIRED_ITEMS}> EXPIRED </option>
+                <option value={filterOptions.EXPIRE_SOON_ITEMS}> EXPIRES SOON </option>
+            </select>
+        );
+    }
+
     render() {
         return (
             <div className="pantry-page-container">
                 <TopBar addButton addButtonOnClick={() => this.props.router.push(Routes.addPantryItem(this.state.pantry.id))} />
 
                 <div className="row">
+                    {this.renderFilterOptions()}
                     {this.renderPantry()}
                 </div>
 

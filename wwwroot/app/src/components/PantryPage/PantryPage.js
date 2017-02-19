@@ -6,10 +6,6 @@ import Routes from '../../services/Routes';
 export default class PantryPage extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-
-        };
     }
 
     twoDigits(value) {
@@ -62,7 +58,7 @@ export default class PantryPage extends Component {
 
     renderPantryList(list) {
         return (
-            <div key={list.key} className="pantry__list">
+            <div key={list.type} className="pantry__list">
                 <div className="pantry__list-title">
                     {list.title}
                 </div>
@@ -77,7 +73,10 @@ export default class PantryPage extends Component {
     render() {
         return (
             <div className="pantry__lists">
-                {this.props.pantry.lists.map(pantryList => this.renderPantryList(pantryList))}
+                {this.props.pantry
+                    .lists
+                    .filter(pantryList => pantryList.type === this.props.filterOption)
+                    .map(pantryList => this.renderPantryList(pantryList))}
             </div>
         );
 
