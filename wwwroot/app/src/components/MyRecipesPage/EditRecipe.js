@@ -103,6 +103,7 @@ export default class EditRecipe extends Component {
         return (
             <div>
                 <TopBar
+                    hideLogo
                     backButton backButtonText="Edit recipe" backButtonOnClick={() => this.goToViewRecipe()}
                     saveButton saveButtonOnClick={() => this.editRecipe()} />
                 <div className="row">

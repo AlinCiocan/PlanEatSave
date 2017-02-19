@@ -59,15 +59,25 @@ export default class TopBar extends Component {
         return null;
     }
 
+    renderLogo() {
+        if (this.props.hideLogo) {
+            return null;
+        }
+
+        return (
+            <Link to="/" className="top-bar__logo">
+                <img src={logo} alt="logo" />
+            </Link>
+        );
+    }
+
     render() {
         return (
             <div className="top-bar">
 
                 {this.renderBackButton()}
 
-                <Link to="/" className="top-bar__logo">
-                    <img src={logo} alt="logo" />
-                </Link>
+                {this.renderLogo()}
 
                 {this.renderAddButton()}
                 {this.renderSaveButton()}

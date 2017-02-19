@@ -81,6 +81,7 @@ export default class AddNewRecipe extends Component {
         return (
             <div>
                 <TopBar
+                    hideLogo
                     backButton backButtonText="Add recipe" backButtonOnClick={() => this.props.router.push(Routes.myRecipes())}
                     saveButton saveButtonOnClick={() => this.saveRecipe()} />
                 <div className="row">
