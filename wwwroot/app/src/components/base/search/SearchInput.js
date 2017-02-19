@@ -12,6 +12,7 @@ class SearchInput extends React.Component {
                     ref={input => this.input = input}
                     onChange={evt => this.props.onChange(evt.target.value)} />
                 <IconButton
+                    className="pes-search__icon"
                     onClick={() => this.props.onChange(this.input.value)}>
                     <SearchIcon />
                 </IconButton>
