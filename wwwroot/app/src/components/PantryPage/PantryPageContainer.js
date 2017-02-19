@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 import PantryPage from './PantryPage';
 import { ApiRequest } from '../../services/ApiRequest';
 import TopBar from '../TopBar/TopBar';
 import Routes from '../../services/Routes';
 import ConfirmModal from '../base/modal/ConfirmModal';
-
-const DAYS_EXPIRES_SOON = 30;
+import PantryService from '../../services/PantryService';
 
 export default class PantryPageContainer extends Component {
     constructor(props) {
@@ -23,26 +21,10 @@ export default class PantryPageContainer extends Component {
     }
 
     populatePantry(pantryDb) {
-        let itemsSortedByExpiration = pantryDb.pantryItems.sort((a, b) => new Date(a.expiration).getTime() - new Date(b.expiration).getTime());
-        let allProductsList = {
-            title: `All products (${itemsSortedByExpiration.length})`,
-            items: itemsSortedByExpiration,
-            key: 'allProducts'
-        };
-
-        let now = moment();
-        let itemsThatWillExpireSoon = itemsSortedByExpiration.filter((item) => moment(item.expiration).diff(now, 'days') <= DAYS_EXPIRES_SOON)
-        let porductsThatWillExpireSoonList = {
-            title: `To expire soon (${itemsThatWillExpireSoon.length})`,
-            items: itemsThatWillExpireSoon,
-            key: 'willExpireSoon'
-        };
-
         let pantry = {
             id: pantryDb.id,
-            lists: [porductsThatWillExpireSoonList, allProductsList]
+            lists: PantryService.separatePantryInCategories(pantryDb)
         };
-
 
         this.setState({ pantry });
     }
@@ -93,10 +75,12 @@ export default class PantryPageContainer extends Component {
             return (<h3> Loading... </h3>);
         }
 
-        return (<PantryPage
-            pantry={this.state.pantry}
-            onRemoveItem={this.onRemoveItem}
-            router={this.props.router} />);
+        return (
+            <PantryPage
+                pantry={this.state.pantry}
+                onRemoveItem={this.onRemoveItem}
+                router={this.props.router} />
+        );
     }
 
     renderRemoveModal() {
@@ -128,6 +112,4 @@ export default class PantryPageContainer extends Component {
             </div>
         );
     }
-
-
 }

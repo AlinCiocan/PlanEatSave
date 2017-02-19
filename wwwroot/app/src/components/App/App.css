@@ -138,18 +138,20 @@ body {
 
 .pes-search {
   border: 1px solid black;
-  border-radius: 18px;
+  border-radius: 30px;
   border: solid 1px #c0c0c0;
   padding-left: 18px;
   padding-right: 9px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   display: flex; }
   .pes-search__input {
     border: none;
     outline: none;
     flex-grow: 1;
     font-size: 14px; }
+  .pes-search__icon {
+    padding-top: 3px; }
 
 .top-bar {
   width: 100%;
