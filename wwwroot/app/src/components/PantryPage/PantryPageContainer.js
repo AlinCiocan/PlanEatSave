@@ -6,6 +6,8 @@ import Routes from '../../services/Routes';
 import ConfirmModal from '../base/modal/ConfirmModal';
 import { PantryService, filterOptions } from '../../services/PantryService';
 import SearchInput from '../base/search/SearchInput';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 export default class PantryPageContainer extends Component {
     constructor(props) {
@@ -103,12 +105,20 @@ export default class PantryPageContainer extends Component {
     }
 
     renderFilterOptions() {
+        const options = [
+            { value: filterOptions.ALL_ITEMS, label: 'ALL' },
+            { value: filterOptions.EXPIRED_ITEMS, label: 'EXPIRED' },
+            { value: filterOptions.EXPIRE_SOON_ITEMS, label: 'EXPIRES SOON' },
+        ];
+
         return (
-            <select value={this.state.filterOption} onChange={evt => this.setState({ filterOption: evt.target.value })}>
-                <option value={filterOptions.ALL_ITEMS}> ALL </option>
-                <option value={filterOptions.EXPIRED_ITEMS}> EXPIRED </option>
-                <option value={filterOptions.EXPIRE_SOON_ITEMS}> EXPIRES SOON </option>
-            </select>
+            <div className="pantry-page-container__filter">
+                <Select
+                    options={options}
+                    value={this.state.filterOption}
+                    onChange={option => this.setState({ filterOption: option.value })}
+                />
+            </div>
         );
     }
 

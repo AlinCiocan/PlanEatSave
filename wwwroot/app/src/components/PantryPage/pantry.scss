@@ -1,8 +1,6 @@
 .pantry {
     &__list-title {
-        @include font-bold();
         font-size: 16px;
-        letter-spacing: 2.24px;
         margin-bottom: 10px;
     }
 
@@ -106,4 +104,11 @@
 .pantry-page-container {
     position: relative;
     height: 100%;
+
+    &__filter {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        width: 100%;
+        height: 35px;   
+    }
 }

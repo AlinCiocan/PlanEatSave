@@ -207,9 +207,7 @@ body {
   display: none; }
 
 .pantry__list-title {
-  font-weight: 900;
   font-size: 16px;
-  letter-spacing: 2.24px;
   margin-bottom: 10px; }
 .pantry__item {
   position: relative;
@@ -279,6 +277,11 @@ body {
 .pantry-page-container {
   position: relative;
   height: 100%; }
+  .pantry-page-container__filter {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+    height: 35px; }
 
 .my-recipe__ingredients {
   margin-bottom: 30px; }
