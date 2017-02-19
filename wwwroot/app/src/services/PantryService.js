@@ -13,7 +13,6 @@ const getItemsSortedByExpiration = (pantry) => {
 
 const createAllProductList = (items) => {
     return {
-        title: `All products (${items.length})`,
         items: items,
         type: filterOptions.ALL_ITEMS
     };
@@ -27,7 +26,6 @@ const getExpiredItems = (items) => {
 
 const createExpiredItemsList = (items) => {
     return {
-        title: `Expired (${items.length})`,
         items: items,
         type: filterOptions.EXPIRED_ITEMS
     };
@@ -44,7 +42,6 @@ const getItemsThatWillExpireSoon = (items) => {
 
 const createProductsThatWillExpireSoonList = (items) => {
     return {
-        title: `To expire soon (${items.length})`,
         items: items,
         type: filterOptions.EXPIRE_SOON_ITEMS
     };
@@ -61,6 +58,13 @@ export class PantryService {
             createExpiredItemsList(itemsExpired),
             createProductsThatWillExpireSoonList(itemsThatWillExpireSoon)
         ];
+    }
+
+    static filterPantry(pantry, filterOption, searchTerm) {
+        const list = pantry.lists.find(pantryList => pantryList.type === filterOption);
+
+        const searchTermLoweredCase = searchTerm.toLowerCase();
+        return list.items.filter(item => item.name.toLowerCase().indexOf(searchTermLoweredCase) >= 0);
     }
 }
 

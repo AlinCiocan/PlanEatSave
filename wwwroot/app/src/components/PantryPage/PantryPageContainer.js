@@ -5,6 +5,7 @@ import TopBar from '../TopBar/TopBar';
 import Routes from '../../services/Routes';
 import ConfirmModal from '../base/modal/ConfirmModal';
 import { PantryService, filterOptions } from '../../services/PantryService';
+import SearchInput from '../base/search/SearchInput';
 
 export default class PantryPageContainer extends Component {
     constructor(props) {
@@ -14,7 +15,8 @@ export default class PantryPageContainer extends Component {
             pantry: null,
             errorMsg: null,
             removeItemId: null,
-            filterOption: filterOptions.ALL_ITEMS
+            filterOption: filterOptions.ALL_ITEMS,
+            searchTerm: ''
         };
 
         this.onRemoveItem = this.onRemoveItem.bind(this);
@@ -78,8 +80,7 @@ export default class PantryPageContainer extends Component {
 
         return (
             <PantryPage
-                filterOption={this.state.filterOption}
-                pantry={this.state.pantry}
+                items={PantryService.filterPantry(this.state.pantry, this.state.filterOption, this.state.searchTerm)}
                 onRemoveItem={this.onRemoveItem}
                 router={this.props.router} />
         );
@@ -117,6 +118,7 @@ export default class PantryPageContainer extends Component {
                 <TopBar addButton addButtonOnClick={() => this.props.router.push(Routes.addPantryItem(this.state.pantry.id))} />
 
                 <div className="row">
+                    <SearchInput onChange={searchTerm => this.setState({ searchTerm })} />
                     {this.renderFilterOptions()}
                     {this.renderPantry()}
                 </div>

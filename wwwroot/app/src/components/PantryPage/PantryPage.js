@@ -4,10 +4,7 @@ import RemoveIcon from '../base/icons/RemoveIcon';
 import Routes from '../../services/Routes';
 
 export default class PantryPage extends Component {
-    constructor(props) {
-        super(props);
-    }
-
+    
     twoDigits(value) {
         return ('0' + value).slice(-2);
     }
@@ -56,27 +53,17 @@ export default class PantryPage extends Component {
         );
     }
 
-    renderPantryList(list) {
-        return (
-            <div key={list.type} className="pantry__list">
-                <div className="pantry__list-title">
-                    {list.title}
-                </div>
-                <div className="pantry__items">
-                    {list.items.map(item => this.renderPantryItem(item))}
-                </div>
-            </div>
-        );
-
-    }
-
     render() {
         return (
             <div className="pantry__lists">
-                {this.props.pantry
-                    .lists
-                    .filter(pantryList => pantryList.type === this.props.filterOption)
-                    .map(pantryList => this.renderPantryList(pantryList))}
+                <div className="pantry__list">
+                    <div className="pantry__list-title">
+                        {this.props.items.length} items
+                </div>
+                    <div className="pantry__items">
+                        {this.props.items.map(item => this.renderPantryItem(item))}
+                    </div>
+                </div>
             </div>
         );
 
