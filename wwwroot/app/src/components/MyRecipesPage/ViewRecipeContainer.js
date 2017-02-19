@@ -69,6 +69,7 @@ export default class ViewRecipeContainer extends Component {
         return (
             <div>
                 <TopBar
+                    hideLogo
                     backButton backButtonText="View recipe" backButtonOnClick={() => this.goToMyRecipes()}
                     editButton editButtonOnClick={() => this.goToEditRecipe()}
                     />
