@@ -153,6 +153,39 @@ body {
   .pes-search__icon {
     padding-top: 3px; }
 
+.pes-navigation-menu {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  height: 60px; }
+  .pes-navigation-menu__item {
+    padding-top: 5px;
+    background-color: #f3f4f6;
+    flex-grow: 1;
+    text-align: center;
+    text-decoration: none;
+    flex-basis: 100%; }
+  .pes-navigation-menu__item--active {
+    background-color: #c7d3d0; }
+  .pes-navigation-menu__item-divider {
+    height: 100%;
+    width: 5px;
+    background-color: white;
+    flex-grow: 0; }
+  .pes-navigation-menu__item-icon {
+    width: 25px;
+    height: 25px;
+    background-color: #e8e8e8;
+    border: solid 1px #979797;
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-bottom: 5px; }
+  .pes-navigation-menu__item-text {
+    color: #000000;
+    font-size: 14px; }
+
 .top-bar {
   width: 100%;
   height: 60px;

@@ -1,0 +1,43 @@
+.pes-navigation-menu {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    height: 60px;
+
+    &__item {
+        padding-top: 5px;
+        background-color: $paleGrey;    
+        flex-grow: 1;
+        text-align: center;
+        text-decoration: none;
+        flex-basis: 100%;
+    }
+
+    &__item--active {
+        background-color: $silver;
+    }
+
+    &__item-divider {
+        height: 100%;
+        width: 5px;
+        background-color: white;
+        flex-grow: 0;
+    }
+
+    &__item-icon {
+        width: 25px;
+        height: 25px;
+        background-color: #e8e8e8;
+        border: solid 1px $warmGrey;
+        border-radius: 50%;
+        margin: 0 auto;
+        margin-bottom: 5px;
+    }
+
+    &__item-text {
+        color: $black;
+        font-size: 14px;
+    }
+}

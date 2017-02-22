@@ -38,4 +38,8 @@ export default class Routes {
     static viewRecipe(recipeId) {
         return `${Routes.myRecipes()}/recipe/${recipeId}`;
     }
+
+    static mealPlanner() {
+        return `${Routes.base()}meal-planner`;
+    }
 }

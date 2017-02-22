@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import TopBar from '../TopBar/TopBar';
 import BrowserStore from '../../services/BrowserStore';
 import Routes from '../../services/Routes';
+import NavigationMenu from '../NavigationMenu';
 
 class LandingPage extends Component {
 
@@ -45,7 +46,7 @@ class LandingPage extends Component {
         <br />
         <br />
         <button onClick={() => this.logOut()}> Log out </button>
-
+        <NavigationMenu />
       </div>
     );
   }
