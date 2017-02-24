@@ -6,6 +6,8 @@ import TopBar from '../TopBar/TopBar';
 import RecipesList from './RecipesList';
 import ConfirmModal from '../base/modal/ConfirmModal';
 import SearchInput from '../base/search/SearchInput';
+import NavigationMenu from '../NavigationMenu';
+import pages from '../../constants/pages';
 
 export default class MyRecipesPageContainer extends Component {
     constructor(props) {
@@ -131,6 +133,7 @@ export default class MyRecipesPageContainer extends Component {
                 </div>
 
                 {this.renderRemoveModal()}
+                <NavigationMenu activeItem={pages.RECIPES} />
             </div>
         );
     }

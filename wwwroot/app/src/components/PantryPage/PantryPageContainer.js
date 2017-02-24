@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 import PantryPage from './PantryPage';
 import { ApiRequest } from '../../services/ApiRequest';
 import TopBar from '../TopBar/TopBar';
@@ -6,8 +8,8 @@ import Routes from '../../services/Routes';
 import ConfirmModal from '../base/modal/ConfirmModal';
 import { PantryService, filterOptions } from '../../services/PantryService';
 import SearchInput from '../base/search/SearchInput';
-import Select from 'react-select';
-import 'react-select/dist/react-select.css';
+import NavigationMenu from '../NavigationMenu';
+import pages from '../../constants/pages';
 
 export default class PantryPageContainer extends Component {
     constructor(props) {
@@ -137,6 +139,7 @@ export default class PantryPageContainer extends Component {
                 </div>
 
                 {this.renderRemoveModal()}
+                <NavigationMenu activeItem={pages.PANTRY} />
             </div>
         );
     }
