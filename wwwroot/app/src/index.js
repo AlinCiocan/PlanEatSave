@@ -14,6 +14,7 @@ import MyRecipesPageContainer from './components/MyRecipesPage/MyRecipesPageCont
 import AddNewRecipe from './components/MyRecipesPage/AddNewRecipe';
 import ViewRecipeContainer from './components/MyRecipesPage/ViewRecipeContainer';
 import EditRecipe from './components/MyRecipesPage/EditRecipe';
+import PlannerPageContainer from './components/PlannerPage/PlannerPageContainer';
 
 import './index.css';
 
@@ -23,7 +24,7 @@ function requiresAuthentication(nextState, replace) {
     replace({
       pathname: Routes.login(),
       state: { nextPathname: nextState.location.pathname }
-    })
+    });
   }
 }
 
@@ -41,6 +42,7 @@ ReactDOM.render(
       <Route path="my-recipes/recipe/:recipeId" component={ViewRecipeContainer} onEnter={requiresAuthentication} />
       <Route path="my-recipes/add-recipe" component={AddNewRecipe} onEnter={requiresAuthentication} />
       <Route path="my-recipes/edit-recipe/:recipeId" component={EditRecipe} onEnter={requiresAuthentication} />
+      <Route path="meal-planner" component={PlannerPageContainer} onEnter={requiresAuthentication} />
     </Route>
   </Router>,
   document.getElementById('root')
