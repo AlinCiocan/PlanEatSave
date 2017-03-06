@@ -14,7 +14,7 @@ import MyRecipesPageContainer from './components/MyRecipesPage/MyRecipesPageCont
 import AddNewRecipe from './components/MyRecipesPage/AddNewRecipe';
 import ViewRecipeContainer from './components/MyRecipesPage/ViewRecipeContainer';
 import EditRecipe from './components/MyRecipesPage/EditRecipe';
-import PlannerPageContainer from './components/PlannerPage/PlannerPageContainer';
+import MealPlannerPageContainer from './components/MealPlannerPage/MealPlannerPageContainer';
 
 import './index.css';
 
@@ -42,7 +42,7 @@ ReactDOM.render(
       <Route path="my-recipes/recipe/:recipeId" component={ViewRecipeContainer} onEnter={requiresAuthentication} />
       <Route path="my-recipes/add-recipe" component={AddNewRecipe} onEnter={requiresAuthentication} />
       <Route path="my-recipes/edit-recipe/:recipeId" component={EditRecipe} onEnter={requiresAuthentication} />
-      <Route path="meal-planner" component={PlannerPageContainer} onEnter={requiresAuthentication} />
+      <Route path="meal-planner" component={MealPlannerPageContainer} onEnter={requiresAuthentication} />
     </Route>
   </Router>,
   document.getElementById('root')

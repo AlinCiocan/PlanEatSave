@@ -40,10 +40,6 @@ class LandingPage extends Component {
     return (
       <div>
         <h3> Hey there, have a lovely day! {email}</h3>
-        <Link to={Routes.myPantry()}> My Pantry </Link>
-        <br />
-        <Link to={Routes.myRecipes()}> My Recipes </Link>
-        <br />
         <br />
         <button onClick={() => this.logOut()}> Log out </button>
         <NavigationMenu />
