@@ -42,4 +42,12 @@ export default class Routes {
     static mealPlanner() {
         return `${Routes.base()}meal-planner`;
     }
+
+    static mealPlannerWithDate(date) {
+        return `${Routes.mealPlanner()}?date=${date}`;
+    }
+
+    static addMeal(mealDate, mealOrder) {
+        return `${Routes.base()}meal-planner/add-meal?mealDate=${mealDate}&mealOrder=${mealOrder}`;
+    }
 }

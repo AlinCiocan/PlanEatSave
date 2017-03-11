@@ -62,6 +62,9 @@ namespace PlanEatSave
 
                 cfg.CreateMap<RecipeViewModel, Recipe>()
                     .ForMember(recipe => recipe.IngredientsJson, configuration => configuration.MapFrom(recipeViewModel => JsonConvert.SerializeObject(recipeViewModel.Ingredients)));
+
+                cfg.CreateMap<Meal, AddMealViewModel>().ReverseMap();
+
             });
 
             services.AddMvc(config =>
@@ -92,6 +95,7 @@ namespace PlanEatSave
             // Add application services
             services.AddTransient<PantryService, PantryService>();
             services.AddTransient<RecipeService, RecipeService>();
+            services.AddTransient<MealService, MealService>();
 
             services.Configure<IdentityOptions>(options =>
            {

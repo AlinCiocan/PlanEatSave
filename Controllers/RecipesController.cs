@@ -17,7 +17,7 @@ namespace PlanEatSave.Controllers
     public class RecipesController : Controller
     {
         private RecipeService _recipeService;
-        private ILogger<PantryController> _logger;
+        private ILogger<RecipesController> _logger;
         public string UserId
         {
             get
@@ -26,7 +26,7 @@ namespace PlanEatSave.Controllers
             }
         }
 
-        public RecipesController(RecipeService recipeService, ILogger<PantryController> logger)
+        public RecipesController(RecipeService recipeService, ILogger<RecipesController> logger)
         {
             _recipeService = recipeService;
             _logger = logger;

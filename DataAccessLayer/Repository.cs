@@ -33,7 +33,7 @@ namespace PlanEatSave.DataAceessLayer
     {
         public long Id { get; set; }
         public string UserId { get; set; }
-        
+
         [MaxLength(RecipeConstants.NameMaxLength)]
         public string Name { get; set; }
 
@@ -44,11 +44,22 @@ namespace PlanEatSave.DataAceessLayer
         public string Preparation { get; set; }
     }
 
+    public class Meal
+    {
+        public string Id { get; set; }
+        public string UserId { get; set; }
+        public long RecipeId { get; set; }
+        public DateTime MealDate { get; set; }
+        public long MealOrder { get; set; }
+    }
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public virtual DbSet<Pantry> Pantries { get; set; }
         public virtual DbSet<PantryItem> PantryItems { get; set; }
         public virtual DbSet<Recipe> Recipes { get; set; }
+        public virtual DbSet<Meal> Meals { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 

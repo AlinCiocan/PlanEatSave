@@ -14,5 +14,6 @@ namespace PlanEatSave.Utils
         public const int RECIPES_RETRIEVE_ALL = 3002;
         public const int RECIPES_REMOVE_RECIPE = 3003;
         public const int RECIPES_RETRIEVE_RECIPE = 3004;
+        public const int MEALS_ADD_MEAL_FROM_EXISTING_RECIPE = 4001;
     }
 }

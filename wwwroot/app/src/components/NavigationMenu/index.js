@@ -5,7 +5,6 @@ import Routes from '../../services/Routes';
 import pages from '../../constants/pages';
 
 const NavigationMenu = (props) => {
-    debugger;
     return (
         <div className="pes-navigation-menu">
             

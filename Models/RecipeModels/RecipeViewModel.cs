@@ -8,6 +8,7 @@ namespace PlanEatSave.Models.RecipeModels
     {
         public long Id { get; set; }
 
+        [Required]
         [MaxLength(RecipeConstants.NameMaxLength)]
         public string Name { get; set; }
 

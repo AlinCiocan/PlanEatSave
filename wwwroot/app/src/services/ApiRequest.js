@@ -117,4 +117,9 @@ export class ApiRequest {
     static removeRecipe(recipeId) {
         return authDeleteRequest(`recipes/removeRecipe?id=${recipeId}`);
     }
+
+    static addMealFromExistingRecipe(recipeId, mealDate, mealOrder) {
+        return authPostRequest(`meal/addMealFromExistingRecipe`)
+            .send({ recipeId, mealDate, mealOrder });
+    }
 }

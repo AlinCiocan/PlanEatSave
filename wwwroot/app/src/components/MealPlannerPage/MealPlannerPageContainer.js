@@ -10,14 +10,15 @@ export default class PlannerPageContainer extends Component {
         super(props);
 
         this.state = {
-            message: null
+            message: null,
+            days: []
         };
     }
 
     componentDidMount() {
     }
 
- 
+
     getLoadingMessage() {
         return (<h3> Loading your planner... </h3>);
     }
@@ -39,7 +40,7 @@ export default class PlannerPageContainer extends Component {
     render() {
         return (
             <div>
-                <TopBar />
+                <TopBar addButton addButtonOnClick={() => this.props.router.push(Routes.addMeal('2017-01-01', 1000))} />
 
                 <div className="row">
                     {this.state.message}

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace PlanEatSave.Models.PantryModels
 {
@@ -14,8 +15,14 @@ namespace PlanEatSave.Models.PantryModels
     public class PantryItemViewModel
     {
         public long Id { get; set; }
+
+        [Required]
         public string Name { get; set; }
+
+        [Required]
         public DateTime Expiration { get; set; }
+
+        [Required]
         public long PantryId { get; set; }
     }
 }
