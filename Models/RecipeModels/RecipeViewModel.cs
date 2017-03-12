@@ -9,13 +9,13 @@ namespace PlanEatSave.Models.RecipeModels
         public long Id { get; set; }
 
         [Required]
-        [MaxLength(RecipeConstants.NameMaxLength)]
+        [MaxLength(RecipeConstants.NAME_MAX_LENGTH)]
         public string Name { get; set; }
 
-        [MaxLength(RecipeConstants.IngredientsMaxLength)]
+        [MaxLength(RecipeConstants.INGREDIENTS_MAX_LENGTH)]
         public List<string> Ingredients { get; set; }
 
-        [MaxLength(RecipeConstants.PreparationMaxLength)]
+        [MaxLength(RecipeConstants.PREPARATION_MAX_LENGTH)]
         public string Preparation { get; set; }
     }
 }

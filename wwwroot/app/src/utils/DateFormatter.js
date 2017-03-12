@@ -14,4 +14,18 @@ export default class DateFormatter {
     static dateToString(date) {
         return date.format(dateFormat);
     }
+
+    static getStartOfWeek(date) {
+        return date.clone().startOf('week').isoWeekday(1);
+    }
+
+    static getEndOfWeek(date) {
+        return date.clone().startOf('week').isoWeekday(7);
+    }
+
+    static extractStartAndEndOfWeek(date) {
+        const startOfWeek = DateFormatter.getStartOfWeek(date);
+        const endOfWeek = DateFormatter.getEndOfWeek(date);
+        return { startOfWeek, endOfWeek };
+    }
 }

@@ -34,13 +34,13 @@ namespace PlanEatSave.DataAceessLayer
         public long Id { get; set; }
         public string UserId { get; set; }
 
-        [MaxLength(RecipeConstants.NameMaxLength)]
+        [MaxLength(RecipeConstants.NAME_MAX_LENGTH)]
         public string Name { get; set; }
 
-        [MaxLength(RecipeConstants.IngredientsMaxLength)]
+        [MaxLength(RecipeConstants.INGREDIENTS_MAX_LENGTH)]
         public string IngredientsJson { get; set; }
 
-        [MaxLength(RecipeConstants.PreparationMaxLength)]
+        [MaxLength(RecipeConstants.PREPARATION_MAX_LENGTH)]
         public string Preparation { get; set; }
     }
 

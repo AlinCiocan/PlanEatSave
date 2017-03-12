@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import { ApiRequest } from '../../services/ApiRequest';
 import Routes from '../../services/Routes';
 import TopBar from '../TopBar/TopBar';
 import NavigationMenu from '../NavigationMenu';
 import pages from '../../constants/pages';
+import DateFormatter from '../../utils/DateFormatter';
 
 export default class PlannerPageContainer extends Component {
     constructor(props) {
@@ -11,11 +13,13 @@ export default class PlannerPageContainer extends Component {
 
         this.state = {
             message: null,
-            days: []
+            arePlannedDaysVisible: false,
+            plannedDays: []
         };
     }
 
     componentDidMount() {
+        this.retrievePlannedDays();
     }
 
 
@@ -29,12 +33,34 @@ export default class PlannerPageContainer extends Component {
 
     getErrorMessage() {
         return (
-            <h3 style={{ color: 'red' }}> There was an error with our server. Please try again! </h3>
+            <h3 style={{ color: 'red' }}> There was an error with our server. Please refresh the page! </h3>
         );
     }
 
     renderPlanner() {
+        if(!this.state.arePlannedDaysVisible) {
+            return null;
+        }
+        
         return <h1> Awesome planner here </h1>;
+    }
+
+    retrievePlannedDays() {
+        this.setState({ message: this.getLoadingMessage(), arePlannedDaysVisible: false });
+
+        let date = DateFormatter.stringToDate(this.props.location.query.date);
+        if(!date.isValid()) {
+            date = moment.utc();
+        }
+        const { startOfWeek, endOfWeek } = DateFormatter.extractStartAndEndOfWeek(date);
+
+        ApiRequest.retrieveMeals(DateFormatter.dateToIsoString(startOfWeek), DateFormatter.dateToIsoString(endOfWeek))
+            .then(rsp => {
+                const plannedDays = rsp.body;
+                this.setState({ message: null, arePlannedDaysVisible: true, plannedDays });
+            }, err => {
+                this.setState({message: this.getErrorMessage()});
+            });
     }
 
     render() {

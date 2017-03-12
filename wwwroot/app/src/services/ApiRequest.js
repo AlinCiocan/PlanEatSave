@@ -122,4 +122,8 @@ export class ApiRequest {
         return authPostRequest(`meal/addMealFromExistingRecipe`)
             .send({ recipeId, mealDate, mealOrder });
     }
+
+    static retrieveMeals(startDate, endDate) {
+        return authGetRequest(`meal/getMeals?startDate=${startDate}&endDate=${endDate}`);
+    }
 }
