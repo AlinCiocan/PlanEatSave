@@ -6,6 +6,7 @@ import TopBar from '../TopBar/TopBar';
 import NavigationMenu from '../NavigationMenu';
 import pages from '../../constants/pages';
 import DateFormatter from '../../utils/DateFormatter';
+import MealPlanner from './MealPlanner';
 
 export default class PlannerPageContainer extends Component {
     constructor(props) {
@@ -38,20 +39,22 @@ export default class PlannerPageContainer extends Component {
     }
 
     renderPlanner() {
-        if(!this.state.arePlannedDaysVisible) {
+        if (!this.state.arePlannedDaysVisible) {
             return null;
         }
-        
-        return <h1> Awesome planner here </h1>;
+
+        return <MealPlanner selectedDay={this.getSelectedDate()} days={this.state.plannedDays} />;
+    }
+
+    getSelectedDate() {
+        let date = DateFormatter.stringToDate(this.props.location.query.date);
+        return date.isValid() ? date : moment.utc();
     }
 
     retrievePlannedDays() {
         this.setState({ message: this.getLoadingMessage(), arePlannedDaysVisible: false });
 
-        let date = DateFormatter.stringToDate(this.props.location.query.date);
-        if(!date.isValid()) {
-            date = moment.utc();
-        }
+        const date = this.getSelectedDate();
         const { startOfWeek, endOfWeek } = DateFormatter.extractStartAndEndOfWeek(date);
 
         ApiRequest.retrieveMeals(DateFormatter.dateToIsoString(startOfWeek), DateFormatter.dateToIsoString(endOfWeek))
@@ -59,7 +62,7 @@ export default class PlannerPageContainer extends Component {
                 const plannedDays = rsp.body;
                 this.setState({ message: null, arePlannedDaysVisible: true, plannedDays });
             }, err => {
-                this.setState({message: this.getErrorMessage()});
+                this.setState({ message: this.getErrorMessage() });
             });
     }
 

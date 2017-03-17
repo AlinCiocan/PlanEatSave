@@ -20,10 +20,9 @@ namespace PlanEatSave.Models.MealModels
         {
             Id = id;
             RecipeId = recipeId;
-            RecipeName = RecipeName;
+            RecipeName = recipeName;
             MealOrder = mealOrder;
         }
-
 
         public string Id { get; set; }
         public long RecipeId { get; set; }

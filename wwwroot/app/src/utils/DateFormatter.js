@@ -16,11 +16,11 @@ export default class DateFormatter {
     }
 
     static getStartOfWeek(date) {
-        return date.clone().startOf('week').isoWeekday(1);
+        return date.clone().isoWeekday(1);
     }
 
     static getEndOfWeek(date) {
-        return date.clone().startOf('week').isoWeekday(7);
+        return date.clone().isoWeekday(7);
     }
 
     static extractStartAndEndOfWeek(date) {

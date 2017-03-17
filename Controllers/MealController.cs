@@ -54,8 +54,8 @@ namespace PlanEatSave.Controllers
         public async Task<IActionResult> GetMeals(DateTime startDate, DateTime endDate)
         {
 
-            startDate = startDate.ToUniversalTime();
-            endDate = endDate.ToUniversalTime();
+            startDate = startDate.Date;
+            endDate = endDate.Date;
 
             if(startDate > endDate) 
             {

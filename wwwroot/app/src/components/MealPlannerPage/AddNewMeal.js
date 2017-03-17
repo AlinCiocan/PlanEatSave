@@ -5,7 +5,6 @@ import TopBar from '../TopBar/TopBar';
 import { ApiRequest } from '../../services/ApiRequest';
 import DateFormatter from '../../utils/DateFormatter';
 
-
 export default class AddNewMeal extends React.Component {
     constructor(props) {
         super(props);

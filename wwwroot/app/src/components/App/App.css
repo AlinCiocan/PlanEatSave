@@ -390,4 +390,15 @@ body {
 .ingredients__remove-button--not-visible {
   visibility: hidden; }
 
+.swiper-container {
+  min-height: 100%;
+  border: 1px solid black; }
+
+.swiper-slide {
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid red;
+  height: auto;
+  min-height: 100%; }
+
 /*# sourceMappingURL=App.css.map */
