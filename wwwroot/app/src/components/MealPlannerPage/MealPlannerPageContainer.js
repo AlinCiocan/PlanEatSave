@@ -21,6 +21,10 @@ export default class PlannerPageContainer extends Component {
 
     componentDidMount() {
         this.retrievePlannedDays();
+
+        if (!this.getDateFromUrl()) {
+            this.props.router.push(Routes.mealPlannerWithDate(this.getSelectedDateAsString()));
+        }
     }
 
 
@@ -43,19 +47,29 @@ export default class PlannerPageContainer extends Component {
             return null;
         }
 
-        return <MealPlanner selectedDay={this.getSelectedDate()} days={this.state.plannedDays} />;
+        return <MealPlanner selectedDay={this.getSelectedDateAsString()} days={this.state.plannedDays} />;
+    }
+
+    getDateFromUrl() {
+        return this.props.location.query.date;
     }
 
     getSelectedDate() {
-        let date = DateFormatter.stringToDate(this.props.location.query.date);
+        let date = DateFormatter.stringToDate(this.getDateFromUrl());
         return date.isValid() ? date : DateFormatter.getLocalCurrentDate();
+    }
+
+    getSelectedDateAsString() {
+        const date = this.getSelectedDate();
+        return DateFormatter.dateToString(date);
     }
 
     retrievePlannedDays() {
         this.setState({ message: this.getLoadingMessage(), arePlannedDaysVisible: false });
 
-        const date = this.getSelectedDate();
-        const { startOfWeek, endOfWeek } = DateFormatter.extractLocaleStartAndEndOfWeek(date);
+        const currentDate = this.getSelectedDate();
+
+        const { startOfWeek, endOfWeek } = DateFormatter.extractLocaleStartAndEndOfWeek(currentDate);
 
         const startOfWeekUtc = DateFormatter.markLocaleDateAsUtc(startOfWeek);
         const endOfWeekUtc = DateFormatter.markLocaleDateAsUtc(endOfWeek);
@@ -75,7 +89,7 @@ export default class PlannerPageContainer extends Component {
     render() {
         return (
             <div>
-                <TopBar addButton addButtonOnClick={() => this.props.router.push(Routes.addMeal('2017-01-01', 1000))} />
+                <TopBar addButton addButtonOnClick={() => this.props.router.push(Routes.addMeal(this.getSelectedDateAsString(), 1000))} />
 
                 <div className="pes-row">
                     {this.state.message}
