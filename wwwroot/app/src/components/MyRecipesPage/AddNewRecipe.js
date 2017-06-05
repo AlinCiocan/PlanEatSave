@@ -84,7 +84,7 @@ export default class AddNewRecipe extends Component {
                     hideLogo
                     backButton backButtonText="Add recipe" backButtonOnClick={() => this.props.router.push(Routes.myRecipes())}
                     saveButton saveButtonOnClick={() => this.saveRecipe()} />
-                <div className="row">
+                <div className="pes-row">
                     {this.state.message}
                     {this.renderRecipe()}
                 </div>

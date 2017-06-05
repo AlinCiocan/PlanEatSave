@@ -127,7 +127,7 @@ export default class MyRecipesPageContainer extends Component {
             <div>
                 <TopBar addButton addButtonOnClick={() => this.props.router.push(Routes.addMyRecipe())} />
 
-                <div className="row">
+                <div className="pes-row">
                     {this.state.message}
                     {this.renderRecipes()}
                 </div>

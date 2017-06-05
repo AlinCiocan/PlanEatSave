@@ -74,7 +74,7 @@ export default class ViewRecipeContainer extends Component {
                     editButton editButtonOnClick={() => this.goToEditRecipe()}
                     />
 
-                <div className="row">
+                <div className="pes-row">
                     {this.state.message}
                     {this.renderRecipe()}
                 </div>

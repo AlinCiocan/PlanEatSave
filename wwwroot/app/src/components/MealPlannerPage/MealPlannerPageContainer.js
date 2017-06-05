@@ -48,16 +48,22 @@ export default class PlannerPageContainer extends Component {
 
     getSelectedDate() {
         let date = DateFormatter.stringToDate(this.props.location.query.date);
-        return date.isValid() ? date : moment.utc();
+        return date.isValid() ? date : DateFormatter.getLocalCurrentDate();
     }
 
     retrievePlannedDays() {
         this.setState({ message: this.getLoadingMessage(), arePlannedDaysVisible: false });
 
         const date = this.getSelectedDate();
-        const { startOfWeek, endOfWeek } = DateFormatter.extractStartAndEndOfWeek(date);
+        const { startOfWeek, endOfWeek } = DateFormatter.extractLocaleStartAndEndOfWeek(date);
 
-        ApiRequest.retrieveMeals(DateFormatter.dateToIsoString(startOfWeek), DateFormatter.dateToIsoString(endOfWeek))
+        const startOfWeekUtc = DateFormatter.markLocaleDateAsUtc(startOfWeek);
+        const endOfWeekUtc = DateFormatter.markLocaleDateAsUtc(endOfWeek);
+
+        const startOfWeekIsoString = DateFormatter.dateToIsoString(startOfWeekUtc);
+        const endOfWeekIsoString = DateFormatter.dateToIsoString(endOfWeekUtc);
+
+        ApiRequest.retrieveMeals(startOfWeekIsoString, endOfWeekIsoString)
             .then(rsp => {
                 const plannedDays = rsp.body;
                 this.setState({ message: null, arePlannedDaysVisible: true, plannedDays });
@@ -71,7 +77,7 @@ export default class PlannerPageContainer extends Component {
             <div>
                 <TopBar addButton addButtonOnClick={() => this.props.router.push(Routes.addMeal('2017-01-01', 1000))} />
 
-                <div className="row">
+                <div className="pes-row">
                     {this.state.message}
                     {this.renderPlanner()}
                 </div>

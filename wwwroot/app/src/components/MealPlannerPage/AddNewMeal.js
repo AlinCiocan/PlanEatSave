@@ -116,7 +116,7 @@ export default class AddNewMeal extends React.Component {
                     backButton backButtonText="Add meal" backButtonOnClick={() => this.props.router.push(Routes.mealPlanner())}
                     saveButton saveButtonOnClick={this.saveMeal} />
 
-                <div className="row">
+                <div className="pes-row">
                     {this.state.message}
                     {this.renderBody()}
                 </div>

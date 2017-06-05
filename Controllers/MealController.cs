@@ -53,10 +53,6 @@ namespace PlanEatSave.Controllers
         [HttpGet]
         public async Task<IActionResult> GetMeals(DateTime startDate, DateTime endDate)
         {
-
-            startDate = startDate.Date;
-            endDate = endDate.Date;
-
             if(startDate > endDate) 
             {
                 return BadRequest("End date cannot be earlier than start date.");
@@ -67,9 +63,12 @@ namespace PlanEatSave.Controllers
                 return BadRequest("The difference between start date and end date is too much.");
             }
 
+            var startDateUtc = DateTime.SpecifyKind(startDate.Date, DateTimeKind.Utc);
+            var endDateUtc = DateTime.SpecifyKind(endDate.Date, DateTimeKind.Utc);
+
             try
             {
-                var days = await _mealService.GetMeals(UserId, startDate, endDate);
+                var days = await _mealService.GetMeals(UserId, startDateUtc, endDateUtc);
                 return Ok(days);
             }
             catch (Exception ex)

@@ -6,7 +6,119 @@
 .swiper-slide {
     box-sizing: border-box;
     padding: 10px;
-    border: 1px solid red;
     height: auto;
     min-height: 100%;
+}
+
+// TODO: check again if margin-bottom will be ok in layout main...
+body {
+    margin-bottom: 60px;
+}
+
+.pes-meal {
+    display: flex;
+    height: 50px;
+    border-radius: 2px;
+    background-color: #eaf2f0;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    margin-bottom: 10px;
+
+    &__divider {
+        width: 8px;
+        height: 50px;
+        border-radius: 2px;
+        background-color: #bd0fe1;
+    }
+
+    &__remove-button {
+        background: none;
+        outline: none;
+        border: none;
+        color: #f36f69;
+        cursor: pointer;
+        margin-right: 5px;
+    }
+
+    &__recipe-name {
+        margin-left: 10px;
+        font-size: 18px;
+        padding-top: 5px;
+        flex-grow: 1;
+
+        background: none;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+    }
+}
+
+.meal-planner {
+
+    &__header {
+        background-color: $paleGrey;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    &__selected-day {
+        text-align: center;
+        flex-grow: 1;
+    }
+
+    &__day-navigation--hidden {
+        visibility: hidden;
+    }
+}
+
+
+
+
+.day-header {
+    display: flex;
+    margin-bottom: 10px;
+    height: 60px;
+    background-color: #f3f4f6;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.day-title {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 500;
+    padding-top: 10px;
+}
+
+.prev-day,
+.next-day {
+    background: none;
+    outline: none;
+    border: none;
+    color: rgba(73, 73, 73, 0.6);
+    cursor: pointer;
+}
+
+.navigation-menu {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    height: 60px;
+    background-color: #c7d3d0;
+    z-index: 2;
+}
+
+.nav-item {
+    cursor: pointer;
+    outline: 0;
+    background: none;
+    flex-grow: 1;
+    text-align: center;
+    border: 1px solid gray;
+    z-index: 999;
 }

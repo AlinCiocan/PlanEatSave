@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import Swiper from 'swiper';
 import 'swiper/dist/css/swiper.css';
+import RemoveIcon from '../base/icons/RemoveIcon';
+import ArrowIcon from '../base/icons/ArrowIcon';
+import DateFormatter from '../../utils/DateFormatter';
+
+
+const firstDayOfWeek = 0;
+const lastDayOfWeek = 6;
 
 class Meal extends Component {
     render() {
         return (
-            <div className="planner-item">
-                <div className="planner-item-divider"></div>
+            <div className="pes-meal">
+                <div className="pes-meal__divider"></div>
 
-                <button className="planner-text">{this.props.meal.recipeName}</button>
-                <button className="planner-remove"><i className="material-icons">delete_forever</i></button>
+                <button className="pes-meal__recipe-name">{this.props.meal.recipeName}</button>
+                <button className="pes-meal__remove-button"><RemoveIcon /></button>
             </div>
         );
     }
@@ -23,24 +31,41 @@ class DayPlanned extends Component {
                 {this.props.day.mealDate}
                 {this.props.day.meals.map(meal => <Meal key={meal.id} meal={meal} />)}
                 <br />
-                <img alt="placeholder img" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" />
             </div>
         );
     }
 }
 
-
 export default class MealPlanner extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            currentDayIndex: 0
+        };
+
+        this.goToPreviousDay = this.goToPreviousDay.bind(this);
+        this.goToNextDay = this.goToNextDay.bind(this);
+    }
+
     componentDidMount() {
         this.swiper = new Swiper(this.swiperContainer, {
             spaceBetween: 30,
             autoHeight: true,
-            calculateHeight: true
+            calculateHeight: true,
+            onTransitionEnd: () => {
+                const currentDayIndex = this.swiper.activeIndex;
+                this.setState({ currentDayIndex });
+            }
         });
+    }
 
-        this.swiper.on('SlideChangeEnd', () => {
-            //this.setState({ selectedDay: this.swiper.activeIndex });
-        });
+    goToPreviousDay() {
+        this.swiper.slidePrev();
+    }
+
+    goToNextDay() {
+        this.swiper.slideNext();
     }
 
     componentWillUnmount() {
@@ -58,9 +83,27 @@ export default class MealPlanner extends Component {
     }
 
     render() {
+        const currentDay = DateFormatter.getDayNameFromString(this.props.days[this.state.currentDayIndex].mealDate);
+
         return (
-            <div>
-                <h1> Selected day: {this.props.selectedDay.toString()}</h1>
+            <div className="meal-planner">
+                <div className="meal-planner__header">
+                    <button
+                        className={classNames('pes-transparent-button', 'meal-planner__day-navigation', { 'meal-planner__day-navigation--hidden': this.state.currentDayIndex === firstDayOfWeek })}
+                        onClick={this.goToPreviousDay}>
+                        <ArrowIcon direction="left" />
+                    </button>
+
+                    <div className="meal-planner__selected-day">
+                        {currentDay.toString()}
+                    </div>
+
+                    <button
+                        className={classNames('pes-transparent-button', 'meal-planner__day-navigation', { 'meal-planner__day-navigation--hidden': this.state.currentDayIndex === lastDayOfWeek })}
+                        onClick={this.goToNextDay}>
+                        <ArrowIcon />
+                    </button>
+                </div>
 
                 {this.renderMealCarousel()}
             </div>

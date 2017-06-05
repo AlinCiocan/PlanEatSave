@@ -132,7 +132,7 @@ export default class PantryPageContainer extends Component {
             <div className="pantry-page-container">
                 <TopBar addButton addButtonOnClick={() => this.props.router.push(Routes.addPantryItem(this.state.pantry.id))} />
 
-                <div className="row">
+                <div className="pes-row">
                     <SearchInput onChange={searchTerm => this.setState({ searchTerm })} />
                     {this.renderFilterOptions()}
                     {this.renderPantry()}

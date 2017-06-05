@@ -16,7 +16,14 @@ body {
     height: 100%;
 }
 
-.row {
+.pes-row {
     padding-left: 16px;
     padding-right: 16px;
+}
+
+.pes-transparent-button {
+    background: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
 }

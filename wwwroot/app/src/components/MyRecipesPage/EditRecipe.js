@@ -106,7 +106,7 @@ export default class EditRecipe extends Component {
                     hideLogo
                     backButton backButtonText="Edit recipe" backButtonOnClick={() => this.goToViewRecipe()}
                     saveButton saveButtonOnClick={() => this.editRecipe()} />
-                <div className="row">
+                <div className="pes-row">
                     {this.state.message}
                     {this.renderRecipe()}
                 </div>
