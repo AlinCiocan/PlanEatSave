@@ -6,7 +6,6 @@ import RemoveIcon from '../base/icons/RemoveIcon';
 import ArrowIcon from '../base/icons/ArrowIcon';
 import DateFormatter from '../../utils/DateFormatter';
 
-
 const firstDayOfWeek = 0;
 const lastDayOfWeek = 6;
 
@@ -36,13 +35,14 @@ class DayPlanned extends Component {
     }
 }
 
+const getSelectedDayIndex = (days, selectedDay) => days.findIndex(day => day.mealDate === selectedDay);
+
 export default class MealPlanner extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            currentDayIndex: 0
-        };
+        const { days, selectedDay } = props;
+        this.state = { currentDayIndex: getSelectedDayIndex(days, selectedDay) };
 
         this.goToPreviousDay = this.goToPreviousDay.bind(this);
         this.goToNextDay = this.goToNextDay.bind(this);
@@ -53,11 +53,26 @@ export default class MealPlanner extends Component {
             spaceBetween: 30,
             autoHeight: true,
             calculateHeight: true,
+            initialSlide: this.state.currentDayIndex,
             onTransitionEnd: () => {
-                const currentDayIndex = this.swiper.activeIndex;
-                this.setState({ currentDayIndex });
+                // first time is called before swiper being asigned
+                if (this.swiper) {
+                    const currentDayIndex = this.swiper.activeIndex;
+                    const { mealDate } = this.props.days[currentDayIndex];
+                    this.props.onDayChange(mealDate);
+                    this.setState({ currentDayIndex });
+                }
             }
         });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.selectedDay === nextProps.selectedDay) {
+            return;
+        }
+
+        const { days, selectedDay } = nextProps;
+        this.swiper.slideTo(getSelectedDayIndex(days, selectedDay));
     }
 
     goToPreviousDay() {
@@ -83,7 +98,8 @@ export default class MealPlanner extends Component {
     }
 
     render() {
-        const currentDay = DateFormatter.getDayNameFromString(this.props.days[this.state.currentDayIndex].mealDate);
+        const currentDay = this.props.days[this.state.currentDayIndex];
+        const currentDayName = DateFormatter.getDayNameFromString(currentDay.mealDate);
 
         return (
             <div className="meal-planner">
@@ -95,7 +111,7 @@ export default class MealPlanner extends Component {
                     </button>
 
                     <div className="meal-planner__selected-day">
-                        {currentDay.toString()}
+                        {currentDayName.toString()}
                     </div>
 
                     <button

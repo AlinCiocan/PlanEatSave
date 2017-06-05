@@ -19,6 +19,10 @@ export default class DateFormatter {
         return date.format(dateFormat);
     }
 
+    static isoStringToDateString(dateAsIsoString) {
+        return DateFormatter.dateToString(moment.utc(dateAsIsoString));
+    }
+
     static getLocaleStartOfWeek(localDate) {
         return localDate.clone().startOf('day').weekday(0);
     }

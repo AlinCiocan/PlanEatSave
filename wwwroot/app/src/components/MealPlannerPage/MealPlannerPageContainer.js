@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 import { ApiRequest } from '../../services/ApiRequest';
 import Routes from '../../services/Routes';
 import TopBar from '../TopBar/TopBar';
@@ -47,7 +46,12 @@ export default class PlannerPageContainer extends Component {
             return null;
         }
 
-        return <MealPlanner selectedDay={this.getSelectedDateAsString()} days={this.state.plannedDays} />;
+        return (
+            <MealPlanner
+                selectedDay={this.getSelectedDateAsString()}
+                days={this.state.plannedDays}
+                onDayChange={mealDate => this.props.router.push(Routes.mealPlannerWithDate(mealDate))} />
+        );
     }
 
     getDateFromUrl() {
@@ -79,7 +83,8 @@ export default class PlannerPageContainer extends Component {
 
         ApiRequest.retrieveMeals(startOfWeekIsoString, endOfWeekIsoString)
             .then(rsp => {
-                const plannedDays = rsp.body;
+                const days = rsp.body;
+                const plannedDays = days.map(day => ({ ...day, mealDate: DateFormatter.isoStringToDateString(day.mealDate) }));
                 this.setState({ message: null, arePlannedDaysVisible: true, plannedDays });
             }, err => {
                 this.setState({ message: this.getErrorMessage() });
