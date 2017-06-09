@@ -20,7 +20,7 @@ export default class AddNewMeal extends React.Component {
     }
 
     getMealDate() {
-        return DateFormatter.stringToDate(this.props.location.query.mealDate);
+        return DateFormatter.markLocaleDateAsUtc(DateFormatter.stringToDate(this.props.location.query.mealDate));
     }
 
     componentDidMount() {
