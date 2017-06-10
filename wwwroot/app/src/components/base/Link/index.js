@@ -7,10 +7,10 @@ const Link = (props) => {
         'pes-link--undecorated': props.undecorated
     });
 
-    const linkProps = { ...props, className: linkClasses };
-
     return (
-        <ReactRouterLink {...linkProps} />
+        <ReactRouterLink to={props.to} className={linkClasses}>
+            {props.children}
+        </ReactRouterLink>
     );
 };
 
