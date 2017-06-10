@@ -162,6 +162,10 @@ body {
   .pes-search__icon {
     padding-top: 3px; }
 
+.pes-link--undecorated, .pes-link--undecorated:hover, .pes-link--undecorated:focus, .pes-link--undecorated:active, .pes-link--undecorated:visited {
+  text-decoration: none;
+  color: initial; }
+
 .pes-navigation-menu {
   position: fixed;
   bottom: 0;
@@ -434,7 +438,7 @@ body {
   .pes-meal__recipe-name {
     margin-left: 10px;
     font-size: 18px;
-    padding-top: 5px;
+    padding-top: 15px;
     flex-grow: 1;
     background: none;
     outline: none;

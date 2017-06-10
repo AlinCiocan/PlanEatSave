@@ -1,0 +1,10 @@
+.pes-link {
+    &--undecorated,
+    &--undecorated:hover,
+    &--undecorated:focus,
+    &--undecorated:active,
+    &--undecorated:visited {
+        text-decoration: none;
+        color: initial;
+    }
+}

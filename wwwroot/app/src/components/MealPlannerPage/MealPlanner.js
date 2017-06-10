@@ -5,18 +5,32 @@ import 'swiper/dist/css/swiper.css';
 import RemoveIcon from '../base/icons/RemoveIcon';
 import ArrowIcon from '../base/icons/ArrowIcon';
 import DateFormatter from '../../utils/DateFormatter';
+import Routes from '../../services/Routes';
+import Link from '../base/Link';
 
 const firstDayOfWeek = 0;
 const lastDayOfWeek = 6;
 
 class Meal extends Component {
     render() {
+        const { meal, onRemoveMeal } = this.props;
+
         return (
             <div className="pes-meal">
                 <div className="pes-meal__divider"></div>
 
-                <button className="pes-meal__recipe-name">{this.props.meal.recipeName}</button>
-                <button className="pes-meal__remove-button"><RemoveIcon /></button>
+                <Link
+                    undecorated
+                    to={Routes.viewRecipe(meal.recipeId)}
+                    className="pes-meal__recipe-name">
+                    {meal.recipeName}
+                </Link>
+
+                <button
+                    onClick={() => onRemoveMeal(meal.id)}
+                    className="pes-meal__remove-button">
+                    <RemoveIcon />
+                </button>
             </div>
         );
     }
@@ -25,10 +39,11 @@ class Meal extends Component {
 
 class DayPlanned extends Component {
     render() {
+        const { day, onRemoveMeal } = this.props;
         return (
             <div className="swiper-slide">
-                {this.props.day.mealDate}
-                {this.props.day.meals.map(meal => <Meal key={meal.id} meal={meal} />)}
+                {day.mealDate}
+                {day.meals.map(meal => <Meal key={meal.id} meal={meal} onRemoveMeal={onRemoveMeal} />)}
                 <br />
             </div>
         );
@@ -46,6 +61,7 @@ export default class MealPlanner extends Component {
 
         this.goToPreviousDay = this.goToPreviousDay.bind(this);
         this.goToNextDay = this.goToNextDay.bind(this);
+        this.onRemoveMeal = this.onRemoveMeal.bind(this);
     }
 
     componentDidMount() {
@@ -91,10 +107,14 @@ export default class MealPlanner extends Component {
         return (
             <div className="swiper-container" ref={swiperContainer => { this.swiperContainer = swiperContainer }}>
                 <div className="swiper-wrapper">
-                    {this.props.days.map(day => <DayPlanned key={day.mealDate} day={day} />)}
+                    {this.props.days.map(day => <DayPlanned key={day.mealDate} day={day} onRemoveMeal={this.onRemoveMeal} />)}
                 </div>
             </div>
         );
+    }
+
+    onRemoveMeal(mealId) {
+        console.log('delete -> ', mealId);
     }
 
     render() {
