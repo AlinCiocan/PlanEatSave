@@ -46,6 +46,24 @@ namespace PlanEatSave.DataAceessLayer
             return ConvertMealsToPlannedDays(startDate, endDate, meals);
         }
 
+        public async Task<bool> RemoveMeal(string mealId, string userId) 
+        {
+            var mealFromDb = await _context.Meals.FirstOrDefaultAsync(meal => meal.Id == mealId);
+            if(mealFromDb == null) 
+            {
+                return false;
+            }
+
+            if(mealFromDb.UserId != userId) 
+            {
+                throw new ForbiddenAccessException();
+            }
+
+            _context.Meals.Remove(mealFromDb);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
         private List<PlannedDay> ConvertMealsToPlannedDays(DateTime startDate, DateTime endDate, List<MealWithRecipeName> meals)
         {
             var allDates = Enumerable

@@ -73,7 +73,33 @@ namespace PlanEatSave.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(LoggingEvents.MEALS_RETRIEVE_MEALS, ex, $"Retrieve meals failes; user id - {UserId}; start date - ${startDate}; end date - ${endDate}");
+                _logger.LogError(LoggingEvents.MEALS_RETRIEVE_MEALS, ex, $"Retrieve meals failed; user id - {UserId}; start date - ${startDate}; end date - ${endDate}");
+                return this.InternalServerError();
+            }
+        }
+
+
+        [HttpDelete]
+        public async Task<IActionResult> RemoveMeal(string mealId)
+        {
+            try
+            {
+                if(await _mealService.RemoveMeal(mealId, UserId)) 
+                {
+                    return Ok(new RemoveResponse { IsSuccess = true });
+                }
+
+                return Ok(new RemoveResponse { IsSuccess = false, Message = "This meal does not exist" });
+            }
+            catch (ForbiddenAccessException ex)
+            {
+                _logger.LogDebug(LoggingEvents.MEALS_REMOVE_MEAL, ex, $"The user with id - {UserId} from IP - {HttpContext.Connection.RemoteIpAddress} tried to remove a meal that was not his.");
+                return Forbid("You are not allowed to remove this meal");
+            }
+
+            catch (Exception ex)
+            {
+                _logger.LogError(LoggingEvents.MEALS_REMOVE_MEAL, ex, $"Remove meal failed; user id - {UserId}; meal id - ${mealId}");
                 return this.InternalServerError();
             }
         }
