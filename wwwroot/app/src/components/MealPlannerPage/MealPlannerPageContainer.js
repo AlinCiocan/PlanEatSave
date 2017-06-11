@@ -6,6 +6,7 @@ import NavigationMenu from '../NavigationMenu';
 import pages from '../../constants/pages';
 import DateFormatter from '../../utils/DateFormatter';
 import MealPlanner from './MealPlanner';
+import ConfirmModal from '../base/modal/ConfirmModal';
 
 export default class PlannerPageContainer extends Component {
     constructor(props) {
@@ -14,8 +15,11 @@ export default class PlannerPageContainer extends Component {
         this.state = {
             message: null,
             arePlannedDaysVisible: false,
-            plannedDays: []
+            plannedDays: [],
+            mealToBeRemoved: null
         };
+
+        this.onRemoveMeal = this.onRemoveMeal.bind(this);
     }
 
     componentDidMount() {
@@ -25,7 +29,6 @@ export default class PlannerPageContainer extends Component {
             this.props.router.push(Routes.mealPlannerWithDate(this.getSelectedDateAsString()));
         }
     }
-
 
     getLoadingMessage() {
         return (<h3> Loading your planner... </h3>);
@@ -50,7 +53,8 @@ export default class PlannerPageContainer extends Component {
             <MealPlanner
                 selectedDay={this.getSelectedDateAsString()}
                 days={this.state.plannedDays}
-                onDayChange={mealDate => this.props.router.push(Routes.mealPlannerWithDate(mealDate))} />
+                onDayChange={mealDate => this.props.router.push(Routes.mealPlannerWithDate(mealDate))}
+                onRemoveMeal={this.onRemoveMeal} />
         );
     }
 
@@ -91,6 +95,47 @@ export default class PlannerPageContainer extends Component {
             });
     }
 
+    onRemoveMeal(mealId, recipeName) {
+        this.setState({ mealToBeRemoved: { mealId, recipeName } })
+    }
+
+    removeMeal() {
+        const { mealId } = this.state.mealToBeRemoved;
+
+        const plannedDays = this.state.plannedDays.map(day => (
+            { ...day, meals: day.meals.filter(meal => meal.id !== mealId) }
+        ));
+
+        // optimistic design (do not wait for the request to finish)
+        this.setState({ mealToBeRemoved: null, plannedDays });
+
+        ApiRequest.removeMeal(mealId).then(response => {
+            const { isSuccess, message } = response.body;
+            if (!isSuccess) {
+                console.log(message);
+            }
+        }, err => { console.log(err); });
+    }
+
+    renderRemoveMealModal() {
+        if(!this.state.mealToBeRemoved) {
+            return null;
+        }
+
+        const modalTitle = `Are you sure you want to remove '${this.state.mealToBeRemoved.recipeName}' from planner?`;
+
+        return (
+            <ConfirmModal
+                isOpen={true}
+                title={modalTitle}
+                cancelButtonText="Cancel"
+                onCancel={() => this.setState({ mealToBeRemoved: null })}
+                actionButtonText="Remove"
+                onAction={() => this.removeMeal()}
+            />
+        );
+    }
+
     render() {
         return (
             <div>
@@ -99,6 +144,7 @@ export default class PlannerPageContainer extends Component {
                 <div className="pes-row">
                     {this.state.message}
                     {this.renderPlanner()}
+                    {this.renderRemoveMealModal()}
                 </div>
 
                 <NavigationMenu activeItem={pages.PLANNER} />

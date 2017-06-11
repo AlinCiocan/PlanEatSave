@@ -27,7 +27,7 @@ class Meal extends Component {
                 </Link>
 
                 <button
-                    onClick={() => onRemoveMeal(meal.id)}
+                    onClick={() => onRemoveMeal(meal.id, meal.recipeName)}
                     className="pes-meal__remove-button">
                     <RemoveIcon />
                 </button>
@@ -61,7 +61,6 @@ export default class MealPlanner extends Component {
 
         this.goToPreviousDay = this.goToPreviousDay.bind(this);
         this.goToNextDay = this.goToNextDay.bind(this);
-        this.onRemoveMeal = this.onRemoveMeal.bind(this);
     }
 
     componentDidMount() {
@@ -107,14 +106,10 @@ export default class MealPlanner extends Component {
         return (
             <div className="swiper-container" ref={swiperContainer => { this.swiperContainer = swiperContainer }}>
                 <div className="swiper-wrapper">
-                    {this.props.days.map(day => <DayPlanned key={day.mealDate} day={day} onRemoveMeal={this.onRemoveMeal} />)}
+                    {this.props.days.map(day => <DayPlanned key={day.mealDate} day={day} onRemoveMeal={this.props.onRemoveMeal} />)}
                 </div>
             </div>
         );
-    }
-
-    onRemoveMeal(mealId) {
-        console.log('delete -> ', mealId);
     }
 
     render() {

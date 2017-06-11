@@ -126,4 +126,8 @@ export class ApiRequest {
     static retrieveMeals(startDate, endDate) {
         return authGetRequest(`meal/getMeals?startDate=${startDate}&endDate=${endDate}`);
     }
+
+    static removeMeal(mealId) {
+        return authDeleteRequest(`meal/removeMeal?mealId=${mealId}`);
+    }
 }
