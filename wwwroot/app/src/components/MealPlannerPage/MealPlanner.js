@@ -36,14 +36,28 @@ class Meal extends Component {
     }
 }
 
+const DayPlannedPlaceholder = () => {
+    return (
+        <div className="pes-day-planned-placeholder">
+            <h1 className="pes-day-planned-placeholder__title"> You have not added any meals for this day. What about planning a healthy meal?  </h1>
+            <img
+                className="pes-day-planned-placeholder__image"
+                alt="Placeholder for no meals"
+                src="/images/no-meals-placeholder.jpg" />
+        </div>);
+};
 
 class DayPlanned extends Component {
     render() {
         const { day, onRemoveMeal } = this.props;
+
         return (
             <div className="swiper-slide">
                 {day.mealDate}
-                {day.meals.map(meal => <Meal key={meal.id} meal={meal} onRemoveMeal={onRemoveMeal} />)}
+                {day.meals.length === 0
+                    ? <DayPlannedPlaceholder />
+                    : day.meals.map(meal => <Meal key={meal.id} meal={meal} onRemoveMeal={onRemoveMeal} />)
+                }
                 <br />
             </div>
         );

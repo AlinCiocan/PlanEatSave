@@ -173,7 +173,8 @@ body {
   width: 100%;
   box-sizing: border-box;
   display: flex;
-  height: 60px; }
+  height: 60px;
+  z-index: 100; }
   .pes-navigation-menu__item {
     padding-top: 5px;
     background-color: #f3f4f6;
@@ -490,7 +491,7 @@ body {
   bottom: 0;
   height: 60px;
   background-color: #c7d3d0;
-  z-index: 2; }
+  z-index: 100; }
 
 .nav-item {
   cursor: pointer;
@@ -499,6 +500,15 @@ body {
   flex-grow: 1;
   text-align: center;
   border: 1px solid gray;
-  z-index: 999; }
+  z-index: 100; }
+
+.pes-day-planned-placeholder {
+  text-align: center; }
+  .pes-day-planned-placeholder__title {
+    font-size: 24px;
+    margin-bottom: 24px; }
+  .pes-day-planned-placeholder__image {
+    max-width: 550px;
+    width: 100%; }
 
 /*# sourceMappingURL=App.css.map */
