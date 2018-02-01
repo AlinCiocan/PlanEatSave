@@ -76,10 +76,18 @@ export default class AddNewMeal extends React.Component {
         const { mealOrder } = this.props.location.query;
         ApiRequest.addMealFromExistingRecipe(this.state.selectedRecipeId, DateFormatter.dateToIsoString(mealDate), mealOrder || 0)
             .then(rsp => {
-                this.props.router.push(Routes.mealPlannerWithDate(DateFormatter.dateToString(mealDate)));
+                this.goToMealPlanner();
             }, err => {
                 this.setState({ message: this.getErrorMessage(), isAddMealVisible: true })
             });
+    }
+
+    goToMealPlanner() {
+        this.props.router.push(this.getRouteToMealPlanner());
+    }
+
+    getRouteToMealPlanner() {
+        return Routes.mealPlannerWithDate(this.props.location.query.mealDate);
     }
 
     renderBody() {
@@ -113,7 +121,7 @@ export default class AddNewMeal extends React.Component {
             <div>
                 <TopBar
                     hideLogo
-                    backButton backButtonText="Add meal" backButtonOnClick={() => this.props.router.push(Routes.mealPlanner())}
+                    backButton backButtonText="Add meal" backButtonOnClick={() => this.props.router.push(this.getRouteToMealPlanner())}
                     saveButton saveButtonOnClick={this.saveMeal} />
 
                 <div className="pes-row">

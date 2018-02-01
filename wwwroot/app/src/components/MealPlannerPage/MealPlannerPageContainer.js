@@ -97,12 +97,10 @@ export default class PlannerPageContainer extends Component {
 
         ApiRequest.retrieveMeals(startOfWeekIsoString, endOfWeekIsoString)
             .then(rsp => {
-                debugger;
                 const days = rsp.body;
                 const plannedDays = days.map(day => ({ ...day, mealDate: DateFormatter.isoStringToDateString(day.mealDate) }));
                 this.setState({ message: null, arePlannedDaysVisible: true, plannedDays });
             }, err => {
-                debugger;
                 this.setState({ message: this.getErrorMessage() });
             });
     }
