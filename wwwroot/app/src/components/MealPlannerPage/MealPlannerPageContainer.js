@@ -23,12 +23,24 @@ export default class PlannerPageContainer extends Component {
     }
 
     componentDidMount() {
-        this.retrievePlannedDays();
+        const selectedDate = this.parseSelectedDate(this.getDateFromUrl());
+        this.retrievePlannedDays(selectedDate);
 
         if (!this.getDateFromUrl()) {
             this.props.router.push(Routes.mealPlannerWithDate(this.getSelectedDateAsString()));
         }
     }
+
+    componentWillReceiveProps(nextProps) {
+        const newDate = nextProps.location.query.date;
+        const isDayInState = this.state.plannedDays.some(day => day.mealDate === newDate);
+
+        if(!isDayInState) {
+            const selectedDate = this.parseSelectedDate(newDate);
+            this.retrievePlannedDays(selectedDate);
+        }
+    }
+    
 
     getLoadingMessage() {
         return (<h3> Loading your planner... </h3>);
@@ -62,22 +74,20 @@ export default class PlannerPageContainer extends Component {
         return this.props.location.query.date;
     }
 
-    getSelectedDate() {
-        let date = DateFormatter.stringToDate(this.getDateFromUrl());
+    parseSelectedDate(dateToParse) {
+        let date = DateFormatter.stringToDate(dateToParse);
         return date.isValid() ? date : DateFormatter.getLocalCurrentDate();
     }
 
     getSelectedDateAsString() {
-        const date = this.getSelectedDate();
+        const date = this.parseSelectedDate(this.getDateFromUrl());
         return DateFormatter.dateToString(date);
     }
 
-    retrievePlannedDays() {
+    retrievePlannedDays(selectedDate) {
         this.setState({ message: this.getLoadingMessage(), arePlannedDaysVisible: false });
 
-        const currentDate = this.getSelectedDate();
-
-        const { startOfWeek, endOfWeek } = DateFormatter.extractLocaleStartAndEndOfWeek(currentDate);
+        const { startOfWeek, endOfWeek } = DateFormatter.extractLocaleStartAndEndOfWeek(selectedDate);
 
         const startOfWeekUtc = DateFormatter.markLocaleDateAsUtc(startOfWeek);
         const endOfWeekUtc = DateFormatter.markLocaleDateAsUtc(endOfWeek);
@@ -87,10 +97,12 @@ export default class PlannerPageContainer extends Component {
 
         ApiRequest.retrieveMeals(startOfWeekIsoString, endOfWeekIsoString)
             .then(rsp => {
+                debugger;
                 const days = rsp.body;
                 const plannedDays = days.map(day => ({ ...day, mealDate: DateFormatter.isoStringToDateString(day.mealDate) }));
                 this.setState({ message: null, arePlannedDaysVisible: true, plannedDays });
             }, err => {
+                debugger;
                 this.setState({ message: this.getErrorMessage() });
             });
     }
