@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PikadayWrapper from '../../lib-components/PikadayWrapper/PikadayWrapper';
+import PikadayWrapper from '../../lib-components/PikadayWrapper';
 import InputGroup from '../base/form/InputGroup';
 
 export default class PantryItem extends Component {
@@ -44,11 +44,10 @@ export default class PantryItem extends Component {
                 <div className="pantry-item__form-group">
                     <label className="pantry-item__form-label">
                         Expiry date
-
-                        <PikadayWrapper onSelect={(date) => this.onSelectDate(date)}
-                            defaultValue={this.state.expiration}
-                            className="pantry-item__form-input pantry-item__form-input--datepicker" />
-
+                        <PikadayWrapper
+                            className="pantry-item__form-input"
+                            onSelect={(date) => this.onSelectDate(date)}
+                            defaultValue={this.state.expiration} />
                     </label>
                 </div>
             </div>

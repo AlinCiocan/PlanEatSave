@@ -1,0 +1,34 @@
+.pes-pikaday-wrapper {
+    width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+    height: 35px;
+    border-radius: 3px;
+    border: 1px solid $pinkishGrey;
+
+    &__input {
+        margin-top: 4px;
+        vertical-align: top;
+        width: calc(100% - 40px);
+        height: 25px;
+        box-sizing: border-box;
+        padding-left: 10px;
+        margin-left: 5px;
+    }
+
+    &__calendar-button {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        margin-left: 5px;
+        background: transparent;
+        border: 0;
+        outline: 0;
+    }
+
+    &__calendar-icon {
+        width: 25px;
+        height: 25px;
+        margin-top: 3px;
+    }
+}

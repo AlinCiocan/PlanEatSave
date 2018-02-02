@@ -136,3 +136,22 @@ body {
         width: 100%;
     }
 }
+
+.pes-meal-planner-container {
+    &__calendar-wrapper {
+        margin-bottom: 10px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__calendar-label {
+        font-size: 24px;
+        white-space: nowrap;
+        line-height: 1.3;
+        margin-right: 10px;
+    }
+
+    &__datepicker {
+        width: 150px;
+    }
+}

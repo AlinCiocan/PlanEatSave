@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Pikaday from 'pikaday';
+import classnames from 'classnames';
 import './pikaday.css';
 import calendarIcon from './calendar-icon.svg';
 import _ from 'lodash';
@@ -21,7 +22,7 @@ export default class PikadayWrapper extends Component {
 
     componentDidMount() {
         var date = this.props.defaultValue ? this.props.defaultValue : new Date();
-        if(_.isString(date)) {
+        if (_.isString(date)) {
             date = new Date(date);
         }
 
@@ -38,9 +39,11 @@ export default class PikadayWrapper extends Component {
 
     render() {
         return (
-            <div className={this.props.className}>
-                <input type="text" ref="datepickerInput" disabled/>
-                <button ref="datepickerButton"> <img src={calendarIcon} alt="calendar icon"/> </button>
+            <div className={classnames('pes-pikaday-wrapper', this.props.className)}>
+                <input type="text" ref="datepickerInput" className="pes-pikaday-wrapper__input" disabled />
+                <button ref="datepickerButton" className="pes-pikaday-wrapper__calendar-button">
+                    <img src={calendarIcon} alt="calendar icon" className="pes-pikaday-wrapper__calendar-icon" />
+                </button>
             </div>
         );
     }
