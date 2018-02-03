@@ -8,6 +8,7 @@ import DateFormatter from '../../utils/DateFormatter';
 import MealPlanner from './MealPlanner';
 import ConfirmModal from '../base/modal/ConfirmModal';
 import PikadayWrapper from '../../lib-components/PikadayWrapper';
+import moment from 'moment';
 
 export default class PlannerPageContainer extends Component {
     constructor(props) {
@@ -151,9 +152,12 @@ export default class PlannerPageContainer extends Component {
         return (
             <div className="pes-meal-planner-container__calendar-wrapper">
                 <div className="pes-meal-planner-container__calendar-label">  Choose a date: </div>
-                <PikadayWrapper 
+                <PikadayWrapper
                     className="pes-meal-planner-container__datepicker"
-                    onSelect={(date) => console.log(date)} />
+                    onSelect={(date) => {
+                        const dateString = DateFormatter.dateToString(moment(date));
+                        this.props.router.push(Routes.mealPlannerWithDate(dateString));
+                    }} />
             </div>
         );
     }
