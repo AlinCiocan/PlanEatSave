@@ -78,19 +78,22 @@ body {
     height: 25px;
     box-sizing: border-box;
     padding-left: 10px;
-    margin-left: 5px; }
+    margin-right: 5px;
+    pointer-events: none; }
   .pes-pikaday-wrapper__calendar-button {
+    width: 100%;
     box-sizing: border-box;
+    background: transparent;
     padding: 0;
     margin: 0;
-    margin-left: 5px;
-    background: transparent;
     border: 0;
     outline: 0; }
   .pes-pikaday-wrapper__calendar-icon {
     width: 25px;
     height: 25px;
     margin-top: 3px; }
+  .pes-pikaday-wrapper__input, .pes-pikaday-wrapper__calendar-button, .pes-pikaday-wrapper__calendar-icon {
+    cursor: pointer; }
 
 .pes-arrow-icon--left {
   transform: rotate(180deg); }

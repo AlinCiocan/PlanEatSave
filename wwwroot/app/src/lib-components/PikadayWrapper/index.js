@@ -40,8 +40,8 @@ export default class PikadayWrapper extends Component {
     render() {
         return (
             <div className={classnames('pes-pikaday-wrapper', this.props.className)}>
-                <input type="text" ref="datepickerInput" className="pes-pikaday-wrapper__input" disabled />
                 <button ref="datepickerButton" className="pes-pikaday-wrapper__calendar-button">
+                    <input type="text" ref="datepickerInput" className="pes-pikaday-wrapper__input" disabled />
                     <img src={calendarIcon} alt="calendar icon" className="pes-pikaday-wrapper__calendar-icon" />
                 </button>
             </div>
