@@ -153,6 +153,7 @@ export default class PlannerPageContainer extends Component {
             <div className="pes-meal-planner-container__calendar-wrapper">
                 <div className="pes-meal-planner-container__calendar-label">  Choose a date: </div>
                 <PikadayWrapper
+                    dateValue={this.getSelectedDateAsString()}
                     className="pes-meal-planner-container__datepicker"
                     onSelect={(date) => {
                         const dateString = DateFormatter.dateToString(moment(date));

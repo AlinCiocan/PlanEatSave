@@ -53,7 +53,6 @@ class DayPlanned extends Component {
 
         return (
             <div className="swiper-slide">
-                {day.mealDate}
                 {day.meals.length === 0
                     ? <DayPlannedPlaceholder />
                     : day.meals.map(meal => <Meal key={meal.id} meal={meal} onRemoveMeal={onRemoveMeal} />)

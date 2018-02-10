@@ -6,35 +6,39 @@ import calendarIcon from './calendar-icon.svg';
 import _ from 'lodash';
 
 export default class PikadayWrapper extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            picker: null,
-            date: null
-        };
-    }
-
     onSelect(date) {
-        this.setState({ date });
         this.props.onSelect(date);
     }
 
-    componentDidMount() {
-        var date = this.props.defaultValue ? this.props.defaultValue : new Date();
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.dateValue !== this.props.dateValue) {
+            const preventOnSelect = true;
+            this.pickaday.setDate(this.parseDate(nextProps.dateValue), preventOnSelect);
+        }
+    }
+
+    parseDate(dateValue) {
+        let date = dateValue || new Date();
         if (_.isString(date)) {
             date = new Date(date);
         }
 
-        var picker = new Pikaday({
+        return date;
+    }
+
+    initializePikaday(date) {
+        this.pickaday = new Pikaday({
             field: this.refs.datepickerInput,
             trigger: this.refs.datepickerButton,
             defaultDate: date,
             setDefaultDate: true,
             onSelect: (date) => this.onSelect(date)
         });
+    }
 
-        this.setState({ picker });
+    componentDidMount() {
+        this.initializePikaday(this.parseDate(this.props.dateValue));
     }
 
     render() {
