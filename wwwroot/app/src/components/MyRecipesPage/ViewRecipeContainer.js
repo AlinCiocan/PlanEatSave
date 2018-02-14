@@ -61,6 +61,10 @@ export default class ViewRecipeContainer extends Component {
         this.props.router.push(Routes.myRecipes());
     }
 
+    goBack() {
+        
+    }
+
     goToEditRecipe() {
         this.props.router.push(Routes.editMyRecipe(this.props.params.recipeId));
     }

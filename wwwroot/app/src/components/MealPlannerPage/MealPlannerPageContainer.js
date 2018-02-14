@@ -10,6 +10,8 @@ import ConfirmModal from '../base/modal/ConfirmModal';
 import PikadayWrapper from '../../lib-components/PikadayWrapper';
 import moment from 'moment';
 
+
+
 export default class PlannerPageContainer extends Component {
     constructor(props) {
         super(props);
@@ -23,14 +25,14 @@ export default class PlannerPageContainer extends Component {
 
         this.onRemoveMeal = this.onRemoveMeal.bind(this);
     }
-
-    componentDidMount() {
+    
+    componentDidMount() {        
         const selectedDate = this.parseSelectedDate(this.getDateFromUrl());
         this.retrievePlannedDays(selectedDate);
 
         if (!this.getDateFromUrl()) {
             this.props.router.push(Routes.mealPlannerWithDate(this.getSelectedDateAsString()));
-        }
+        }       
     }
 
     componentWillReceiveProps(nextProps) {
@@ -165,10 +167,10 @@ export default class PlannerPageContainer extends Component {
 
     render() {
         return (
-            <div>
+            <div className="full-height">
                 <TopBar addButton addButtonOnClick={() => this.props.router.push(Routes.addMeal(this.getSelectedDateAsString(), 1000))} />
 
-                <div className="pes-row">
+                <div className="pes-row full-height">
                     {this.renderDatePicker()}
                     {this.state.message}
                     {this.renderPlanner()}

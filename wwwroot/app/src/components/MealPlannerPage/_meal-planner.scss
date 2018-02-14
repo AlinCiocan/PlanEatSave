@@ -10,11 +10,6 @@
     min-height: 100%;
 }
 
-// TODO: check again if margin-bottom will be ok in layout main...
-body {
-    margin-bottom: 60px;
-}
-
 .pes-meal {
     display: flex;
     height: 50px;
@@ -154,4 +149,9 @@ body {
     &__datepicker {
         width: 150px;
     }
+}
+
+
+.swiper-slide {
+    height: 100% !important;
 }

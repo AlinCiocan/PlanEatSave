@@ -2,6 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+/* line 6, ../../node_modules/reset-css/_reset.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -23,35 +24,57 @@ time, mark, audio, video {
   vertical-align: baseline; }
 
 /* HTML5 display-role reset for older browsers */
+/* line 27, ../../node_modules/reset-css/_reset.scss */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, main, menu, nav, section {
   display: block; }
 
+/* line 31, ../../node_modules/reset-css/_reset.scss */
 body {
   line-height: 1; }
 
+/* line 34, ../../node_modules/reset-css/_reset.scss */
 ol, ul {
   list-style: none; }
 
+/* line 37, ../../node_modules/reset-css/_reset.scss */
 blockquote, q {
   quotes: none; }
+  /* line 39, ../../node_modules/reset-css/_reset.scss */
   blockquote:before, blockquote:after, q:before, q:after {
     content: '';
     content: none; }
 
+/* line 44, ../../node_modules/reset-css/_reset.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+/* line 5, layout.scss */
 html {
-  font-family: 'Roboto', sans-serif;
-  height: 100%; }
+  font-family: "Roboto", sans-serif;
+  min-height: 100%; }
 
+/* line 10, layout.scss */
 body {
   margin: 0;
-  height: 100%; }
+  min-height: 100%;
+  margin-bottom: 60px; }
 
+/* line 16, layout.scss */
 .full-height {
   height: 100%; }
+
+/* line 20, layout.scss */
+.pes-row {
+  padding-left: 16px;
+  padding-right: 16px; }
+
+/* line 25, layout.scss */
+.pes-transparent-button {
+  background: none;
+  outline: none;
+  border: none;
+  cursor: pointer; }
 
 /*# sourceMappingURL=layout.css.map */

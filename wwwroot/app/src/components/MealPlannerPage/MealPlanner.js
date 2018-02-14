@@ -65,6 +65,14 @@ class DayPlanned extends Component {
 
 const getSelectedDayIndex = (days, selectedDay) => days.findIndex(day => day.mealDate === selectedDay);
 
+// TODO-alin: refactor adapt swiper to height of window functionality
+const adaptSwiperToHeightOfWindow = () => {
+    const swiper = document.getElementsByClassName('swiper-container')[0];
+    const windowHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    const heightOfHeaderBeforeSwiper = 250;
+    swiper.style.minHeight = `${windowHeight-heightOfHeaderBeforeSwiper}px`;
+};
+
 export default class MealPlanner extends Component {
     constructor(props) {
         super(props);
@@ -79,8 +87,8 @@ export default class MealPlanner extends Component {
     componentDidMount() {
         this.swiper = new Swiper(this.swiperContainer, {
             spaceBetween: 30,
-            autoHeight: true,
-            calculateHeight: true,
+            // autoHeight: true,
+            // calculateHeight: true,
             initialSlide: this.state.currentDayIndex,
             onTransitionEnd: () => {
                 // first time is called before swiper being asigned
@@ -92,6 +100,9 @@ export default class MealPlanner extends Component {
                 }
             }
         });
+
+        adaptSwiperToHeightOfWindow();
+        window.addEventListener("optimizedResize", adaptSwiperToHeightOfWindow);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -112,13 +123,14 @@ export default class MealPlanner extends Component {
     }
 
     componentWillUnmount() {
+        window.removeEventListener("optimizedResize", adaptSwiperToHeightOfWindow);
         this.swiper.destroy(true);
     }
 
     renderMealCarousel() {
         return (
-            <div className="swiper-container" ref={swiperContainer => { this.swiperContainer = swiperContainer }}>
-                <div className="swiper-wrapper">
+            <div className="swiper-container full-height" ref={swiperContainer => { this.swiperContainer = swiperContainer }}>
+                <div className="swiper-wrapper full-height">
                     {this.props.days.map(day => <DayPlanned key={day.mealDate} day={day} onRemoveMeal={this.props.onRemoveMeal} />)}
                 </div>
             </div>
@@ -130,7 +142,7 @@ export default class MealPlanner extends Component {
         const currentDayName = DateFormatter.getDayNameFromString(currentDay.mealDate);
 
         return (
-            <div className="meal-planner">
+            <div className="meal-planner full-height">
                 <div className="meal-planner__header">
                     <button
                         className={classNames('pes-transparent-button', 'meal-planner__day-navigation', { 'meal-planner__day-navigation--hidden': this.state.currentDayIndex === firstDayOfWeek })}

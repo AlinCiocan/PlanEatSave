@@ -45,11 +45,12 @@ table {
 
 html {
   font-family: "Roboto", sans-serif;
-  height: 100%; }
+  min-height: 100%; }
 
 body {
   margin: 0;
-  height: 100%; }
+  min-height: 100%;
+  margin-bottom: 60px; }
 
 .full-height {
   height: 100%; }
@@ -418,9 +419,6 @@ body {
   height: auto;
   min-height: 100%; }
 
-body {
-  margin-bottom: 60px; }
-
 .pes-meal {
   display: flex;
   height: 50px;
@@ -525,5 +523,8 @@ body {
   margin-right: 10px; }
 .pes-meal-planner-container__datepicker {
   width: 150px; }
+
+.swiper-slide {
+  height: 100% !important; }
 
 /*# sourceMappingURL=App.css.map */
