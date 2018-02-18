@@ -4,6 +4,7 @@ import RecipeService from '../../services/RecipeService';
 import Routes from '../../services/Routes';
 import TopBar from '../TopBar/TopBar';
 import ViewRecipe from './ViewRecipe';
+import NavigationMenu from '../NavigationMenu';
 
 export default class ViewRecipeContainer extends Component {
     constructor(props) {
@@ -82,6 +83,8 @@ export default class ViewRecipeContainer extends Component {
                     {this.state.message}
                     {this.renderRecipe()}
                 </div>
+
+                <NavigationMenu />
             </div>
         );
     }
