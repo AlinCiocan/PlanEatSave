@@ -11,14 +11,6 @@ const lastDayOfWeek = 6;
 
 const getSelectedDayIndex = (days, selectedDay) => days.findIndex(day => day.mealDate === selectedDay);
 
-// TODO-alin: refactor adapt swiper to height of window functionality
-const adaptSwiperToHeightOfWindow = () => {
-    const swiper = document.getElementsByClassName('swiper-container')[0];
-    const windowHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    const heightOfHeaderBeforeSwiper = 250;
-    swiper.style.minHeight = `${windowHeight-heightOfHeaderBeforeSwiper}px`;
-};
-
 export default class MealPlanner extends Component {
     constructor(props) {
         super(props);
@@ -28,16 +20,15 @@ export default class MealPlanner extends Component {
 
         this.goToPreviousDay = this.goToPreviousDay.bind(this);
         this.goToNextDay = this.goToNextDay.bind(this);
+        this.adaptSwiperToHeightOfWindow = this.adaptSwiperToHeightOfWindow.bind(this);
     }
 
     componentDidMount() {
         this.swiper = new Swiper(this.swiperContainer, {
             spaceBetween: 30,
-            // autoHeight: true,
-            // calculateHeight: true,
             initialSlide: this.state.currentDayIndex,
             onTransitionEnd: () => {
-                // first time is called before swiper being asigned
+                // first time is called before this.swiper was assigned a value
                 if (this.swiper) {
                     const currentDayIndex = this.swiper.activeIndex;
                     const { mealDate } = this.props.days[currentDayIndex];
@@ -47,8 +38,14 @@ export default class MealPlanner extends Component {
             }
         });
 
-        adaptSwiperToHeightOfWindow();
-        window.addEventListener("optimizedResize", adaptSwiperToHeightOfWindow);
+        this.adaptSwiperToHeightOfWindow();
+        window.addEventListener("optimizedResize", this.adaptSwiperToHeightOfWindow);
+    }
+
+    adaptSwiperToHeightOfWindow() {
+        const windowHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        const heightOfHeaderBeforeSwiper = 250;
+        this.swiperContainer.style.minHeight = `${windowHeight - heightOfHeaderBeforeSwiper}px`;
     }
 
     componentWillReceiveProps(nextProps) {
@@ -69,7 +66,7 @@ export default class MealPlanner extends Component {
     }
 
     componentWillUnmount() {
-        window.removeEventListener("optimizedResize", adaptSwiperToHeightOfWindow);
+        window.removeEventListener("optimizedResize", this.adaptSwiperToHeightOfWindow);
         this.swiper.destroy(true);
     }
 
