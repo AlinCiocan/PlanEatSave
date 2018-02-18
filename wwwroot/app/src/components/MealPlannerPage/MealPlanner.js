@@ -2,66 +2,12 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import Swiper from 'swiper';
 import 'swiper/dist/css/swiper.css';
-import RemoveIcon from '../base/icons/RemoveIcon';
 import ArrowIcon from '../base/icons/ArrowIcon';
 import DateFormatter from '../../utils/DateFormatter';
-import Routes from '../../services/Routes';
-import Link from '../base/Link';
+import DayPlanned from './DayPlanned';
 
 const firstDayOfWeek = 0;
 const lastDayOfWeek = 6;
-
-class Meal extends Component {
-    render() {
-        const { meal, onRemoveMeal } = this.props;
-
-        return (
-            <div className="pes-meal">
-                <div className="pes-meal__divider"></div>
-
-                <Link
-                    undecorated
-                    to={Routes.viewRecipe(meal.recipeId)}
-                    className="pes-meal__recipe-name">
-                    {meal.recipeName}
-                </Link>
-
-                <button
-                    onClick={() => onRemoveMeal(meal.id, meal.recipeName)}
-                    className="pes-meal__remove-button">
-                    <RemoveIcon />
-                </button>
-            </div>
-        );
-    }
-}
-
-const DayPlannedPlaceholder = () => {
-    return (
-        <div className="pes-day-planned-placeholder">
-            <h1 className="pes-day-planned-placeholder__title"> You have not added any meals for this day. What about planning a healthy meal?  </h1>
-            <img
-                className="pes-day-planned-placeholder__image"
-                alt="Placeholder for no meals"
-                src="/images/no-meals-placeholder.jpg" />
-        </div>);
-};
-
-class DayPlanned extends Component {
-    render() {
-        const { day, onRemoveMeal } = this.props;
-
-        return (
-            <div className="swiper-slide">
-                {day.meals.length === 0
-                    ? <DayPlannedPlaceholder />
-                    : day.meals.map(meal => <Meal key={meal.id} meal={meal} onRemoveMeal={onRemoveMeal} />)
-                }
-                <br />
-            </div>
-        );
-    }
-}
 
 const getSelectedDayIndex = (days, selectedDay) => days.findIndex(day => day.mealDate === selectedDay);
 

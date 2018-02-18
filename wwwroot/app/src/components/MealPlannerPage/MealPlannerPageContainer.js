@@ -10,8 +10,6 @@ import ConfirmModal from '../base/modal/ConfirmModal';
 import PikadayWrapper from '../../lib-components/PikadayWrapper';
 import moment from 'moment';
 
-
-
 export default class PlannerPageContainer extends Component {
     constructor(props) {
         super(props);
