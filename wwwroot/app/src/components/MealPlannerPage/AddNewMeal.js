@@ -4,6 +4,8 @@ import Routes from '../../services/Routes';
 import TopBar from '../TopBar/TopBar';
 import { ApiRequest } from '../../services/ApiRequest';
 import DateFormatter from '../../utils/DateFormatter';
+import Button from '../base/buttons/Button';
+import OrSeparator from '../base/OrSeparator';
 
 export default class AddNewMeal extends React.Component {
     constructor(props) {
@@ -11,7 +13,7 @@ export default class AddNewMeal extends React.Component {
 
         this.state = {
             message: this.getRetrievingYourRecopesMessage(),
-            isAddMealVisible: false,
+            areRecipiesLoaded: false,
             recipes: [],
             selectedRecipeId: null
         };
@@ -28,7 +30,7 @@ export default class AddNewMeal extends React.Component {
             .then(rsp => {
                 const recipes = rsp.body;
                 const recipesOptions = recipes.map(recipe => ({ value: recipe.id, label: recipe.name }));
-                this.setState({ isAddMealVisible: true, message: null, recipes: recipesOptions });
+                this.setState({ areRecipiesLoaded: true, message: null, recipes: recipesOptions });
             }, err => {
                 this.setState({ message: this.getErrorMessage() });
             });
@@ -72,13 +74,13 @@ export default class AddNewMeal extends React.Component {
             return;
         }
 
-        this.setState({ message: this.getSavingYourMealMessage(), isAddMealVisible: false });
+        this.setState({ message: this.getSavingYourMealMessage(), areRecipiesLoaded: false });
         const { mealOrder } = this.props.location.query;
         ApiRequest.addMealFromExistingRecipe(this.state.selectedRecipeId, DateFormatter.dateToIsoString(mealDate), mealOrder || 0)
             .then(rsp => {
                 this.goToMealPlanner();
             }, err => {
-                this.setState({ message: this.getErrorMessage(), isAddMealVisible: true })
+                this.setState({ message: this.getErrorMessage(), areRecipiesLoaded: true })
             });
     }
 
@@ -91,25 +93,32 @@ export default class AddNewMeal extends React.Component {
     }
 
     renderBody() {
-        if (!this.state.isAddMealVisible) {
+        if (!this.state.areRecipiesLoaded) {
             return null;
         }
 
         return (
-            <div className="add-meal__existing-recipe">
-                <div className="add-meal__existing-recipe-title">
-                    Add meal from existing recipes
+            <div>
+                <div className="pes-add-meal__existing-recipe">
+                    <div className="pes-add-meal__existing-recipe-title">
+                        Add meal from existing recipes
                 </div>
-                <div className="add-meal__existing-recipe-dropdown">
-                    <Select
-                        options={this.state.recipes}
-                        value={this.state.selectedRecipeId}
-                        onChange={option => this.onRecipeChanged(option)}
-                        clearable={true}
-                        searchable={true}
-                        placeholder="Select recipe"
-                    // noResultsText={<button> Create this recipe </button>}
-                    />
+                    <div className="pes-add-meal__existing-recipe-dropdown">
+                        <Select
+                            options={this.state.recipes}
+                            value={this.state.selectedRecipeId}
+                            onChange={option => this.onRecipeChanged(option)}
+                            clearable={true}
+                            searchable={true}
+                            placeholder="Select recipe"
+                        />
+                        <div className="pes-add-meal__existing-recipe-add-button">
+                            <Button onClick={this.saveMeal} text="Add meal" />
+                        </div>
+                    </div>
+                </div>
+                <OrSeparator />
+                <div>
                 </div>
 
             </div>
@@ -121,8 +130,7 @@ export default class AddNewMeal extends React.Component {
             <div>
                 <TopBar
                     hideLogo
-                    backButton backButtonText="Add meal" backButtonOnClick={() => this.props.router.push(this.getRouteToMealPlanner())}
-                    saveButton saveButtonOnClick={this.saveMeal} />
+                    backButton backButtonText="Add meal" backButtonOnClick={() => this.props.router.push(this.getRouteToMealPlanner())} />
 
                 <div className="pes-row">
                     {this.state.message}

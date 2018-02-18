@@ -151,7 +151,13 @@
     }
 }
 
-
 .swiper-slide {
     height: 100% !important;
+}
+
+.pes-add-meal {
+    &__existing-recipe-add-button {
+        text-align: right;
+        margin-top: 10px;
+    }
 }

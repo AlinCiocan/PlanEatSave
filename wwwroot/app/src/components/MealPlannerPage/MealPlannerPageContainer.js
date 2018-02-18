@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import { ApiRequest } from '../../services/ApiRequest';
 import Routes from '../../services/Routes';
 import TopBar from '../TopBar/TopBar';
@@ -8,7 +9,6 @@ import DateFormatter from '../../utils/DateFormatter';
 import MealPlanner from './MealPlanner';
 import ConfirmModal from '../base/modal/ConfirmModal';
 import PikadayWrapper from '../../lib-components/PikadayWrapper';
-import moment from 'moment';
 
 export default class PlannerPageContainer extends Component {
     constructor(props) {

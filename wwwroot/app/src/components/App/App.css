@@ -45,7 +45,7 @@ table {
 
 html {
   font-family: "Roboto", sans-serif;
-  min-height: 100%; }
+  height: 100%; }
 
 body {
   margin: 0;
@@ -198,6 +198,19 @@ body {
 .pes-link--undecorated, .pes-link--undecorated:hover, .pes-link--undecorated:focus, .pes-link--undecorated:active, .pes-link--undecorated:visited {
   text-decoration: none;
   color: initial; }
+
+.pes-or-separator {
+  display: flex;
+  align-items: center; }
+  .pes-or-separator__line {
+    flex-grow: 1;
+    display: inline-block;
+    border-top: 1px solid #e8e8e8; }
+  .pes-or-separator__label {
+    border: 1px solid #e8e8e8;
+    border-radius: 50%;
+    display: inline-block;
+    padding: 10px 8px; }
 
 .pes-navigation-menu {
   position: fixed;
@@ -526,5 +539,9 @@ body {
 
 .swiper-slide {
   height: 100% !important; }
+
+.pes-add-meal__existing-recipe-add-button {
+  text-align: right;
+  margin-top: 10px; }
 
 /*# sourceMappingURL=App.css.map */
